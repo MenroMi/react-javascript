@@ -1,3 +1,4 @@
+import WhoAmI from './props';
 import {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -49,6 +50,10 @@ function App() {
           <Header/>
           <Field/>
           <Btn/>
+          <WhoAmI name={ () => 'John' }surname="Smith" link="instagram.com"/>
+          <WhoAmI name={ () => 'Alex' }surname="Smith" link="instagram.com"/>
+          <WhoAmI name={ () => 'Kyle' }surname="Smith" link="instagram.com"/>
+          <WhoAmI name={ () => 'Brett' }surname="Smith" link="instagram.com"/>
       </header>
     </div>
   );
