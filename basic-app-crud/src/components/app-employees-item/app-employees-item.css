@@ -11,7 +11,7 @@
     line-height: 35px;
     font-size: 20px;
     cursor: pointer;
-    /* min-width: 550px; */
+    min-width: 550px;
 }
 
 .list-group-item input {
@@ -19,6 +19,8 @@
     font-size: 20px;
     text-align: center;
     border: 0;
+    background-color: rgba(243, 242, 242, .8);
+    /* border-image-source: linear-gradient(to left, rgba(243, 242, 242, .8), #fff); */
 }
 
 .list-group-item button {
@@ -41,7 +43,8 @@
 .list-group-item .fa-star {
     width: 35px;
     height: 35px;
-    text-align: center;line-height: 35px;
+    text-align: center;
+    line-height: 35px;
     font-size: 16px;
     color: #FFD700;
     transition: 0.3s all;
@@ -54,7 +57,7 @@
     transform: translateX(0px);
 }
 
-.list-group-increase .list-group-item-label, .list-group-increase .list-group-item-input {
+.list-group-item.increase .list-group-item-label, .list-group-item.increase .list-group-item-input {
     color: #c09f3e;
 }
 
