@@ -7,13 +7,13 @@ const Header = () => {
   return <h2>Hello World!</h2>;
 }
 
-class Field extends Component {
-  render() {
-    const holder = 'Enter here';
-    const styles = {boxShadow: "0px 0px 5px blue"};
-    return <input placeholder= {holder} type="text" style={styles}/>
-  };
-}
+// class Field extends Component {
+//   render() {
+//     const holder = 'Enter here';
+//     const styles = {boxShadow: "0px 0px 5px blue"};
+//     return <input placeholder= {holder} type="text" style={styles}/>
+//   };
+// }
 
 // function Field() {
 //   const holder = 'Enter here';
@@ -23,40 +23,25 @@ class Field extends Component {
 //   return <input placeholder= {holder} type="text" style={styles}/>
 // }
 
-function Btn() {
-  let content = 'Log in';
-  const styles = {
-    marginTop: "5px"
-  }
-
-  let click = false;
-
-  if (click) {
-    content = 'Clicked';
-    return <button style={styles}>{content}</button>
-  } else {
-    return <button style={styles}>{content}</button>
-  } 
-}
-
-
   
 
-function App() {
-  return (
+class App extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  render() {
+    return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-          <Header/>
-          <Field/>
-          <Btn/>
-          <WhoAmI name={ () => 'John' }surname="Smith" link="instagram.com"/>
-          <WhoAmI name={ () => 'Alex' }surname="Smith" link="instagram.com"/>
-          <WhoAmI name={ () => 'Kyle' }surname="Smith" link="instagram.com"/>
-          <WhoAmI name={ () => 'Brett' }surname="Smith" link="instagram.com"/>
+        <h2>Актуальное время: {this.state.date.toLocaleTimeString()}</h2>
       </header>
     </div>
-  );
+    );
+  }
 }
 
 export {Header};
