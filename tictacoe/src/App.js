@@ -1,43 +1,41 @@
-function Window() {
+import { Component } from "react";
+import Btn from "./components/btn-component/btn";
 
-    const boxStyles = {
-        border: "2px solid blue",
-        borderRadius: '5px',
-        width: '100px',
-        height: "30px",
-        boxShadow: '0x 5px 1px red',
-    }
-
-    return <div style={boxStyles}>Times!</div>
+function Smile({name, style}) {
+    return <p style={style}>If you see this text - smile, {name}! c:</p>
 }
 
-function Text() {
-    const stylesSpan = {
-        boxShadow: "0 0 5px blue",
-        border: "1px solid blue",
-        display: "block",
-        margin: "0 auto"
+class Txt extends Component {
+    constructor(props) {
+        super(props)
+        this.styles = {textShadow: "0 0 7px blue"}
+        this.state = {birthday: 1999}
     }
-    const stylesDiv = {
-        width: "400px"
-        
+
+    plusOne = () => {
+        console.log(1999);
+        this.setState({birthday: this.state.birthday + 1})
     }
-    const text = <div style={stylesDiv}>
-        <span style={stylesSpan}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti consequatur minima maiores vero nobis praesentium libero dicta soluta voluptatibus nulla pariatur perferendis tempora, est nemo possimus magnam similique officiis! Praesentium.</span>
-    </div>
+ 
+    render() {
+        const users = this.props.data.map((user, i) => {
+            const {name} = user;
+            return (
+                <div key={i}>
+                    <Smile key={this.props.key} style={this.styles} name={name}/>
+                    <button onClick={this.plusOne}>Click Me!</button>
+                    {/* <Btn key={name}/> */}
+                    <p>{this.state.birthday}</p>
+                </div>
+            )
+        })
+        return (
+            <ul>
+                {users}
+            </ul>
+        )
+    }
 
-
-    return text;
 }
 
-
-function ComponentBlock() {
-    return (
-        <div>
-            <Window/>
-            <Text/>
-        </div>
-    );
-}
-
-export default ComponentBlock;
+export default Txt;

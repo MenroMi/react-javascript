@@ -1,4 +1,4 @@
-body {
+/* body {
     font: 14px "Century Gothic", Futura, sans-serif;
     margin: 20px;
   }
@@ -47,4 +47,10 @@ body {
   
   .game-info {
     margin-left: 20px;
-  }
+  } */
+
+
+.app {
+  margin: 0 auto;
+  text-align: center;
+}
