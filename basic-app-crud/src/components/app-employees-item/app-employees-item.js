@@ -12,7 +12,7 @@ class EmployeesListItem extends Component {
     }
 
     acceptIncrease = () => {
-        this.setState(({increase, like}) => ({increase: !increase}))
+        this.setState(({increase}) => ({increase: !increase}))
     }
 
     addStarIncreaseEmplo = () => {
