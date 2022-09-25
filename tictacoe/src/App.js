@@ -41,24 +41,34 @@ import { Component } from "react";
 
 // ================================
 
-class Txt extends Component {
-    constructor(props) {
-        super(props);
-        this.styles = {margin: "30px auto", width: "143px", padding: "10px", textShadow: "0 0 7px red", border: "2px solid red", borderRadius: "4px", boxShadow: "0 0 20px rgba(255, 0, 0, 0.3)"}
-    }
-
-    render() {
-        return (
-            <h1 style={this.styles}>Hello!</h1>
-        )
-    }
-}
-
 class Clock extends Component {
     constructor(props) {
         super(props);
         this.styles = {display: "inline", padding: "10px", textShadow: "0 0 7px blue", border: "2px solid blue", borderRadius: "4px", boxShadow: "0 0 20px rgba(0, 0, 255, 0.3)"}
-        this.state = {date: new Date()};
+        this.styleDiv = {
+            width: "200px",
+            margin: "25px auto",
+            padding: "10px",
+            textShadow: "0 0 7px blue",
+            border: "2px solid blue",
+            borderRadius: "4px",
+            boxShadow: "0 0 20px rgba(0, 0, 255, 0.3)"
+        }
+        this.btn = {
+            height: "50px",
+            width: "100px",
+            border: "2px solid green",
+
+        }
+
+        this.state = {
+            date: new Date(),
+            time: 'Day',
+            position: ""
+        }
+
+        this.checkDayOrNight = this.checkDayOrNight.bind(this);
+
     }
 
     componentDidMount() {
@@ -69,6 +79,23 @@ class Clock extends Component {
     //     clearInterval(this.timerID);
     // }
 
+    checkDayOrNight = (txt) => {
+        console.log(txt);
+        if (this.state.time === 'Day') {
+            this.setState({
+                time: 'Night'
+            })
+        } else {
+            this.setState({
+                time: 'Day'
+            })
+        }
+    }
+
+    commitInputChanges = (e) => {
+        this.setState({position: e.target.value})
+    }
+
     tick() {
         this.setState({
             date: new Date()
@@ -76,11 +103,40 @@ class Clock extends Component {
     }
 
     render() {
+
+        const {date, time, position} = this.state;
+
         return (
-            <h2 style={this.styles}>{this.state.date.toLocaleTimeString()}</h2>
+            <div>
+                <div style={this.styleDiv}>{position}</div>
+                <h2 style={this.styles}>{date.toLocaleTimeString()}</h2>
+                <div style={this.styleDiv}>{time}</div>
+                <button style={this.btn} onClick={() => this.checkDayOrNight('some text')}>Check</button>
+                <form style={this.styleDiv}>
+                    <span>Введите должность:</span>
+                    <input  type="text" onChange={this.commitInputChanges}/>
+                </form>
+            </div>
         )
     }
 
+}
+
+
+class Txt extends Clock {
+    constructor(props) {
+        super(props);
+        this.stylesTxt = {margin: "30px auto", width: "143px", padding: "10px", textShadow: "0 0 7px red", border: "2px solid red", borderRadius: "4px", boxShadow: "0 0 20px rgba(255, 0, 0, 0.3)"};
+
+    }
+
+    render() {
+        return (
+            <div>
+                <h1 style={this.stylesTxt}>Hello!</h1>
+            </div>
+        )
+    }
 }
 
 export {Txt};
