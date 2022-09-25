@@ -19,6 +19,7 @@ class EmployeesAddForm extends Component {
     handleSubmit = (e) => {
         console.log(this.state.name);
         console.log(this.state.salary);
+        
         e.preventDefault();
     }
     
