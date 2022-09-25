@@ -31,7 +31,6 @@ class EmployeesList extends Component {
 
 //     })
 
-
 //     return (
 //         <ul className="app-list list-group">
 //             {elements}
