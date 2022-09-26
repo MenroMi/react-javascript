@@ -6,12 +6,12 @@ import "./app-employees-list.css";
 class EmployeesList extends Component {
 
     render() {
-        const {data} = this.props;
+        const {data, onDelete} = this.props;
         return (
             <ul className="app-list list-group">
                 {data.map(item => {
                     const {id, ...itemProps} = item;
-                    return <EmployeesListItem key={id} {...itemProps}/>
+                    return <EmployeesListItem key={id} {...itemProps} onDelete={() => onDelete(id)}/>
                 })}
             </ul>
         )
