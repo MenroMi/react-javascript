@@ -1,11 +1,12 @@
-import WhoAmI from './props';
-import {Component} from 'react';
-import logo from './logo.svg';
+// import {Component} from 'react';
+import {Component} from "react";
+import BoilingVerdict from "./temperature/BoilingVerdict";
+
 import './App.css';
 
-const Header = () => {
-  return <h2>Hello World!</h2>;
-}
+// const Header = () => {
+//   return <h2>Hello World!</h2>;
+// }
 
 // class Field extends Component {
 //   render() {
@@ -23,26 +24,41 @@ const Header = () => {
 //   return <input placeholder= {holder} type="text" style={styles}/>
 // }
 
-  
 
-class App extends Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
-  }
 
-  render() {
-    return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Актуальное время: {this.state.date.toLocaleTimeString()}</h2>
-      </header>
-    </div>
-    );
-  }
+class Temperature extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            temperature: ''
+        }
+        this.checkTemp = this.checkTemp.bind(this)
+    }
+
+    checkTemp(e) {
+        this.setState({
+            temperature: e.target.value
+        })
+    }
+
+    render() {
+
+        const {temperature} = this.state;
+
+        return (
+            <div className="App">
+                <fieldset>
+                    <legend>Введите температуру в градусах Цельсия:</legend>
+                    <input type="text" value={temperature} onChange={this.checkTemp}/>
+                    <BoilingVerdict celsius={temperature}/>
+                </fieldset>
+            </div>
+        )
+    }
+
 }
 
-export {Header};
-export default App;
+export default Temperature;
+
+  
+
