@@ -1,9 +1,6 @@
 import {Component} from "react";
 import "./app-employees-add-form.css";
-import nextId from "react-id-generator";
 class EmployeesAddForm extends Component {
-
-    htmlId = nextId("id-");
 
     constructor(props) {
         super(props);
@@ -22,12 +19,12 @@ class EmployeesAddForm extends Component {
         e.preventDefault();
     }
 
-    cancelCourse = () => {
-        this.setState({
-            name: '',
-            salary: ''
-        })
-    }    
+    // cancelCourse = () => {
+    //     this.setState({
+    //         name: '',
+    //         salary: ''
+    //     })
+    // }    
 
     render() {
 
@@ -45,8 +42,8 @@ class EmployeesAddForm extends Component {
                     placeholder="Salary in USD?" name="salary" value={salary} onChange={this.onValueChange}/>
 
                     <button type="submit" className="btn btn-outline-light" onClick={() => {
-                        addEmplo(name, salary, this.htmlId)
-                        this.cancelCourse()
+                        addEmplo(name, salary)
+                        // this.cancelCourse()
                     }}>Add</button>
                 
                 </form>

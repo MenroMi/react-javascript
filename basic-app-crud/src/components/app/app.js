@@ -36,13 +36,13 @@ class App extends Component {
         })
     }
 
-    addNewEmployee(n, s, id, inc = false) {
+    addNewEmployee(n, s, inc = false) {
 
         if ((n && s) === '' || (n && s) === undefined) {
             return
         } else {
             this.setState(({employees}) => {
-                let newEmployee = [{name: n, salary: s, increase: inc, id: id }]
+                let newEmployee = [{name: n, salary: s, increase: inc, id: employees.length+1 }]
                 let arrEmplos = [...employees, ...newEmployee]
     
                 return {
