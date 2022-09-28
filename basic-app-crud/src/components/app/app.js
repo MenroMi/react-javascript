@@ -7,8 +7,12 @@ import EmployeesAddForm from "../app-employees-add-form/app-employees-add-form";
 import "./app.css";
 
 class App extends Component {
+    
+
+    
     constructor(props) {
         super(props);
+        this.addNewEmployee = this.addNewEmployee.bind(this);
         this.state = {
             employees: [
                 {name: "John S.", salary: 800, increase: false, id: 1}, // 0
@@ -20,7 +24,7 @@ class App extends Component {
 
     deleteElem = (id) => {
         this.setState(({employees}) => {
-            const index = employees.findIndex(elem => elem.id === id);
+            // const index = employees.findIndex(elem => elem.id === id);
             
             const deleteItem = employees.filter(emplo => emplo.id !== id) // 1
 
@@ -32,6 +36,26 @@ class App extends Component {
         })
     }
 
+    addNewEmployee(n, s, id, inc = false) {
+
+        if ((n && s) === '' || (n && s) === undefined) {
+            return
+        } else {
+            this.setState(({employees}) => {
+                let newEmployee = [{name: n, salary: s, increase: inc, id: id }]
+                let arrEmplos = [...employees, ...newEmployee]
+    
+                return {
+                    employees: arrEmplos
+                }
+    
+            })
+        
+        }
+        
+        
+
+    }
 
     render() {        
     
@@ -47,7 +71,7 @@ class App extends Component {
                 </div>
     
                 <EmployeesList data={employees} onDelete={this.deleteElem}/>
-                <EmployeesAddForm/>
+                <EmployeesAddForm addEmplo={this.addNewEmployee}/>
     
             </div>
         )

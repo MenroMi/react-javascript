@@ -1,7 +1,10 @@
 import {Component} from "react";
 import "./app-employees-add-form.css";
-
+import nextId from "react-id-generator";
 class EmployeesAddForm extends Component {
+
+    htmlId = nextId("id-");
+
     constructor(props) {
         super(props);
         this.state = {
@@ -13,24 +16,27 @@ class EmployeesAddForm extends Component {
     onValueChange = (e) => {
         
         e.target.getAttribute("name") === "name" ? this.setState({name: e.target.value}) : this.setState({salary: +e.target.value});
-        console.log(this.state);
     }
 
     handleSubmit = (e) => {
-        console.log(this.state.name);
-        console.log(this.state.salary);
-        
         e.preventDefault();
     }
-    
+
+    cancelCourse = () => {
+        this.setState({
+            name: '',
+            salary: ''
+        })
+    }    
+
     render() {
 
         const {name, salary} = this.state;
-
+        const {addEmplo} = this.props;
         return (
-            <div className="app-add-form" onSubmit={this.handleSubmit}>
+            <div className="app-add-form" >
                 <h3>Add new employee</h3>
-                <form className="add-form d-flex">
+                <form className="add-form d-flex" onSubmit={this.handleSubmit}>
                     <input type="text"
                     className="form-control new-post label"
                     placeholder="What is his name?" name="name" value={name} onChange={this.onValueChange}/>
@@ -38,7 +44,10 @@ class EmployeesAddForm extends Component {
                     <input type="number" className="form-control new-post-label"
                     placeholder="Salary in USD?" name="salary" value={salary} onChange={this.onValueChange}/>
 
-                    <button type="submit" className="btn btn-outline-light">Add</button>
+                    <button type="submit" className="btn btn-outline-light" onClick={() => {
+                        addEmplo(name, salary, this.htmlId)
+                        this.cancelCourse()
+                    }}>Add</button>
                 
                 </form>
             </div>
