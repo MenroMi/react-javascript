@@ -1,6 +1,7 @@
 // import {Component} from 'react';
 import {Component} from "react";
-import BoilingVerdict from "./temperature/BoilingVerdict";
+import BoilingVerdict from "../boiling-verdict/BoilingVerdict";
+import InputProps from "../temperature/InputProps";
 
 import './App.css';
 
@@ -24,7 +25,10 @@ import './App.css';
 //   return <input placeholder= {holder} type="text" style={styles}/>
 // }
 
-
+const scaleNames = {
+    c: 'Цельсия',
+    f: 'Фаренгейта'
+}
 
 class Temperature extends Component {
     constructor(props){
@@ -44,12 +48,14 @@ class Temperature extends Component {
     render() {
 
         const {temperature} = this.state;
+        const {c, f} = scaleNames;
 
         return (
             <div className="App">
                 <fieldset>
-                    <legend>Введите температуру в градусах Цельсия:</legend>
-                    <input type="text" value={temperature} onChange={this.checkTemp}/>
+                <legend>Введите температуру в градусах :</legend>
+                    <InputProps key="1" name={c} value={temperature} changeTemp={this.checkTemp}/>
+                    <InputProps key="2" name={f} value={temperature} changeTemp={this.checkTemp}/>
                     <BoilingVerdict celsius={temperature}/>
                 </fieldset>
             </div>
