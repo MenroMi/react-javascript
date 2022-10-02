@@ -14,10 +14,15 @@ class App extends Component {
         this.state = {
             employees: [
                 {name: "John S.", salary: 800, increase: false, rise: false, id: 1}, // 0
-                {name: "Brett H.", salary: 5000, increase: false, rise: false, id: 2}, // 1
+                {name: "Brett H.", salary: 5000, increase: true, rise: false, id: 2}, // 1
                 {name: "Kyle W.", salary: 1500, increase: false, rise: false, id: 3}, // 2
             ],
-            term: ''
+            term: '',
+            propFilter: [
+                {allEmployees: false},
+                {IncreaseEmployees: false},
+                {SalaryMoreThousand: false}
+            ]
         }
 
         this.onToggleIncrease = this.onToggleIncrease.bind(this);
@@ -97,6 +102,16 @@ class App extends Component {
     onUpdateSearch(term) {
         this.setState({term})
     }
+
+    // changePropFilter = (e) => {
+    //     // this.setState(({propFilter}) => {
+    //     //     let res = propFilter.filter(item => item[prop] === value)
+    //     //     })
+
+    //     console.log(`This is btn: ${e.target}`)
+            
+
+    // }
 
 
     render() {        

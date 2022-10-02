@@ -13,6 +13,7 @@ class EmployeesAddForm extends Component {
     onValueChange = (e) => {
         
         e.target.getAttribute("name") === "name" ? this.setState({name: e.target.value}) : this.setState({salary: +e.target.value});
+        console.log(e);
     }
 
     handleSubmit = (e) => {
