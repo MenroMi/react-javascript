@@ -1,51 +1,46 @@
 // import {Component} from 'react';
 import {Component} from "react";
-import BoilingVerdict from "../boiling-verdict/BoilingVerdict";
+// import BoilingVerdict from "../boiling-verdict/BoilingVerdict";
+import TemperatureInput from "../temperature/TemperatureInput";
 
 
 import './App.css';
 
-// const Header = () => {
-//   return <h2>Hello World!</h2>;
-// }
 
-// class Field extends Component {
-//   render() {
-//     const holder = 'Enter here';
-//     const styles = {boxShadow: "0px 0px 5px blue"};
-//     return <input placeholder= {holder} type="text" style={styles}/>
-//   };
-// }
+function toCelsius(fahrenheit) {
+  return (fahrenheit - 32) * 5 / 9;
+}
+function toFahrenheit(celsius) {
+  return (celsius * 9 / 5) + 32;
+}
 
-// function Field() {
-//   const holder = 'Enter here';
-//   const styles = {
-//     boxShadow: "0px 0px 5px blue"
-//   };
-//   return <input placeholder= {holder} type="text" style={styles}/>
-// }
+function tryConvert(temperature, convert) {
 
-// const scaleNames = {
-//     c: 'по Цельсия',
-//     f: 'по Фаренгейту'
-// }
+  const onFloat = parseFloat(temperature);
+  if(Number.isNaN(onFloat)) {
+    return ''
+  }
+
+  const onTemp = convert(onFloat);
+  const rounded = Math.round(onTemp * 1000) / 1000;
+  return rounded.toString();
+
+}
 
 class Temperature extends Component {
     constructor(props) {
-      super(props);
-      this.handleChange = this.handleChange.bind(this);
-      this.state = {temperature: ''};  }
-  
-    handleChange(e) {
-      this.setState({temperature: e.target.value});  }
-  
+      super(props)
+      this.state = {}
+    }
+
+
     render() {
-      const temperature = this.state.temperature;    
+
       return (
         <fieldset>
-          <legend>Введите температуру в градусах Цельсия:</legend>
-          <input value={temperature} onChange={this.handleChange}/>        
-          <BoilingVerdict celsius={parseFloat(temperature)}/>      
+          <legend>Введите температуру в градусах:</legend>
+          <TemperatureInput scale='c'/>
+          <TemperatureInput scale='f'/>    
           </fieldset>
       );
     }
