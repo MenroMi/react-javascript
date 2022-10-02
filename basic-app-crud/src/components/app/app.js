@@ -21,6 +21,7 @@ class App extends Component {
 
         this.onToggleIncrease = this.onToggleIncrease.bind(this);
         this.onToggleRise = this.onToggleRise.bind(this);
+        // this.checkHowMuchEmploInc = this.checkHowMuchEmploInc.bind(this);
     }
 
     deleteElem = (id) => {
@@ -79,16 +80,16 @@ class App extends Component {
                 return emplo;
             })
         }))
-
     }
 
     render() {        
     
         const {employees} = this.state;
+        const increased = employees.filter(item => item.increase).length
 
         return (
             <div className="app">
-                <AppInfo/>
+                <AppInfo value={employees.length} increase={increased}/>
     
                 <div className="app-search-panel">
                     <SearchPanel/>
