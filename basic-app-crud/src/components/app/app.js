@@ -16,12 +16,14 @@ class App extends Component {
                 {name: "John S.", salary: 800, increase: false, rise: false, id: 1}, // 0
                 {name: "Brett H.", salary: 5000, increase: false, rise: false, id: 2}, // 1
                 {name: "Kyle W.", salary: 1500, increase: false, rise: false, id: 3}, // 2
-            ]
+            ],
+            term: ''
         }
 
         this.onToggleIncrease = this.onToggleIncrease.bind(this);
         this.onToggleRise = this.onToggleRise.bind(this);
-        // this.checkHowMuchEmploInc = this.checkHowMuchEmploInc.bind(this);
+        this.searchEmp = this.searchEmp.bind(this);
+        this.onUpdateSearch = this.onUpdateSearch.bind(this);
     }
 
     deleteElem = (id) => {
@@ -41,7 +43,7 @@ class App extends Component {
     addNewEmployee(n, s, inc = false, rise = false) {
 
         if ((n && s) === '' || (n && s) === undefined) {
-            return
+            return false;
         } else {
             this.setState(({employees}) => {
                 let newEmployee = {name: n, salary: s, increase: inc, rise: rise, id: employees.length + 1 }
@@ -82,21 +84,37 @@ class App extends Component {
         }))
     }
 
+    searchEmp(items, term) {
+        if(term.length === 0) {
+            return items;
+        }
+
+        return items.filter(item => {
+            return item.name.indexOf(term) > -1
+        })
+    }
+
+    onUpdateSearch(term) {
+        this.setState({term})
+    }
+
+
     render() {        
     
-        const {employees} = this.state;
-        const increased = employees.filter(item => item.increase).length
+        const {employees, term} = this.state;
+        const increased = employees.filter(item => item.increase).length;
+        const visibleData = this.searchEmp(employees, term);
 
         return (
             <div className="app">
                 <AppInfo value={employees.length} increase={increased}/>
     
                 <div className="app-search-panel">
-                    <SearchPanel/>
+                    <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
                     <AppFilter/>
                 </div>
     
-                <EmployeesList data={employees} onDelete={this.deleteElem} onToggleIncrease={this.onToggleIncrease} onToggleRise={this.onToggleRise}/>
+                <EmployeesList data={visibleData} onDelete={this.deleteElem} onToggleIncrease={this.onToggleIncrease} onToggleRise={this.onToggleRise}/>
                 <EmployeesAddForm addEmplo={this.addNewEmployee}/>
     
             </div>
