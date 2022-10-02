@@ -8,18 +8,19 @@ import "./app.css";
 
 class App extends Component {
     
-
-    
     constructor(props) {
         super(props);
         this.addNewEmployee = this.addNewEmployee.bind(this);
         this.state = {
             employees: [
-                {name: "John S.", salary: 800, increase: false, id: 1}, // 0
-                {name: "Brett H.", salary: 5000, increase: false, id: 2}, // 1
-                {name: "Kyle W.", salary: 1500, increase: false, id: 3}, // 2
+                {name: "John S.", salary: 800, increase: false, rise: true, id: 1}, // 0
+                {name: "Brett H.", salary: 5000, increase: true, rise: false, id: 2}, // 1
+                {name: "Kyle W.", salary: 1500, increase: false, rise: false, id: 3}, // 2
             ]
         }
+
+        this.onToggleIncrease = this.onToggleIncrease.bind(this);
+        this.onToggleRise = this.onToggleRise.bind(this);
     }
 
     deleteElem = (id) => {
@@ -36,24 +37,48 @@ class App extends Component {
         })
     }
 
-    addNewEmployee(n, s, inc = false) {
+    addNewEmployee(n, s, inc = false, rise = false) {
 
         if ((n && s) === '' || (n && s) === undefined) {
             return
         } else {
             this.setState(({employees}) => {
-                let newEmployee = [{name: n, salary: s, increase: inc, id: employees.length+1 }]
-                let arrEmplos = [...employees, ...newEmployee]
+                let newEmployee = {name: n, salary: s, increase: inc, rise: rise, id: employees.length + 1 }
+                let arrEmplos = [...employees, newEmployee]
     
                 return {
                     employees: arrEmplos
                 }
-    
             })
-        
         }
+    }
+
+    onToggleIncrease(id) {
+
+        this.setState(({employees}) => {
+            const index = employees.findIndex(elem => elem.id === id); // we find element which active now
+            const old = employees[index]; // we make our data is "older"
+            const newObj = {...old, increase: !old.increase}; // we remake active element on new
+            const newArr = [...employees.slice(0, index), newObj, ...employees.slice(index+1)]; // and rerender our old data for new data with method slice
+
+            return {
+                employees: newArr
+            }
+
+        })
+        // this.setState(({increase}) => ({increase: !increase}))
+    }
+
+    onToggleRise(id) {
         
-        
+        this.setState(({employees}) => ({
+            employees: employees.map(emplo => {
+                if(emplo.id === id) {
+                    return {...emplo, rise: !emplo.rise}
+                }
+                return emplo;
+            })
+        }))
 
     }
 
@@ -70,7 +95,7 @@ class App extends Component {
                     <AppFilter/>
                 </div>
     
-                <EmployeesList data={employees} onDelete={this.deleteElem}/>
+                <EmployeesList data={employees} onDelete={this.deleteElem} onToggleIncrease={this.onToggleIncrease} onToggleRise={this.onToggleRise}/>
                 <EmployeesAddForm addEmplo={this.addNewEmployee}/>
     
             </div>

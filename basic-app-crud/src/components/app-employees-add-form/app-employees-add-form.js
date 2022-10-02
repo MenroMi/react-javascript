@@ -19,12 +19,12 @@ class EmployeesAddForm extends Component {
         e.preventDefault();
     }
 
-    // cancelCourse = () => {
-    //     this.setState({
-    //         name: '',
-    //         salary: ''
-    //     })
-    // }    
+    cancelCourse = () => {
+        this.setState({
+            name: '',
+            salary: ''
+        })
+    }    
 
     render() {
 
@@ -43,7 +43,7 @@ class EmployeesAddForm extends Component {
 
                     <button type="submit" className="btn btn-outline-light" onClick={() => {
                         addEmplo(name, salary)
-                        // this.cancelCourse()
+                        this.cancelCourse()
                     }}>Add</button>
                 
                 </form>
