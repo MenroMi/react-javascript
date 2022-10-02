@@ -13,8 +13,8 @@ class App extends Component {
         this.addNewEmployee = this.addNewEmployee.bind(this);
         this.state = {
             employees: [
-                {name: "John S.", salary: 800, increase: false, rise: true, id: 1}, // 0
-                {name: "Brett H.", salary: 5000, increase: true, rise: false, id: 2}, // 1
+                {name: "John S.", salary: 800, increase: false, rise: false, id: 1}, // 0
+                {name: "Brett H.", salary: 5000, increase: false, rise: false, id: 2}, // 1
                 {name: "Kyle W.", salary: 1500, increase: false, rise: false, id: 3}, // 2
             ]
         }
