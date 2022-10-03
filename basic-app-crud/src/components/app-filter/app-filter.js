@@ -17,19 +17,30 @@ class AppFilter extends Component {
 
         this.onChangePropFilter = this.onChangePropFilter.bind(this);
     }
+    
 
-    onChangePropFilter(e) {
+    resetSettings = () => {
+        this.setState(({propFilter}) => ({
+                propFilter: propFilter.map(btnSet => {
+                    return {...btnSet, btnProp: false}
+                })
+        }))
+    }
+
+    async onChangePropFilter(e, callback) {
+        await callback()
+
         const numBtn = e.target.getAttribute("data-num");
         const property = this.state.propFilter;
         // const old = [...this.state.propFilter];
 
-        this.setState(({propFilter}) => {
+        await this.setState(({propFilter}) => {
             const index = property.findIndex(prop => prop.id === +numBtn)
             const older = property[index];
             const newElem = {...older, btnProp: !older.btnProp};
             const newArr = [...propFilter.slice(0, index), newElem, ...propFilter.slice(index+1)];
 
-            console.log(newElem.btnProp);
+            this.props.onCheckFilter(newArr);
 
             return {
                 propFilter: newArr
@@ -48,17 +59,17 @@ class AppFilter extends Component {
                 className="btn btn-light"
                 type="button"
                 data-num="1" 
-                onClick={this.onChangePropFilter}>Все сотрудники</button>
+                onClick={(e) => this.onChangePropFilter(e, this.resetSettings)}>Все сотрудники</button>
                 <button 
                 className="btn btn-outline-light"
                 type="button"
                 data-num="2" 
-                onClick={this.onChangePropFilter}>На повышение</button>
+                onClick={(e) => this.onChangePropFilter(e, this.resetSettings)}>На повышение</button>
                 <button 
                 className="btn btn-outline-light"
                 type="button"
                 data-num="3" 
-                onClick={this.onChangePropFilter}>З/П больше 1000$</button>
+                onClick={(e) => this.onChangePropFilter(e, this.resetSettings)}>З/П больше 1000$</button>
             </div>
         )
     }

@@ -19,9 +19,9 @@ class App extends Component {
             ],
             term: '',
             propFilter: [
-                {allEmployees: false},
-                {IncreaseEmployees: false},
-                {SalaryMoreThousand: false}
+                {btnProp: false, id: 1},
+                {btnProp: false, id: 2},
+                {btnProp: false, id: 3}
             ]
         }
 
@@ -103,15 +103,33 @@ class App extends Component {
         this.setState({term})
     }
 
-    // changePropFilter = (e) => {
-    //     // this.setState(({propFilter}) => {
-    //     //     let res = propFilter.filter(item => item[prop] === value)
-    //     //     })
+    onCheckFilter = (arr) => {
+        const filterTrue = arr.filter(item => item.btnProp === true);
 
-    //     console.log(`This is btn: ${e.target}`)
-            
-
-    // }
+        if(filterTrue[0].id === 1) {
+            console.log(filterTrue[0].id);
+            this.setState(({employees}) => {
+                
+                let arr = [...employees];
+                return {
+                    employees: arr
+                }
+            })
+        
+        } else if(filterTrue[0].id === 2) {
+            this.setState(({employees}) => {
+                return {
+                    employees: employees.filter(emplo => emplo.increase)
+                }
+            })
+        } else {
+            this.setState(({employees}) => {
+                return {
+                    employees: employees.filter(emplo => emplo.salary > 1000)
+                }
+            })            
+        }
+    }
 
 
     render() {        
@@ -126,7 +144,7 @@ class App extends Component {
     
                 <div className="app-search-panel">
                     <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
-                    <AppFilter/>
+                    <AppFilter onCheckFilter={this.onCheckFilter}/>
                 </div>
     
                 <EmployeesList data={visibleData} onDelete={this.deleteElem} onToggleIncrease={this.onToggleIncrease} onToggleRise={this.onToggleRise}/>
