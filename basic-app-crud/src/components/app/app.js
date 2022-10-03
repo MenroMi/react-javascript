@@ -103,40 +103,39 @@ class App extends Component {
         this.setState({term})
     }
 
-    onCheckFilter = (arr) => {
-        const filterTrue = arr.filter(item => item.btnProp === true);
+    onCheckFilter = (activeFilter, activeArr = this.state.propFilter) => {
 
-        if(filterTrue[0].id === 1) {
-            console.log(filterTrue[0].id);
-            this.setState(({employees}) => {
-                
-                let arr = [...employees];
-                return {
-                    employees: arr
-                }
-            })
+        const active = activeArr,
+              real = this.state.propFilter,
+              emplos = this.state.employees
         
-        } else if(filterTrue[0].id === 2) {
-            this.setState(({employees}) => {
-                return {
-                    employees: employees.filter(emplo => emplo.increase)
-                }
-            })
+        if (active === real) {
+            return emplos
         } else {
-            this.setState(({employees}) => {
-                return {
-                    employees: employees.filter(emplo => emplo.salary > 1000)
-                }
-            })            
+            if(activeFilter.id === 2) {
+                console.log(activeFilter.id);
+                return emplos.filter(emplo => emplo.increase)
+            } else if(activeFilter.id === 3) {
+                console.log(activeFilter.id);
+                return emplos.filter(emplo => emplo.salary > 1000)
+            } else {
+                console.log(activeFilter.id);
+                return emplos
+            }
         }
+
+        // const filterTrue = arr.filter(item => item.btnProp === true);
+
+
     }
 
 
     render() {        
     
         const {employees, term} = this.state;
+        const emplos = this.onCheckFilter();
         const increased = employees.filter(item => item.increase).length;
-        const visibleData = this.searchEmp(employees, term);
+        const visibleData = this.searchEmp(emplos, term);
 
         return (
             <div className="app">
