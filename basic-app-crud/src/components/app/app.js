@@ -90,7 +90,9 @@ class App extends Component {
     }
 
     searchEmp(items, term) {
+
         if(term.length === 0) {
+            this.onCheckFilter();
             return items;
         }
 
@@ -103,28 +105,46 @@ class App extends Component {
         this.setState({term})
     }
 
-    onCheckFilter = (activeFilter, activeArr = this.state.propFilter) => {
+    onUpdateSalary = (salary, id) => {
+        this.setState(({employees}) => ({
+            employees: employees.map(emplo => {
+                if(emplo.id === id) {
+                    return {...emplo, salary: salary}
+                }
+                return emplo
+            })
+        }))
+    }
 
-        const active = activeArr,
-              real = this.state.propFilter,
-              emplos = this.state.employees
-        
-        if (active === real) {
-            return emplos
-        } else {
-            if(activeFilter.id === 2) {
+    onCheckFilter = (activeFilter = false) => {
+
+        // const activeFilter = arr.filter(item => item.btnProp === true);
+        console.log(activeFilter)
+
+        switch(activeFilter.id) {
+            case 1:
+                return this.state.employees;
+            case 2:
+                this.setState(({employees}) => {
+                    return {
+                        employees: employees.filter(emplo => emplo.increase)
+                    }
+                })
+
+                break;
+            case 3:
                 console.log(activeFilter.id);
-                return emplos.filter(emplo => emplo.increase)
-            } else if(activeFilter.id === 3) {
-                console.log(activeFilter.id);
-                return emplos.filter(emplo => emplo.salary > 1000)
-            } else {
-                console.log(activeFilter.id);
-                return emplos
-            }
+                this.setState(({employees}) => {
+                    return {
+                        employees: employees.filter(emplo => emplo.salary > 1000)
+                    }
+                })
+                break;
+            default:
+                return this.state.employees;
+
         }
 
-        // const filterTrue = arr.filter(item => item.btnProp === true);
 
 
     }
@@ -133,9 +153,8 @@ class App extends Component {
     render() {        
     
         const {employees, term} = this.state;
-        const emplos = this.onCheckFilter();
         const increased = employees.filter(item => item.increase).length;
-        const visibleData = this.searchEmp(emplos, term);
+        const visibleData = this.searchEmp(employees, term);
 
         return (
             <div className="app">
@@ -146,7 +165,7 @@ class App extends Component {
                     <AppFilter onCheckFilter={this.onCheckFilter}/>
                 </div>
     
-                <EmployeesList data={visibleData} onDelete={this.deleteElem} onToggleIncrease={this.onToggleIncrease} onToggleRise={this.onToggleRise}/>
+                <EmployeesList data={visibleData} onDelete={this.deleteElem} onToggleIncrease={this.onToggleIncrease} onToggleRise={this.onToggleRise} onUpdateSalary={this.onUpdateSalary}/>
                 <EmployeesAddForm addEmplo={this.addNewEmployee}/>
     
             </div>

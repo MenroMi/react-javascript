@@ -1,12 +1,12 @@
 import "./app-employees-item.css";
 
-function EmployeesListItem({name, salary, increase, rise, onDelete, onToggleRise, onToggleIncrease}) {
+function EmployeesListItem({name, salary, increase, rise, onDelete, onToggleRise, onToggleIncrease, onUpdateSalary}) {
 
     return (
         <li className={`list-group-item d-flex justify-content-between${increase ? " increase" : ''}${rise ? " like" : ''}`
         }>
             <span className="list-group-item-label" onClick={onToggleRise}>{name}</span>
-            <input type="text" className="list-group-item-input" defaultValue={salary + "$"} /> 
+            <input type="text" className="list-group-item-input" onChange={onUpdateSalary} defaultValue={salary + "$"} /> 
             {/* //field with salary our employees */}
             <div className="d-flex justify-content-center align-items-center">
                 <button type="button" className="btn-cookie btn-sm" onClick={onToggleIncrease}>

@@ -1,5 +1,3 @@
-
-
 import { Component } from "react";
 import "./app-filter.css";
 
@@ -34,13 +32,14 @@ class AppFilter extends Component {
         const property = this.state.propFilter;
         // const old = [...this.state.propFilter];
 
-        await this.setState(({propFilter}) => {
+        this.setState(({propFilter}) => {
             const index = property.findIndex(prop => prop.id === +numBtn)
             const older = property[index];
             const newElem = {...older, btnProp: !older.btnProp};
             const newArr = [...propFilter.slice(0, index), newElem, ...propFilter.slice(index+1)];
 
-            this.props.onCheckFilter(newElem, newArr);
+            console.log(newElem);
+            this.props.onCheckFilter(newElem);
 
             return {
                 propFilter: newArr
