@@ -38,8 +38,9 @@ class AppFilter extends Component {
             const newElem = {...older, btnProp: !older.btnProp};
             const newArr = [...propFilter.slice(0, index), newElem, ...propFilter.slice(index+1)];
 
-            console.log(newElem);
-            this.props.onCheckFilter(newElem);
+            // console.log(newElem);
+
+            this.props.onCheckFilter(newArr);
 
             return {
                 propFilter: newArr
@@ -47,7 +48,6 @@ class AppFilter extends Component {
         })
     
     } 
-
 
     render() {
 
