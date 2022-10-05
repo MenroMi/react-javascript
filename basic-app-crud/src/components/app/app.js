@@ -39,7 +39,8 @@ class App extends Component {
             const deleteItem = employees.filter(emplo => emplo.id !== id) // 1
 
             return {
-                employees: deleteItem
+                employees: deleteItem,
+                emploFilter: deleteItem
             }
 
 
@@ -56,7 +57,8 @@ class App extends Component {
                 let arrEmplos = [...employees, newEmployee]
     
                 return {
-                    employees: arrEmplos
+                    employees: arrEmplos,
+                    emploFilter: arrEmplos
                 }
             })
         }
@@ -71,7 +73,8 @@ class App extends Component {
             const newArr = [...employees.slice(0, index), newObj, ...employees.slice(index+1)]; // and rerender our old data for new data with method slice
 
             return {
-                employees: newArr
+                employees: newArr,
+                emploFilter: newArr
             }
 
         })
@@ -80,8 +83,14 @@ class App extends Component {
 
     onToggleRise(id) {
         
-        this.setState(({employees}) => ({
-            employees: employees.map(emplo => {
+        this.setState(() => ({
+            emploFilter: this.state.employees.map(emplo => {
+                if(emplo.id === id) {
+                    return {...emplo, rise: !emplo.rise}
+                }
+                return emplo;
+            }),
+            employees: this.state.employees.map(emplo => {
                 if(emplo.id === id) {
                     return {...emplo, rise: !emplo.rise}
                 }
@@ -118,12 +127,9 @@ class App extends Component {
 
     onCheckFilter = (arrFilter = this.state.propFilter, arr = this.state.employees) => {
 
-        console.log(arrFilter);
-
         const activeFilter = arrFilter.filter(item => item.btnProp === true);
 
         if ( activeFilter.length === 0) {
-            console.log(activeFilter);
             return arr;
         } else {
             switch(activeFilter[0].id) {
@@ -135,12 +141,10 @@ class App extends Component {
                     })
                     break;
                 case 2:
-                    console.log(2);
-                    console.log(arr.filter(emplo => emplo.increase));
                     this.setState(() => {
                         return {
                             emploFilter: arr.filter(emplo => {
-                                return emplo.increase
+                                return emplo.increase;
                             })
                         }
                     })
@@ -153,7 +157,6 @@ class App extends Component {
                     })
                     break;
                 default:
-                    console.log('default')
                     return arr;
     
             }
