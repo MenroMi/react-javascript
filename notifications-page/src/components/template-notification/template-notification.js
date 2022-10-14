@@ -21,7 +21,8 @@ class Notification extends Component {
             // top: "150px",
             color: "rgba(71, 71, 71, 0.8)",
             fontSize: "17px",
-            width: "630px"
+            width: "630px",
+            
         }
 
         this.time = {
@@ -29,7 +30,9 @@ class Notification extends Component {
             position: "relative",
             bottom: "20px",
             left: "100px",
-            fontWeight: "500"
+            fontWeight: "500",
+            width: "630px",
+            
         }
         this.action = {
             color: "rgba(0, 0, 0)",
