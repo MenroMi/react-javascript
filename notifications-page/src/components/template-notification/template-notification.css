@@ -1,0 +1,16 @@
+.notification {
+    height: 70px;
+    background-color: rgba(110, 196, 252, 0.1);
+    margin-top: 5px;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding-top: 10px;
+    /* list-style: none; */
+}
+
+.img-avatar {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 610px;
+}
