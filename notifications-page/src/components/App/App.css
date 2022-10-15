@@ -2,8 +2,13 @@ body {
   background-color: #edf2fb;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
 
 .app {
   /* text-align: center; */
   height: 1440px;
+
 }

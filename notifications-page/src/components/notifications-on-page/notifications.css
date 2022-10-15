@@ -1,10 +1,8 @@
 .list-of-notifications {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     min-height: 650px;
-    /* border: 1px solid black; */
     margin-top: 5px;
-    margin-bottom: 20px;
-    /* margin-left: 30px; */
-    /* margin-right: 30px; */
-    list-style: none;
-    padding: 0;
+    padding-bottom: 20px;
 }

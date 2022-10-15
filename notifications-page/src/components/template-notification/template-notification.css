@@ -1,12 +1,17 @@
 .notification {
-    
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    padding: 1rem;
     min-height: 70px;
     background-color: rgba(110, 196, 252, 0.1);
-    margin-top: 10px;
+    border: 1px solid transparent;
+    /* margin-top: 10px; */
     margin-left: 30px;
     margin-right: 30px;
-    padding-top: 10px;
-    /* list-style: none; */
+    /* padding-top: 10px; */
+
+
 }
 
 .img-avatar {
@@ -14,4 +19,11 @@
     height: 60px;
     position: relative;
     left: 20px;
+}
+
+.text-style {
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around;  */
 }

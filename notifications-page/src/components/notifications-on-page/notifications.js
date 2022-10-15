@@ -16,12 +16,12 @@ class Notifications extends Component {
         const {data} = this.props;
 
         return (
-            <ul className='list-of-notifications'>
+            <div className='list-of-notifications'>
                 {data.map(contact => {
-                    const {name, avatar, descr} = contact;
-                    return <Notification name={name} avatar={avatar} descr={descr} key={name}/>
+                    const {name, avatar, descr, time} = contact;
+                    return <Notification name={name} avatar={avatar} descr={descr} time={time} key={name}/>
                 })}
-            </ul>
+            </div>
         )
     }
 }

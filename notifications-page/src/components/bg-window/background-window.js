@@ -7,7 +7,8 @@ import jacobT from "../images/avatar-jacob-thompson.webp";
 import kimberlyS from "../images/avatar-kimberly-smith.webp";
 import markW from "../images/avatar-mark-webber.webp";
 import nathanP from "../images/avatar-nathan-peterson.webp";
-import rizkyH from "../images/avatar-rizky-hasanuddin.webp"
+import rizkyH from "../images/avatar-rizky-hasanuddin.webp";
+
 
 import "./background-window.css";
 
@@ -16,13 +17,13 @@ class WindowNotification extends Component {
         super(props);
         this.state = {
             contacts: [
-                {name: "Mark Webber", avatar: markW, descr: "reacted to your recent post My first tournament today!"},
-                {name: "Angela Gray", avatar: angelaGray, descr: "followed you"},
-                {name: "Jacob Thompson", avatar: jacobT, descr: "has joined your group..."},
-                {name: "Rizky Hasanuddin", avatar: rizkyH, descr: "sent you a private message"},
-                {name: "Kimberly Smith", avatar: kimberlyS, descr: "commented on your picture"},
-                {name: "Nathan Peterson", avatar: nathanP, descr: " reacted to your recent post 5 end-game strategies to increase your win rate"},
-                {name: "Anna Kim", avatar: annaKim, descr: "left the group..."},
+                {name: "Mark Webber", avatar: markW, descr: `reacted to your recent post`, time: "1m ago"},
+                {name: "Angela Gray", avatar: angelaGray, descr: "followed you", time: "5m ago"},
+                {name: "Jacob Thompson", avatar: jacobT, descr: `has joined your group`, time: "1 day ago"},
+                {name: "Rizky Hasanuddin", avatar: rizkyH, descr: "sent you a private message", time: "5 day ago"},
+                {name: "Kimberly Smith", avatar: kimberlyS, descr: "commented on your picture", time: "1 week ago"},
+                {name: "Nathan Peterson", avatar: nathanP, descr: ` reacted to your recent post`, time: "2 weeks ago"},
+                {name: "Anna Kim", avatar: annaKim, descr: `left the group`, time: "2 weeks ago"},
             ]
         }
     }
