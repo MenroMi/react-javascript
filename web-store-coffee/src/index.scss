@@ -1,6 +1,15 @@
+// Fonts
+
+@font-face {
+  font-family: 'Merienda';
+  src: local('Merienda'), url(./assets/fonts/Merienda.ttf) format('truetype');
+}
+
+// Styles
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: "Merienda", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;

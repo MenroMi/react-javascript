@@ -1,6 +1,17 @@
-.sectionAboutUs {
-    max-width: 1400px;
-    margin: 0 auto;
+.about-us {
+    padding: 80px 0 60px 0;
     text-align: center;
-    border: 1px solid black;
+
+    &__divider {
+        margin-top: 20px;
+        height: 35px;
+    }
+
+    &__descr {
+        margin: 40px auto;
+        max-width: 650px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 25px;
+    }
 }

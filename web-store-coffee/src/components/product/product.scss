@@ -1,0 +1,22 @@
+.productItem {
+    width: 220px;
+    min-height: 240px;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 8px;
+    padding: 22px;
+    text-align: right;
+
+    &__title {
+        margin-top: 14px;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        text-align: center;
+        color: #000000;
+    }
+
+    &__price {
+        margin-top: 10px;
+    }
+
+}

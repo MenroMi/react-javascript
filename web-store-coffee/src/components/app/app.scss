@@ -4,6 +4,20 @@
     box-sizing: border-box;
 }
 
-.app {
+.container {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.title {
+    font-weight: 400;
+    font-size: 28px;
+    text-align: center;
+}
+
+.avatar {
+    width: 151px;
+    height: 130px;
+    display: block;
     margin: 0 auto;
 }
