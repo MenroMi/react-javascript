@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "first_name": "Oates",
+        "last_name": "Lindblom",
+        "gender": "Male"
+    },
+    {
+        "id": 2,
+        "first_name": "Maribel",
+        "last_name": "Wannell",
+        "gender": "Female"
+    },
+    {
+        "id": 3,
+        "first_name": "Tiffi",
+        "last_name": "Danielczyk",
+        "gender": "Female"
+    },
+    {
+        "id": 4,
+        "first_name": "Candace",
+        "last_name": "Casazza",
+        "gender": "Female"
+    },
+    {
+        "id": 5,
+        "first_name": "Steve",
+        "last_name": "Gilbertson",
+        "gender": "Male"
+    },
+    {
+        "id": 6,
+        "first_name": "Carlyn",
+        "last_name": "Tumayan",
+        "gender": "Female"
+    },
+    {
+        "id": 7,
+        "first_name": "Mandie",
+        "last_name": "Treske",
+        "gender": "Female"
+    },
+    {
+        "id": 8,
+        "first_name": "Farly",
+        "last_name": "Rugg",
+        "gender": "Male"
+    },
+    {
+        "id": 9,
+        "first_name": "Tina",
+        "last_name": "Izatt",
+        "gender": "Female"
+    },
+    {
+        "id": 10,
+        "first_name": "Chloris",
+        "last_name": "Pilpovic",
+        "gender": "Female"
+    }
+]

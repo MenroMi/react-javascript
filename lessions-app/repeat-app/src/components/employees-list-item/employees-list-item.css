@@ -1,0 +1,81 @@
+.list-group-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid #3d5a80;
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.list-group-item span {
+    line-height: 35px;
+    font-size: 20px;
+    cursor: pointer;
+    min-width: 550px;
+}
+
+.list-group-item input {
+    line-height: 35px;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px
+}
+
+.list-group-item button {
+    width: 35px;
+    height: 35px;
+    margin: 3px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.list-group-item .btn-cookie {
+    color: #e09f3e;
+}
+
+.list-group-item .btn-trash {
+    color: #e5383b;
+}
+
+.list-group-item .fa-star {
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 16px;
+    color: #FFD700;
+    transition: 0.3s all;
+    transform: translateX(30px);
+    opacity: 0;
+}
+
+.list-group-item.like .fa-star {
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.list-group-item.increase .list-group-item-label,
+.list-group-item.increase .list-group-item-input {
+    color: #e09f3e;
+}
+
+.list-group-item.increase .btn-star {
+    color: #aeaeae;
+}
+
+.list-group-item-input.error {
+    border: 2px solid red;
+}
+
+.list-group-item-input.error:focus {
+    outline: 0;
+}
