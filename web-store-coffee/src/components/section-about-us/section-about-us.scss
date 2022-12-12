@@ -15,3 +15,17 @@
         line-height: 25px;
     }
 }
+
+@media (max-width: 700.98px) {
+    .about-us {
+        &__descr {
+            margin: 40px 25px;
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    .about-us {
+        padding: 80px 0 30px 0;
+    }
+}
