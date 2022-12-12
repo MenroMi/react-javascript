@@ -76,9 +76,11 @@
         cursor: pointer;
         transition: 0.3s ease;
 
-        &:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        &:hover,
+        &:focus {
+            box-shadow:
+                inset -4.7em 0 0 0 rgba(0, 0, 0, 0.5),
+                inset 4.6em 0 0 0 rgba(0, 0, 0, 0.5);
         }
     }
 

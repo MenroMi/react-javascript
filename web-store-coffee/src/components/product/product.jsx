@@ -15,6 +15,7 @@ class Product extends Component {
                     <div className="productItem__title">{name}</div>
                     <div className="productItem__price">{price}$</div>
                 </div>
+                {/* <button className="productItem__detail">more</button> */}
             </div>
         )
     }
