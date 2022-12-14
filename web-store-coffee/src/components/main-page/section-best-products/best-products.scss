@@ -1,0 +1,15 @@
+.products {
+    min-height: 495px;
+    padding: 80px 0 90px 0;
+    background: url(../../../assets/imgs/main-page/bcg-img-best-products.png) center (center/cover) no-repeat;
+
+    &__list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        margin-top: 19px;
+        max-width: 850px;
+
+    }
+}
