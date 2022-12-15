@@ -2,6 +2,7 @@
 import { Component } from 'react';
 
 // plugins
+import { v4 as uuidv4 } from 'uuid';
 
 
 // Components
@@ -13,6 +14,11 @@ class SearchBarCoffee extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            buttons: [
+                { name: "Brazil", label: "Brazil", id: uuidv4() },
+                { name: "Kenya", label: "Kenya", id: uuidv4() },
+                { name: "Columbia", label: "Columbia", id: uuidv4() },
+            ],
             search: "",
             filter: ""
         }
@@ -24,10 +30,30 @@ class SearchBarCoffee extends Component {
         this.props.funcSearch(value);
     }
 
+    onUpdateFilter = (e) => {
+        let filter = e.target.name;
+        this.setState({ filter });
+        this.props.funcFilter(filter);
+    }
+
+    btnsFilter = (btns, funcFilter) => {
+        return btns.map(({ name, label, id }) => {
+            return (
+                <button
+                    className='searchbar__btn'
+                    name={name}
+                    type="button"
+                    key={id}
+                    onClick={funcFilter}
+                >{label}</button>
+            )
+        })
+    }
+
     render() {
 
-        const { search, filter } = this.state;
-
+        const { search, filter, buttons } = this.state;
+        const btnsList = this.btnsFilter(buttons, this.onUpdateFilter);
         return (
             <div className="container">
                 <div className="searchbar">
@@ -46,9 +72,7 @@ class SearchBarCoffee extends Component {
                         <div
                             id="buttons" className="searchbar__btns"
                         >
-                            <button className='searchbar__btn'>Brazil</button>
-                            <button className='searchbar__btn'>Kenya</button>
-                            <button className='searchbar__btn'>Columbia</button>
+                            {btnsList}
                         </div>
 
                     </div>

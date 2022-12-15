@@ -36,24 +36,38 @@ class CoffeePage extends Component {
         if (search === '') {
             return products;
         }
-
         return products.filter(product => product.name.toLowerCase().startsWith(search.toLowerCase()));
+    }
 
+    checkFilter = (products, filter) => {
+        switch (filter) {
+            case "Brazil":
+                return products.filter(product => product.country === filter);
+            case "Kenya":
+                return products.filter(product => product.country === filter);
+            case "Columbia":
+                return products.filter(product => product.country === filter);
+            default:
+                return products;
+        }
     }
 
     onSetInputValue = (search) => {
         this.setState({ search });
     }
 
+    onSetFilter = (filter) => {
+        this.setState({ filter });
+    }
+
     render() {
         const { search, filter, products } = this.state;
-        const visibleProducts = this.onSearchItem(products, search);
-        console.log(visibleProducts);
+        const visibleProducts = this.checkFilter(this.onSearchItem(products, search), filter);
         return (
             <div>
                 <HeaderCoffeeHouse />
                 <AboutBeans />
-                <SearchBarCoffee funcSearch={this.onSetInputValue} />
+                <SearchBarCoffee funcSearch={this.onSetInputValue} funcFilter={this.onSetFilter} />
                 <ProductsList data={visibleProducts} />
                 <CoffeeFooter />
             </div>
