@@ -20,13 +20,13 @@ class SearchBarCoffee extends Component {
 
     controlledSearch = (e) => {
         let value = e.target.value;
-        console.log(this.state.search);
         this.setState({ search: value });
+        this.props.funcSearch(value);
     }
 
     render() {
 
-        const { products, search, filter } = this.state;
+        const { search, filter } = this.state;
 
         return (
             <div className="container">
