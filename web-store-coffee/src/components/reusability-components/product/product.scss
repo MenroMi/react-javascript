@@ -1,4 +1,5 @@
 .productItem {
+    list-style-type: none;
     position: relative;
     width: 220px;
     min-height: 240px;
@@ -19,8 +20,6 @@
         .detail {
             display: block;
         }
-
-
     }
 
     &__title {
@@ -34,8 +33,16 @@
 
     }
 
+    &__country {
+        text-align: right;
+        margin-top: 5px;
+        font-weight: 400;
+        font-size: 14px;
+        color: #000000;
+    }
+
     &__price {
-        margin-top: 10px;
+        margin-top: 5px;
         text-align: right;
 
     }

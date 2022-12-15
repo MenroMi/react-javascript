@@ -20,9 +20,9 @@ class BestProducts extends Component {
         super(props);
         this.state = {
             data: [
-                { name: "Solimo Coffee Beans - 2kg", price: "10.73", icon: `${avatarSolimo}`, id: uuidv4() },
-                { name: "Presto Coffee Beans - 1kg", price: "15.99", icon: `${avatarPresto}`, id: uuidv4() },
-                { name: "AROMISTICO Coffee - 1kg", price: "6.99", icon: `${avatarAromistico}`, id: uuidv4() },
+                { name: "Solimo Coffee Beans - 2kg", price: "10.73", icon: `${avatarSolimo}`, country: "Brazil", id: uuidv4() },
+                { name: "Presto Coffee Beans - 1kg", price: "15.99", icon: `${avatarPresto}`, country: "Brazil", id: uuidv4() },
+                { name: "AROMISTICO Coffee - 1kg", price: "6.99", icon: `${avatarAromistico}`, country: "Brazil", id: uuidv4() },
             ]
         }
     }

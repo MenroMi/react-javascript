@@ -2,7 +2,7 @@
 import { Component } from 'react';
 
 // Components
-
+import NavBar from '../../reusability-components/nav-component/nav';
 // Styles
 import './header-coffee-house.scss';
 
@@ -11,8 +11,12 @@ class HeaderCoffeeHouse extends Component {
 
     render() {
         return (
-            <div>
-            </div>
+            <header className="header">
+                <div className="container">
+                    <NavBar />
+                    <h1 className="header__title">Our Coffee</h1>
+                </div>
+            </header>
         )
     }
 }
