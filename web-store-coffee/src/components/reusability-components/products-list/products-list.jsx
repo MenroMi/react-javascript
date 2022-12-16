@@ -2,7 +2,7 @@
 import { Component } from 'react';
 
 // Components
-import Product from "../../reusability-components/product/product";
+import Product from "../product/product";
 
 // images
 import avatarAromistico from "../../../assets/icons/product-icons/aromistico-coffee-1kg.png";

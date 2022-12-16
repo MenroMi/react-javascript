@@ -4,23 +4,21 @@ import { Component } from 'react';
 // plugins
 import { v4 as uuidv4 } from 'uuid';
 
+
 // Components
 import HeaderCoffeeHouse from '../../reusability-components/header-coffee-house/header-coffee-house';
 import About from '../../reusability-components/about/about';
-import SearchBarCoffee from '../../reusability-components/coffee-searchbar/coffee-searchbar';
 import CoffeeFooter from '../../reusability-components/coffee-footer/coffee-footer';
 import ProductsList from '../../reusability-components/products-list/products-list';
 
-// image 
-import headerImage from "../../../assets/imgs/our-coffee-page/header-bg.png";
-import girlBeans from "../../../assets/imgs/our-coffee-page/gitl-with-beans.png";
-
-
+// image
+import headerImage from "../../../assets/imgs/our-goods/header-coffee-our-goods.png";
+import cupOfPicture from "../../../assets/imgs/our-goods/cup-of-coffee.png";
 
 // Styles
-import './coffee-page.scss';
+import './our-goods.scss';
 
-class CoffeePage extends Component {
+class OurGoods extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,44 +30,14 @@ class CoffeePage extends Component {
                 { name: "SROMISTICO Coffee 1 kg", country: "Brazil", price: "6.99", id: uuidv4() },
                 { name: "AROMISTICO Coffee 1 kg", country: "Brazil", price: "6.99", id: uuidv4() },
             ],
-            search: "",
-            filter: "",
         }
-    }
-
-    onSearchItem = (products, search) => {
-        if (search === '') {
-            return products;
-        }
-        return products.filter(product => product.name.toLowerCase().startsWith(search.toLowerCase()));
-    }
-
-    checkFilter = (products, filter) => {
-        switch (filter) {
-            case "Brazil":
-                return products.filter(product => product.country === filter);
-            case "Kenya":
-                return products.filter(product => product.country === filter);
-            case "Columbia":
-                return products.filter(product => product.country === filter);
-            default:
-                return products;
-        }
-    }
-
-    onSetInputValue = (search) => {
-        this.setState({ search });
-    }
-
-    onSetFilter = (filter) => {
-        this.setState({ filter });
     }
 
     render() {
-        const { search, filter, products } = this.state;
-        const visibleProducts = this.checkFilter(this.onSearchItem(products, search), filter);
-        const head = "Our coffee";
-        const title = "About our beans";
+
+        const { products } = this.state;
+        const head = "For your pleasure";
+        const title = "About our goods";
         const descr = <div className="about__descr">
             Extremity sweetness difficult behaviour he of. On disposal of as landlord horrible.
             <br /><br />
@@ -81,25 +49,22 @@ class CoffeePage extends Component {
             met spot shy want. Children me laughing we prospect answered followed. At it went
             is song that held help face.
         </div>
-        const altText = "Woman with cup of coffee";
+        const altText = "White cup of coffee on the table";
+
         return (
             <div>
                 <HeaderCoffeeHouse bgImage={headerImage} headerTitle={head} />
                 <About
                     title={title}
                     descr={descr}
-                    image={girlBeans}
+                    image={cupOfPicture}
                     alt={altText}
                 />
-                <SearchBarCoffee
-                    funcSearch={this.onSetInputValue}
-                    funcFilter={this.onSetFilter}
-                />
-                <ProductsList data={visibleProducts} />
+                <ProductsList data={products} />
                 <CoffeeFooter />
             </div>
         )
     }
 }
 
-export default CoffeePage;
+export default OurGoods;
