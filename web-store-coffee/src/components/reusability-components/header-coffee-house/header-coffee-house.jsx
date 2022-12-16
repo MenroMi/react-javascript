@@ -2,7 +2,7 @@
 import { Component } from 'react';
 
 // Components
-import NavBar from '../../reusability-components/nav-component/nav';
+import NavBar from '../nav-component/nav';
 // Styles
 import './header-coffee-house.scss';
 

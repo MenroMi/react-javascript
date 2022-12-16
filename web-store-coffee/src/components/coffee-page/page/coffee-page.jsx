@@ -5,7 +5,7 @@ import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 // Components
-import HeaderCoffeeHouse from '../header-coffee-house/header-coffee-house';
+import HeaderCoffeeHouse from '../../reusability-components/header-coffee-house/header-coffee-house';
 import AboutBeans from '../about-beans/about-beans';
 import SearchBarCoffee from '../../reusability-components/coffee-searchbar/coffee-searchbar';
 import CoffeeFooter from '../../reusability-components/coffee-footer/coffee-footer';

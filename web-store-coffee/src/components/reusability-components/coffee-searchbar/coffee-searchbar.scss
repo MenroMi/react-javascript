@@ -93,6 +93,7 @@
             }
 
             input {
+                border: 1px solid black;
                 margin-right: 0;
                 margin-left: 20px;
                 width: 200px;
@@ -132,6 +133,7 @@
         &__search {
 
             input {
+                width: 270px;
                 display: block;
                 margin-left: 0;
             }
