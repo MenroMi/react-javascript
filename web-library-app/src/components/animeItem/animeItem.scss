@@ -1,0 +1,32 @@
+.card {
+    width: 200px;
+    height: 318px;
+    background: #232222;
+    transition: .3s ease;
+
+    &:hover,
+    &:focus {
+        box-shadow: 5px 5px 20px #023E8A;
+        outline: 0;
+        animation-name: cardsAnimation;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+    &__image {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+
+}
+
+@keyframes cardsAnimation {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-3%);
+    }
+}

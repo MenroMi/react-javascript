@@ -1,0 +1,16 @@
+.App {
+	padding: 50px 0 50px 0;
+	min-height: 750px;
+	width: 1100px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.girl-bg {
+	position: absolute;
+	width: 270px;
+	height: 370px;
+	z-index: -1;
+	right: -100px;
+	bottom: -10px;
+}

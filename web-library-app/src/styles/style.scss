@@ -1,0 +1,76 @@
+/* fonts for all pages */
+
+@font-face {
+    font-family: 'BebasNeue';
+    src: local('BebasNeue'), url(../assets/fonts/BebasNeue-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: local("Roboto"), url(../assets/fonts/Roboto-Light.ttf) format('ttruetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: local("Roboto"), url(../assets/fonts/Roboto-Regular.ttf) format('ttruetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: local("Roboto"), url(../assets/fonts/Roboto-Bold.ttf) format('ttruetype');
+    font-weight: 700;
+}
+
+* {
+    font-family: "BebasNeue", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul,
+li,
+dl {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+
+    &:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    position: relative;
+    width: 1440px;
+    margin: 0 auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

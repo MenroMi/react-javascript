@@ -1,0 +1,51 @@
+@import "../../styles/variables.scss";
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+
+    &__title {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+
+        span {
+            color: $main-color;
+        }
+    }
+
+    &__menu {
+        font-weight: 500;
+        font-size: 24px;
+    }
+
+    &__link {
+        margin: 0 5px;
+    }
+
+    #category-anime {
+
+        &:hover,
+        &:focus {
+            color: $main-color;
+        }
+
+        &:active {
+            color: #03045E;
+        }
+    }
+
+    #category-manga {
+
+        &:hover,
+        &:focus {
+            color: $main-color;
+        }
+
+        &:active {
+            color: #03045E;
+        }
+    }
+}
