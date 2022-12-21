@@ -29,8 +29,16 @@
     &_load {
         background-color: #0096C7;
         width: 170px;
-        grid-column: 2;
-        align-self: start;
+        grid-column: 1/4;
         margin: 0 auto;
+        align-self: center;
+    }
+}
+
+@media (max-width: 1200px) {
+    .button {
+        &_load {
+            grid-column: 1/3;
+        }
     }
 }

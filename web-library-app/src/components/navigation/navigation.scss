@@ -4,12 +4,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
+    height: 100%;
+
 
     &__title {
         font-style: normal;
         font-weight: 700;
         font-size: 40px;
+        width: 50%;
+
 
         span {
             color: $main-color;
@@ -19,6 +22,8 @@
     &__menu {
         font-weight: 500;
         font-size: 24px;
+        width: 50%;
+        text-align: right;
     }
 
     &__link {
@@ -47,5 +52,34 @@
         &:active {
             color: #03045E;
         }
+    }
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        flex-direction: column;
+
+        &__menu {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+
+        &__title {
+            width: 100%;
+            text-align: center;
+        }
+
+        #category-anime {
+            width: 50%;
+            text-align: right;
+        }
+
+        #category-manga {
+            width: 50%;
+            text-align: left;
+
+        }
+
     }
 }

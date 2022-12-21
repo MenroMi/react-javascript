@@ -30,6 +30,7 @@ class AnimeList extends Component {
                 { title: "One Piece", image: onePiece },
                 { title: "Spy Family", image: spyFamily },
                 { title: "Chainsaw Man", image: chainsawMan },
+
             ]
         }
     }
@@ -49,9 +50,8 @@ class AnimeList extends Component {
                 <ul className='list'>
                     {items}
                     <button className='button button_load'>Load more</button>
-
                 </ul>
-                <DetailInformation data={data} />
+                {/* <DetailInformation data={data} /> */}
             </div>
         );
     }

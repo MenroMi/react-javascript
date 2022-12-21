@@ -1,7 +1,6 @@
 .App {
 	padding: 50px 0 50px 0;
-	min-height: 750px;
-	width: 1100px;
+	max-width: 1100px;
 	margin: 0 auto;
 	position: relative;
 }
@@ -13,4 +12,34 @@
 	z-index: -1;
 	right: -100px;
 	bottom: -10px;
+}
+
+@media (max-width:1200px) {
+	.App {
+		max-width: 900px;
+	}
+
+	.girl-bg {
+		width: 240px;
+		height: 340px;
+		right: -30px;
+	}
+}
+
+@media (max-width:992px) {
+	.App {
+		max-width: 768px;
+	}
+}
+
+@media (max-width:768px) {
+	.App {
+		max-width: 576px;
+	}
+}
+
+@media (max-width:576px) {
+	.App {
+		max-width: 320px;
+	}
 }
