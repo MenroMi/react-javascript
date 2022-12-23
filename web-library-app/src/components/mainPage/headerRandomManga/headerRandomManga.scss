@@ -1,6 +1,6 @@
-@import url(../../styles/elements/button.scss);
-@import url(../../styles/elements/title.scss);
-@import "../../styles/variables.scss";
+@import url(../../../styles/elements/button.scss);
+@import url(../../../styles/elements/title.scss);
+@import "../../../styles/variables.scss";
 
 .random {
     display: flex;
@@ -178,7 +178,7 @@
                     content: "";
                     left: 0;
                     top: -150px;
-                    background: url(../../assets/imgs/randomThan992px.png) center (center/contain) no-repeat;
+                    background: url(../../../assets/imgs/randomThan992px.png) center (center/contain) no-repeat;
                 }
             }
         }

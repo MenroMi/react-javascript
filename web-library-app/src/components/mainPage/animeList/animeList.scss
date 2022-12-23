@@ -1,5 +1,5 @@
-@import url(../../styles/elements/button.scss);
-@import "../../styles/variables.scss";
+@import url(../../../styles/elements/button.scss);
+@import "../../../styles/variables.scss";
 
 .cards-with-info {
     display: grid;
@@ -16,6 +16,25 @@
     row-gap: 30px;
     grid-column: 1;
     grid-row: 1/3;
+
+    li {
+        &:last-child {
+            grid-column: 1/4;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .list {
+
+        li {
+            &:last-child {
+                grid-column: 1/3;
+                margin: 0 auto;
+            }
+        }
+    }
 }
 
 @media (max-width: 992px) {
@@ -26,6 +45,13 @@
     .list {
         justify-self: center;
         column-gap: 50px;
+
+        li {
+            &:last-child {
+                grid-column: 1/4;
+                margin: 0 auto;
+            }
+        }
     }
 }
 
@@ -39,6 +65,15 @@
 @media (max-width: 576px) {
     .list {
         grid-template-columns: repeat(1, 1fr);
+
+        li {
+            &:last-child {
+                grid-column: 1/2;
+                margin: 0 auto;
+                width: 100%;
+
+            }
+        }
     }
 
 }

@@ -2,11 +2,11 @@
 import { Component } from 'react';
 
 //Components
-import Nav from '../navigation/navigation';
+import Nav from '../../reusabilityComponents/navigation/navigation';
 
 // images 
-import plugPic from "../../assets/icons/icons8-kuromi.svg";
-import girlRandom from "../../assets/imgs/girlRandomManga.png";
+import plugPic from "../../../assets/icons/icons8-kuromi.svg";
+import girlRandom from "../../../assets/imgs/girlRandomManga.png";
 
 // styles
 import './headerRandomManga.scss';

@@ -7,15 +7,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Components
 import AnimeItem from '../animeItem/animeItem';
-import DetailInformation from '../reusabilityComponents/informationAboutTitle/informationAboutTitle';
+import DetailInformation from '../../reusabilityComponents/informationAboutTitle/informationAboutTitle';
 // images 
-import onePiece from "../../assets/imgs/cards/one-piece.jpg";
-import spyFamily from "../../assets/imgs/cards/spy-family.jpeg";
-import chainsawMan from "../../assets/imgs/cards/chaisaw-man.jpeg";
+import onePiece from "../../../assets/imgs/cards/one-piece.jpg";
+import spyFamily from "../../../assets/imgs/cards/spy-family.jpeg";
+import chainsawMan from "../../../assets/imgs/cards/chaisaw-man.jpeg";
 
 // styles
 import './animeList.scss';
-
 class AnimeList extends Component {
     constructor(props) {
         super(props);
@@ -49,8 +48,10 @@ class AnimeList extends Component {
             <div className="cards-with-info">
                 <ul className='list'>
                     {items}
-                    <button className='button button_load'>Load more</button>
+                    <li>
+                        <button className='button button_load'>Load more</button>
 
+                    </li>
                 </ul>
                 <DetailInformation data={data} />
             </div>

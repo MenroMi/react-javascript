@@ -2,8 +2,8 @@
 import { Component } from 'react';
 
 // Components
-import HeaderRandomManga from '../headerRandomManga/headerRandomManga';
-import AnimeList from '../animeList/animeList';
+import HeaderRandomManga from '../mainPage/headerRandomManga/headerRandomManga';
+import AnimeList from '../mainPage/animeList/animeList';
 // images 
 import girlBackground from "../../assets/imgs/girlBackground.png";
 

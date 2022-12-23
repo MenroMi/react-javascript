@@ -8,8 +8,7 @@
     cursor: pointer;
     transition: .3s ease;
 
-    &:hover,
-    &:focus {
+    &:hover {
         background-color: #0077B6;
     }
 
@@ -20,8 +19,7 @@
     &_submain {
         background-color: #a7babe;
 
-        &:hover,
-        &:focus {
+        &:hover {
             background-color: #889193;
         }
     }
@@ -34,37 +32,10 @@
     }
 }
 
-@media (max-width: 1200px) {
-    .button {
-        &_load {
-            grid-column: 1/3;
-        }
-    }
-}
-
-@media (max-width: 992px) {
-    .button {
-        &_load {
-            grid-column: 1/4;
-
-        }
-    }
-}
-
-@media (max-width: 768px) {
-    .button {
-        &_load {
-            grid-column: 1/4;
-
-        }
-    }
-}
-
 
 @media (max-width: 576px) {
     .button {
         &_load {
-            grid-column: 1/2;
             width: 100%;
         }
     }
