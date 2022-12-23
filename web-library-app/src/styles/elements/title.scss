@@ -9,3 +9,18 @@
         color: #fff;
     }
 }
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+}
+
+
+@media (max-width: 575px) {
+    .title {
+        font-size: 22px;
+        letter-spacing: 1px;
+    }
+}

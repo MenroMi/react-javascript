@@ -3,21 +3,42 @@
 
 .cards-with-info {
     display: grid;
-    grid-template: repeat(auto-fill, 320px) / repeat(1, 2fr 1fr);
     margin-top: 50px;
-    transition: $transition;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-rows: 320px;
 }
 
 .list {
     display: grid;
     grid-template-columns: repeat(auto-fill, 200px);
-    grid-auto-flow: row;
-    grid-row: 1/4;
     column-gap: 25px;
     row-gap: 30px;
-    transition: $transition;
+    grid-column: 1;
+    grid-row: 1/3;
 }
 
-@media (max-width: 1200px) {
-    .list {}
+@media (max-width: 992px) {
+    .cards-with-info {
+        grid-template-columns: 1fr;
+    }
+
+    .list {
+        justify-self: center;
+        column-gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .list {
+        grid-template-columns: repeat(auto-fill, 150px);
+    }
+
+}
+
+@media (max-width: 575px) {
+    .list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
 }
