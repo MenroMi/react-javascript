@@ -2,8 +2,13 @@
 import { Component } from 'react';
 
 // Components
-import HeaderRandomManga from '../mainPage/headerRandomManga/headerRandomManga';
-import AnimeList from '../mainPage/animeList/animeList';
+/* Main Page */
+// import HeaderRandomManga from '../mainPage/headerRandomManga/headerRandomManga';
+// import AnimeList from '../mainPage/animeList/animeList';
+
+/* Manga Page */
+import MangaPage from '../mangaPage/mangaPage';
+
 // images 
 import girlBackground from "../../assets/imgs/girlBackground.png";
 
@@ -14,9 +19,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <HeaderRandomManga />
+        {/* Main page */}
+        {/* <HeaderRandomManga />
         <AnimeList />
-        <img className="girl-bg" src={girlBackground} alt="Anime girl on background" />
+        <img className="girl-bg" src={girlBackground} alt="Anime girl on background" /> */}
+        {/* Manga page */}
+        <MangaPage />
       </div>
     );
   }
