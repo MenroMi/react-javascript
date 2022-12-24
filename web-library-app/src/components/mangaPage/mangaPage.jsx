@@ -20,27 +20,61 @@ class MangaPage extends Component {
         super(props);
         this.state = {
             data: [
-                { title: "One Piece", image: onePiece, available: "9.99$" },
-                { title: "Spy Family", image: spyFamily, available: "NOT AVAILABLE" },
-                { title: "Chainsaw Man", image: chainsawMan, available: "9.99$" },
-                { title: "One Piece", image: onePiece, available: "9.99$" },
-                { title: "Spy Family", image: spyFamily, available: "9.99$" },
-                { title: "Chainsaw Man", image: chainsawMan, available: "9.99$" },
-                { title: "One Piece", image: onePiece, available: "NOT AVAILABLE" },
-                { title: "Spy Family", image: spyFamily, available: "9.99$" },
-                { title: "Chainsaw Man", image: chainsawMan, available: "9.99$" },
+                { title: "One Piece", image: onePiece, available: "9.99$", category: "fantasy" },
+                { title: "Spy Family", image: spyFamily, available: "NOT AVAILABLE", category: "drama" },
+                { title: "Chainsaw Man", image: chainsawMan, available: "9.99$", category: "drama" },
+                { title: "One Piece", image: onePiece, available: "9.99$", category: "adventure" },
+                { title: "Spy Family", image: spyFamily, available: "9.99$", category: "everyday" },
+                { title: "Chainsaw Man", image: chainsawMan, available: "9.99$", category: "fantasy" },
+                { title: "One Piece", image: onePiece, available: "NOT AVAILABLE", category: "comedy" },
+                { title: "Spy Family", image: spyFamily, available: "9.99$", category: "comedy" },
+                { title: "Chainsaw Man", image: chainsawMan, available: "9.99$", category: "romantic" },
 
-            ]
+            ],
+            valueCategory: "",
+            search: ""
         }
     }
 
+    onChangeValueCategory = (res) => {
+        this.setState(({ valueCategory: res }))
+    }
+
+    onChangeSearchValue = (search) => {
+        this.setState({ search });
+    }
+
+    onSearchByCategory = (category, items) => {
+        if (category === "all" || Object.keys(category).length === 0) {
+            return items;
+        } else {
+            return items.filter(item => {
+                return Object.values(item).some(value => value.includes(category));
+            })
+        }
+    }
+
+    onSearchByWords = (term, items) => {
+        if (term.length === 0) {
+            return items
+        } else {
+            return items.filter(item => item.title.toLowerCase().startsWith(term.toLowerCase()));
+        }
+
+    }
+
     render() {
-        const { data } = this.state;
+        const { data, valueCategory, search } = this.state;
+        const filterCategory = this.onSearchByWords(search, this.onSearchByCategory(valueCategory, data));
         return (
             <div className="mangaPage">
                 <NavManga />
-                <SearchPanelManga />
-                <MangaList data={data} />
+                <SearchPanelManga
+                    onChangeValueCategory={this.onChangeValueCategory}
+                    chooseCategory={this.onSearchByCategory}
+                    onChangeSearchValue={this.onChangeSearchValue}
+                />
+                <MangaList data={filterCategory} />
             </div>
         );
     }

@@ -25,11 +25,30 @@ class SearchPanelManga extends Component {
     }
 
     changeSelectValue = (e) => {
-        this.setState({ valueCategory: [...e] });
-        setTimeout(() => {
-            console.log(this.state.valueCategory);
+        let res = e.value;
+        this.setState({ valueCategory: res });
+        this.props.onChangeValueCategory(res);
+    }
 
-        }, 2000);
+    changeSearchValue = (e) => {
+        let value = e.target.value,
+            crossForReset = e.target.nextElementSibling;
+
+        if (value.length > 0) {
+            crossForReset.classList.add("cross_active");
+        } else {
+            crossForReset.classList.remove("cross_active");
+        }
+
+        this.setState(({ search: value }));
+        this.props.onChangeSearchValue(value);
+    }
+
+    onResetValue = (e) => {
+        // let parent = e.target.previousElementSibling.value = '';
+        // this.changeSearchValue(parent);
+        // setTimeout(() => console.log(this.state.search), 2000);
+
     }
 
     render() {
@@ -38,14 +57,44 @@ class SearchPanelManga extends Component {
             <div className="searchManga">
 
                 <Select
+                    styles={{
+                        control: (provided, state) => ({
+                            ...provided,
+                            outline: state.isFocused ? '2px solid #48CAE4' : null
+                        })
+                    }}
                     onChange={this.changeSelectValue}
                     value={valueCategory}
                     options={category}
                     className="searchManga__categories"
                     placeholder="Choose category..."
                     isSearchable={true}
-                    isMulti
+                    theme={(theme) => ({
+                        ...theme,
+                        borderRadius: 0,
+                        colors: {
+                            ...theme.colors,
+                            primary: "#48CAE4",
+                            primary25: "#90E0EF",
+                            neutral10: "#CAF0F8",
+                            neutral20: "black"
+                        }
+                    })}
                 />
+
+                <input
+                    onChange={this.changeSearchValue}
+                    type="search"
+                    className="searchManga__search"
+                    value={search}
+                    placeholder="Search title..."
+                />
+
+                <div
+                    className="cross"
+                    onClick={this.onResetValue}
+                ></div>
+
             </div>
         );
     }
