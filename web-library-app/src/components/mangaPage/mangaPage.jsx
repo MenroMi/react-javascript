@@ -44,6 +44,10 @@ class MangaPage extends Component {
         this.setState({ search });
     }
 
+    onResetValue = () => {
+        this.setState(({ search: '' }))
+    }
+
     onSearchByCategory = (category, items) => {
         if (category === "all" || Object.keys(category).length === 0) {
             return items;
@@ -70,6 +74,7 @@ class MangaPage extends Component {
             <div className="mangaPage">
                 <NavManga />
                 <SearchPanelManga
+                    onResetValue={this.onResetValue}
                     onChangeValueCategory={this.onChangeValueCategory}
                     chooseCategory={this.onSearchByCategory}
                     onChangeSearchValue={this.onChangeSearchValue}

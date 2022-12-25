@@ -42,9 +42,9 @@
 .cross {
     position: absolute;
     opacity: 0;
-    // display: none;
     right: 105px;
     top: 50%;
+    z-index: -1;
     transform: translateY(-50%);
     background: url(../../../assets/icons/crossForInput.svg) right (center/13px) no-repeat;
     width: 13px;
@@ -55,6 +55,7 @@
     animation-fill-mode: forwards;
 
     &_active {
+        z-index: 1;
         animation-name: visibleCross;
         animation-duration: .2s;
         animation-fill-mode: forwards;

@@ -43,19 +43,16 @@ class SearchPanelManga extends Component {
         this.setState(({ search: value }));
         this.props.onChangeSearchValue(value);
     }
-
     onResetValue = (e) => {
-        // let parent = e.target.previousElementSibling.value = '';
-        // this.changeSearchValue(parent);
-        // setTimeout(() => console.log(this.state.search), 2000);
-
+        this.setState(({ search: '' }));
+        this.props.onResetValue();
+        e.target.classList.remove('cross_active');
     }
 
     render() {
         const { search, category, valueCategory } = this.state;
         return (
             <div className="searchManga">
-
                 <Select
                     styles={{
                         control: (provided, state) => ({
