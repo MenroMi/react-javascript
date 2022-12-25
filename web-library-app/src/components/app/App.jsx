@@ -7,10 +7,13 @@ import { Component } from 'react';
 // import AnimeList from '../mainPage/animeList/animeList';
 
 /* Manga Page */
-import MangaPage from '../mangaPage/mangaPage';
+// import MangasPage from '../mangasPage/mangasPage';
+
+/* Choosen Manga Page */
+import MangaPage from '../reusabilityComponents/mangaPage/mangaPage';
 
 // images 
-import girlBackground from "../../assets/imgs/girlBackground.png";
+// import girlBackground from "../../assets/imgs/girlBackground.png";
 
 // styles
 import './App.scss';
@@ -23,7 +26,9 @@ class App extends Component {
         {/* <HeaderRandomManga />
         <AnimeList />
         <img className="girl-bg" src={girlBackground} alt="Anime girl on background" /> */}
-        {/* Manga page */}
+        {/* Mangas page */}
+        {/* <MangasPage /> */}
+        {/* Page with choosen manga */}
         <MangaPage />
       </div>
     );

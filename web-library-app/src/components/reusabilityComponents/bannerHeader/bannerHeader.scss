@@ -9,7 +9,7 @@
     height: 100px;
     margin-top: 50px;
     background-color: #00B4D8;
-    z-index: 1;
+    z-index: 50;
 
     &__image-man,
     &__image-girl {
@@ -18,15 +18,16 @@
     }
 
     &__image-girl {
+        z-index: -1;
         width: 20%;
         right: 0;
-        top: -79px;
+        top: -72px;
     }
 
     &__image-man {
         width: 15%;
-        top: -2.7em;
-        left: -4.5em;
+        top: -2.4em;
+        left: -4em;
         z-index: -1;
     }
 
@@ -47,13 +48,13 @@
 
     .banner {
         &__image-girl {
-            top: -46px;
+            top: -40px;
         }
 
         &__image-man {
             width: 25%;
-            top: -6em;
-            left: -5.7em;
+            top: -5.3em;
+            left: -5.3em;
         }
     }
 
@@ -63,13 +64,13 @@
 
     .banner {
         &__image-girl {
-            top: -25px;
+            top: -18px;
         }
 
         &__image-man {
             width: 25%;
-            top: -4em;
-            left: -4.8em;
+            top: -3.5em;
+            left: -4.5em;
         }
     }
 
@@ -79,13 +80,13 @@
 
     .banner {
         &__image-girl {
-            top: 6px;
+            top: 13px;
         }
 
         &__image-man {
             width: 25%;
-            top: -1.5em;
-            left: -3.5em;
+            top: -1em;
+            left: -3.3em;
         }
 
         &__title {
@@ -105,7 +106,7 @@
     .banner {
         &__image-girl {
             width: 40%;
-            top: -4px;
+            top: 9px;
             z-index: -1;
         }
 

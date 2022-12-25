@@ -13,8 +13,9 @@ class AnimeItem extends Component {
         return (
             <li className="card" tabIndex='0'>
                 <img src={image} alt={title} className="card__image" />
-                <h2 className="title title_card">{title}</h2>
-                <a href='#top' className='title title_card'>More Info</a>
+                <div className="title title_card">{title}
+                    <a href='#top'>More Info</a>
+                </div>
             </li>
         );
     }

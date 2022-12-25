@@ -24,6 +24,10 @@ class SearchPanelManga extends Component {
         }
     }
 
+    scrollMenu = (e) => {
+        console.log(e);
+    }
+
     changeSelectValue = (e) => {
         let res = e.value;
         this.setState({ valueCategory: res });

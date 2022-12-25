@@ -2,8 +2,8 @@
 import { Component } from 'react';
 
 // Components
-import NavManga from '../mangaPage/headerMangaPage/headerMangaPage';
-import MangaList from '../mangaPage/mangaList/mangaList';
+import NavManga from './headerMangaPage/headerMangaPage';
+import MangaList from './mangaList/mangaList';
 import SearchPanelManga from './searchManga/searchManga';
 
 // images 
@@ -12,9 +12,9 @@ import spyFamily from "../../assets/imgs/cards/spy-family.jpeg";
 import chainsawMan from "../../assets/imgs/cards/chaisaw-man.jpeg";
 
 // styles
-import './mangaPage.scss';
+import './mangasPage.scss';
 
-class MangaPage extends Component {
+class MangasPage extends Component {
 
     constructor(props) {
         super(props);
@@ -85,4 +85,4 @@ class MangaPage extends Component {
     }
 }
 
-export default MangaPage;
+export default MangasPage;

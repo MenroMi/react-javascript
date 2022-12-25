@@ -11,11 +11,11 @@ class MangaItem extends Component {
     render() {
         const { image, title, available } = this.props;
         return (
-            <li className="card" tabIndex='0'>
-                <img src={image} alt={title} className="card__image" />
+            <li className="mangaItem" tabIndex='0'>
+                <img src={image} alt={title} className="mangaItem__image" />
                 <div className="title title_card">{title}
-                    <a href='#top' className='title title_card'>More Info</a>
-                    <h3 className='card__subtitle'>{available}</h3>
+                    <a href='#top'>More Info</a>
+                    <h3 className='mangaItem__subtitle'>{available}</h3>
 
                 </div>
             </li>

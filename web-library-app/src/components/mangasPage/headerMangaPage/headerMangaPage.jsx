@@ -2,7 +2,6 @@
 import { Component } from 'react';
 
 // plugins
-import { v4 as uuidv4 } from 'uuid';
 
 // Components
 import Nav from '../../reusabilityComponents/navigation/navigation';
