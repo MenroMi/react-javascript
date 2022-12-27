@@ -3,17 +3,20 @@ import { Component } from 'react';
 
 // Components
 /* Main Page */
-// import HeaderRandomManga from '../mainPage/headerRandomManga/headerRandomManga';
-// import AnimeList from '../mainPage/animeList/animeList';
+import HeaderRandomManga from '../mainPage/headerRandomManga/HeaderRandomManga';
+import AnimeList from '../mainPage/animeList/AnimeList';
 
 /* Manga Page */
-// import MangasPage from '../mangasPage/mangasPage';
+// import MangasPage from '../mangasPage/MangasPage';
 
 /* Choosen Manga Page */
-import MangaPage from '../reusabilityComponents/mangaPage/mangaPage';
+// import MangaPage from '../reusabilityComponents/mangaPage/MangaPage';
+
+// services
+// import { Anime } from '../services/AnimeResources';
 
 // images 
-// import girlBackground from "../../assets/imgs/girlBackground.png";
+import girlBackground from "../../assets/imgs/girlBackground.png";
 
 // styles
 import './App.scss';
@@ -23,13 +26,13 @@ class App extends Component {
     return (
       <div className="App">
         {/* Main page */}
-        {/* <HeaderRandomManga />
+        <HeaderRandomManga />
         <AnimeList />
-        <img className="girl-bg" src={girlBackground} alt="Anime girl on background" /> */}
+        <img className="girl-bg" src={girlBackground} alt="Anime girl on background" />
         {/* Mangas page */}
         {/* <MangasPage /> */}
         {/* Page with choosen manga */}
-        <MangaPage />
+        {/* <MangaPage /> */}
       </div>
     );
   }

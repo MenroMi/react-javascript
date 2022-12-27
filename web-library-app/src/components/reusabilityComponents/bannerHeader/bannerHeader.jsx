@@ -6,7 +6,7 @@ import bannerMan from "../../../assets/imgs/bannerMan.png";
 import bannerGirl from "../../../assets/imgs/bannerGirl.png";
 
 // styles
-import "./bannerHeader.scss";
+import "./BannerHeader.scss";
 
 
 class Banner extends Component {

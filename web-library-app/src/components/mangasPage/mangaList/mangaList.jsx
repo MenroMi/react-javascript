@@ -5,10 +5,10 @@ import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 // Components
-import MangaItem from '../mangaItem/mangaItem';
+import MangaItem from '../mangaItem/MangaItem';
 
 // styles
-import './mangaList.scss';
+import './MangaList.scss';
 
 
 class MangaList extends Component {

@@ -6,15 +6,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 // Components
-import AnimeItem from '../animeItem/animeItem';
-import DetailInformation from '../../reusabilityComponents/informationAboutTitle/informationAboutTitle';
+import AnimeItem from '../animeItem/AnimeItem';
+import DetailInformation from '../../reusabilityComponents/informationAboutTitle/InformationAboutTitle';
 // images 
 import onePiece from "../../../assets/imgs/cards/one-piece.jpg";
 import spyFamily from "../../../assets/imgs/cards/spy-family.jpeg";
 import chainsawMan from "../../../assets/imgs/cards/chaisaw-man.jpeg";
 
 // styles
-import './animeList.scss';
+import './AnimeList.scss';
 class AnimeList extends Component {
     constructor(props) {
         super(props);

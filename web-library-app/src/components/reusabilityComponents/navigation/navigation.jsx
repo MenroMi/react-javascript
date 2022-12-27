@@ -4,7 +4,7 @@ import { Component } from 'react';
 // images 
 
 // styles
-import './navigation.scss';
+import './Navigation.scss';
 
 class Nav extends Component {
     render() {

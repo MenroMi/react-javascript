@@ -5,7 +5,7 @@ import { Component } from 'react';
 // images
 
 // styles
-import './animeItem.scss';
+import './AnimeItem.scss';
 
 class AnimeItem extends Component {
     render() {

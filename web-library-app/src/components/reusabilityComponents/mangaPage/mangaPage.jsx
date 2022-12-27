@@ -1,14 +1,16 @@
 // basics
 import { Component } from 'react';
 
+
+
 // plugins
 
 // Components
-import NavManga from '../../mangasPage/headerMangaPage/headerMangaPage';
+import NavManga from '../../mangasPage/headerMangaPage/HeaderMangaPage';
 // images 
 import ChaisawMan from "../../../assets/imgs/cards/chaisaw-man.jpeg";
 // styles
-import './mangaPage.scss';
+import './MangaPage.scss';
 
 
 class MangaPage extends Component {

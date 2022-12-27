@@ -4,14 +4,9 @@ import { Component } from 'react';
 // plugins
 
 // Components
-import Nav from '../../reusabilityComponents/navigation/navigation';
-import Banner from '../../reusabilityComponents/bannerHeader/bannerHeader';
+import Nav from '../../reusabilityComponents/navigation/Navigation';
+import Banner from '../../reusabilityComponents/bannerHeader/BannerHeader';
 // images 
-
-// styles
-import './headerMangaPage.scss';
-
-
 class NavManga extends Component {
     constructor(props) {
         super(props);

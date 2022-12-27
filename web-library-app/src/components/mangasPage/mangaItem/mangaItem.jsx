@@ -1,11 +1,8 @@
 // basics
 import { Component } from 'react';
 
-// Components
-// images
-
 // styles
-import './mangaItem.scss';
+import './MangaItem.scss';
 
 class MangaItem extends Component {
     render() {

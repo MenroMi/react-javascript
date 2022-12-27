@@ -3,7 +3,7 @@ import { Component } from 'react';
 import Select from "react-select";
 
 // styles
-import './searchManga.scss';
+import './SearchManga.scss';
 
 
 class SearchPanelManga extends Component {

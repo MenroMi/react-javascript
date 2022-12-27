@@ -5,7 +5,7 @@ import { Component } from 'react';
 // images 
 
 // styles
-import './informationAboutTitle.scss';
+import './InformationAboutTitle.scss';
 
 class DetailInformation extends Component {
     render() {

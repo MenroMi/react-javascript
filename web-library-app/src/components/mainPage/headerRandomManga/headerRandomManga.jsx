@@ -2,14 +2,14 @@
 import { Component } from 'react';
 
 //Components
-import Nav from '../../reusabilityComponents/navigation/navigation';
+import Nav from '../../reusabilityComponents/navigation/Navigation';
 
 // images 
 import plugPic from "../../../assets/icons/icons8-kuromi.svg";
 import girlRandom from "../../../assets/imgs/girlRandomManga.png";
 
 // styles
-import './headerRandomManga.scss';
+import './HeaderRandomManga.scss';
 
 class HeaderRandomManga extends Component {
     render() {
