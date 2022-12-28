@@ -13,13 +13,16 @@ import AnimeList from '../mainPage/animeList/AnimeList';
 // import MangaPage from '../reusabilityComponents/mangaPage/MangaPage';
 
 // services
-// import { Anime } from '../services/AnimeResources';
+import { Anime } from '../services/AnimeResources';
 
 // images 
 import girlBackground from "../../assets/imgs/girlBackground.png";
 
 // styles
 import './App.scss';
+
+// const randonAnime = new Anime();
+// randonAnime.getCountAllAnime().then(data => console.log(data));
 
 class App extends Component {
   render() {

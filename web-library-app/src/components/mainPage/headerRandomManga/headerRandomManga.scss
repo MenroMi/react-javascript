@@ -20,7 +20,9 @@
     transition: $transition;
 
     &__img {
-        grid-row: 1/3;
+        width: 100%;
+        height: 100%;
+        grid-row: 1/2;
         align-self: center;
         object-fit: cover;
         transition: $transition;
@@ -29,12 +31,14 @@
 
     &__info {
         display: grid;
-        grid-template-rows: 1fr repeat(2, 2fr);
+        grid-template-rows: repeat(3, 1fr);
         row-gap: 10px;
         transition: $transition;
     }
 
     &__descr {
+        width: 100%;
+        height: 100%;
         font-family: "Roboto", sans-serif;
         font-weight: 300;
         font-size: 14px;
