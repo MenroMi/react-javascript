@@ -30,6 +30,10 @@
 
     &__link {
         margin: 0 5px;
+
+        &:last-child {
+            margin: 0 0 0 5px;
+        }
     }
 
     #category-anime {

@@ -3,12 +3,13 @@ import { Component } from 'react';
 
 //Components
 import Nav from '../../reusabilityComponents/navigation/Navigation';
+import Spinner from '../../reusabilityComponents/spinnerLoading/Spinner';
 
 // Services
 import { Anime } from '../../services/AnimeResources';
 
 // images 
-import plugPic from "../../../assets/icons/icons8-kuromi.svg";
+// import plugPic from "../../../assets/icons/icons8-kuromi.svg";
 import girlRandom from "../../../assets/imgs/girlRandomManga.png";
 
 // styles
@@ -36,44 +37,44 @@ class HeaderRandomManga extends Component {
             description: null,
             posterImage: null,
             homepage: null,
-            wiki: null
-        }
+            wiki: null,
+            alt: "random manga",
+        },
+        loading: true,
+        error: false
     }
 
     getRandomNumber = (min, max) => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    updateState = async () => {
-
-        const maxCountAnime = await this.anime.getCountAllAnime();
-        const id = await this.getRandomNumber(0, maxCountAnime);
-        return this.anime.getAnime(id)
-            .then(data => this.setState(({ character: data })))
-            .catch(() => this.updateState());
-
+    onLoadedAnime = (anime) => {
+        return this.setState({ character: anime, loading: false });
     }
 
+    onErrorLoad = () => {
+        return this.setState({ loading: false, error: true });
+    }
+
+    updateState = async () => {
+        // let maxCount = await this.anime.getCountAllAnime();
+        const id = await this.getRandomNumber(0, 5000);
+        await this.anime.getAnime(id)
+            .then(this.onLoadedAnime) // == .then(data => this.onChangeAnime(data))
+            .catch((error) => {
+                console.log(`${error.name}: ${error.message}`);
+                this.updateState();
+            })
+    }
 
     render() {
 
-        const { character: { title, description, posterImage, homepage, wiki } } = this.state;
-
-
+        const { character, loading } = this.state;
         return (
             <header>
                 <Nav />
                 <div className="random">
-                    <div className="random-manga">
-                        <img className='random-manga__img' src={posterImage} alt='Random manga' />
-                        <div className="random-manga__info">
-                            <div className="title">{title}</div>
-                            <div className="random-manga__descr">{description}</div>
-                            <div className="random-manga__btns">
-                                <a href={homepage} target="_blank" rel='noreferrer'> <button type="button" className="button button_main">Homepage</button> </a>
-                                <a href={wiki} target="_blank" rel='noreferrer'> <button type="button" className="button button_submain">WIKI</button> </a></div>
-                        </div>
-                    </div>
+                    {loading ? <Spinner /> : <ViewRandomManga character={character} />}
                     <div className="choose-random-manga">
                         <div className="choose-random-manga__subdescr">Random manga today! <br />
                             Do you want to read special title for you? <br /> <br /> Or choose another one</div>
@@ -88,6 +89,25 @@ class HeaderRandomManga extends Component {
             </header>
         );
     }
+}
+
+
+const ViewRandomManga = ({ character }) => { // Render component without logic
+
+    const { title, description, posterImage, homepage, wiki, alt } = character;
+
+    return (
+        <div className="random-manga">
+            <img className='random-manga__img' src={posterImage} alt={alt} />
+            <div className="random-manga__info">
+                <div className="title" >{title}</div>
+                <div className="random-manga__descr">{description}</div>
+                <div className="random-manga__btns">
+                    <a href={homepage} target="_blank" rel='noreferrer'> <button type="button" className="button button_main">Homepage</button> </a>
+                    <a href={wiki} target="_blank" rel='noreferrer'> <button type="button" className="button button_submain">WIKI</button> </a></div>
+            </div>
+        </div>
+    )
 }
 
 export default HeaderRandomManga;

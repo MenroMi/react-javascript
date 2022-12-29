@@ -6,6 +6,8 @@
     display: flex;
     align-items: center;
     margin-top: 50px;
+    box-shadow: $shadow;
+
 }
 
 .random-manga {
@@ -16,7 +18,6 @@
     max-width: 550px;
     height: 250px;
     background: #FFFFFF;
-    box-shadow: $shadow;
     transition: $transition;
 
     &__img {
@@ -51,7 +52,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
 
-        button {
+        a {
             &:nth-child(-n+2) {
                 align-self: flex-end;
             }
@@ -66,7 +67,6 @@
     width: 550px;
     height: 250px;
     background: #232222;
-    box-shadow: $shadow;
     font-weight: 700;
     font-size: 24px;
     transition: $transition;
