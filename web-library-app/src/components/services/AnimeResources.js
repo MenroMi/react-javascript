@@ -5,10 +5,10 @@ class AnimeResources {
 
     getResources = async (url) => {
         const req = await fetch(url, {
-            headers: { "Content-type": "application/vnd.api+json" }
+            header: { "Content-type": "application/vnd.api+json" }
         })
             .then(data => data.json())
-            .catch((error) => new Error(`Could not fetch: ${url}. This is error have status: ${error.statusText}`));
+            .catch(() => req.errors)
 
         return req;
     }
@@ -65,8 +65,15 @@ class Anime extends AnimeResources {
     }
 
     getAnime = async (id) => {
-        const oneTitle = await this.getResources(`${this.#apiBase}/${id}`).then(data => data.data);
-        return this.#animeTitle(oneTitle);
+        const oneTitle = await this.getResources(`${this.#apiBase}/${id}`);
+        return "errors" in oneTitle ? oneTitle.errors[0] : this.#animeTitle(oneTitle.data);
+        // if ("errors" in oneTitle) {
+        //     let err = oneTitle.errors[0];
+        //     console.log(oneTitle.errors[0]);
+        //     return err;
+        // } else {
+        //     return this.#animeTitle(oneTitle.data);
+        // }
     }
 
     getAnimeCategory = (id) => {

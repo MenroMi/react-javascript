@@ -4,6 +4,7 @@ import { Component } from 'react';
 //Components
 import Nav from '../../reusabilityComponents/navigation/Navigation';
 import Spinner from '../../reusabilityComponents/spinnerLoading/Spinner';
+import ErrorMessage from '../../reusabilityComponents/errorValidate/ErrorValidate';
 
 // Services
 import { Anime } from '../../services/AnimeResources';
@@ -41,7 +42,8 @@ class HeaderRandomManga extends Component {
             alt: "random manga",
         },
         loading: true,
-        error: false
+        error: false,
+        statusCode: 200
     }
 
     getRandomNumber = (min, max) => {
@@ -49,32 +51,47 @@ class HeaderRandomManga extends Component {
     }
 
     onLoadedAnime = (anime) => {
-        return this.setState({ character: anime, loading: false });
+        this.setState({ character: anime, loading: false, statusCode: 200 });
+
     }
 
-    onErrorLoad = () => {
-        return this.setState({ loading: false, error: true });
+    onErrorLoad = (error) => {
+        this.setState({
+            error: true,
+            loading: false,
+            statusCode: Number(error.status)
+        });
     }
 
     updateState = async () => {
+
         // let maxCount = await this.anime.getCountAllAnime();
-        const id = await this.getRandomNumber(0, 5000);
+        const id = await this.getRandomNumber(0, 10000);
         await this.anime.getAnime(id)
-            .then(this.onLoadedAnime) // == .then(data => this.onChangeAnime(data))
-            .catch((error) => {
-                console.log(`${error.name}: ${error.message}`);
-                this.updateState();
-            })
+            .then(data => {
+                if ("status" in data) {
+                    return this.onErrorLoad(data);
+                } else {
+                    return this.onLoadedAnime(data);
+                }
+            }) // == .then(data => this.onChangeAnime(data))
     }
 
     render() {
 
-        const { character, loading } = this.state;
+        const { character, loading, error, statusCode } = this.state;
+        const errorMessage = error !== false && statusCode !== 200 ? <ErrorMessage replyReq={this.updateState} /> : console.log(null);
+        const load = loading ? <Spinner /> : null;
+        const content = !(errorMessage || load) ? <ViewRandomManga character={character} /> : null;
+
+
         return (
             <header>
                 <Nav />
                 <div className="random">
-                    {loading ? <Spinner /> : <ViewRandomManga character={character} />}
+                    {errorMessage}
+                    {load}
+                    {content}
                     <div className="choose-random-manga">
                         <div className="choose-random-manga__subdescr">Random manga today! <br />
                             Do you want to read special title for you? <br /> <br /> Or choose another one</div>
