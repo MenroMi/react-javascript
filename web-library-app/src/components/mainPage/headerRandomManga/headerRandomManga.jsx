@@ -25,10 +25,9 @@ import './HeaderRandomManga.scss';
 
 class HeaderRandomManga extends Component {
 
-    constructor(props) {
-        super(props);
-        this.updateState();
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     anime = new Anime();
 
@@ -45,16 +44,16 @@ class HeaderRandomManga extends Component {
         error: false,
     }
 
+    componentDidMount() {
+        this.updateState();
+    }
+
     getRandomNumber = (min, max) => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
     onLoadedAnime = (anime) => {
         this.setState({ character: anime, loading: false, statusCode: 200 });
-
-    }
-
-    validateError = () => {
 
     }
 
@@ -121,7 +120,6 @@ class HeaderRandomManga extends Component {
                         <button className="button button_main">Try it</button>
                         <img className='choose-random-manga__img-random' src={girlRandom} alt="School girl" />
                     </div>
-
                 </div>
             </header>
         );

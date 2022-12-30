@@ -10,7 +10,7 @@ class AnimeResources {
             .then(data => data.json())
             .catch(() => req.errors)
 
-        return req;
+        return await req;
     }
 
     checkDescriptionLength = (descr) => {
