@@ -43,7 +43,6 @@ class HeaderRandomManga extends Component {
         },
         loading: true,
         error: false,
-        statusCode: 200
     }
 
     getRandomNumber = (min, max) => {
@@ -55,22 +54,43 @@ class HeaderRandomManga extends Component {
 
     }
 
-    onErrorLoad = (error) => {
-        this.setState({
-            error: true,
-            loading: false,
-            statusCode: Number(error.status)
-        });
+    validateError = () => {
+
+    }
+
+    onErrorLoad = (status) => {
+
+        switch (status) {
+            case "404":
+                this.updateState();
+                break;
+            case status >= "500":
+                alert("problems with server");
+                this.setState({ loading: false, error: true });
+                break;
+            case "400":
+                alert("Bad Request - malformed request");
+                this.setState({ loading: false, error: true });
+                break;
+            case "401":
+                alert("Unauthorized - invalid or no authentication details provided");
+                this.setState({ loading: false, error: true });
+                break;
+            default:
+                alert("Please contact with administration");
+                this.setState({ loading: false, error: true });
+                break;
+        }
     }
 
     updateState = async () => {
 
         // let maxCount = await this.anime.getCountAllAnime();
-        const id = await this.getRandomNumber(0, 10000);
+        const id = await this.getRandomNumber(0, 18500);
         await this.anime.getAnime(id)
             .then(data => {
                 if ("status" in data) {
-                    return this.onErrorLoad(data);
+                    return this.onErrorLoad(data.status);
                 } else {
                     return this.onLoadedAnime(data);
                 }
@@ -80,7 +100,7 @@ class HeaderRandomManga extends Component {
     render() {
 
         const { character, loading, error, statusCode } = this.state;
-        const errorMessage = error !== false && statusCode !== 200 ? <ErrorMessage replyReq={this.updateState} /> : console.log(null);
+        const errorMessage = error ? <ErrorMessage statusCode={statusCode} /> : null;
         const load = loading ? <Spinner /> : null;
         const content = !(errorMessage || load) ? <ViewRandomManga character={character} /> : null;
 
