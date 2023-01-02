@@ -25,7 +25,14 @@ import './App.scss';
 // randonAnime.getCountAllAnime().then(data => console.log(data));
 
 class App extends Component {
+
+
+  state = {
+    state: false
+  }
+
   render() {
+
     return (
       <div className="App">
         {/* Main page */}

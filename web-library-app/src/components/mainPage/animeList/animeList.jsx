@@ -1,48 +1,54 @@
 // basics
 import { Component } from 'react';
 
-// plugins
-import { v4 as uuidv4 } from 'uuid';
-
-
+// services
+import { Anime } from "../../services/AnimeResources";
 // Components
 import AnimeItem from '../animeItem/AnimeItem';
-import DetailInformation from '../../reusabilityComponents/informationAboutTitle/InformationAboutTitle';
-// images 
-import onePiece from "../../../assets/imgs/cards/one-piece.jpg";
-import spyFamily from "../../../assets/imgs/cards/spy-family.jpeg";
-import chainsawMan from "../../../assets/imgs/cards/chaisaw-man.jpeg";
+// import DetailInformation from '../../reusabilityComponents/informationAboutTitle/InformationAboutTitle';
 
 // styles
 import './AnimeList.scss';
-class AnimeList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [
-                { title: "One Piece", image: onePiece },
-                { title: "Spy Family", image: spyFamily },
-                { title: "Chainsaw Man", image: chainsawMan },
-                { title: "One Piece", image: onePiece },
-                { title: "Spy Family", image: spyFamily },
-                { title: "Chainsaw Man", image: chainsawMan },
-                { title: "One Piece", image: onePiece },
-                { title: "Spy Family", image: spyFamily },
-                { title: "Chainsaw Man", image: chainsawMan },
 
-            ]
-        }
+// object
+const obj = {
+    title: null,
+    description: null,
+    posterImage: null,
+    homepage: null,
+    wiki: null,
+    alt: null,
+};
+
+class AnimeList extends Component {
+
+    anime = new Anime();
+
+    state = {
+        data: [obj, obj, obj, obj, obj, obj, obj, obj, obj],
+        loading: true,
+        error: false,
     }
 
-    iterationItems = (data) => {
+    componentDidMount() {
+        this.giveAllAnime();
+    }
+
+    iterationItems = (data, loading, error) => {
         return data.map(({ ...info }) => {
-            return <AnimeItem {...info} key={uuidv4()} />
+            return <AnimeItem {...info} key={crypto.randomUUID()} loading={loading} error={error} />
         })
     }
 
+    giveAllAnime = async () => {
+        const list = await this.anime.getAllAnime(); // request for list of anime
+        return this.setState({ data: list, loading: false, error: false });
+    }
+
     render() {
-        const { data } = this.state;
-        const items = this.iterationItems(data);
+        const { data, loading, error } = this.state;
+        const items = this.iterationItems(data, loading, error);
+
 
         return (
             <div className="cards-with-info">
@@ -50,10 +56,9 @@ class AnimeList extends Component {
                     {items}
                     <li>
                         <button className='button button_load'>Load more</button>
-
                     </li>
                 </ul>
-                <DetailInformation data={data} />
+                {/* <DetailInformation data={data} /> */}
             </div>
         );
     }

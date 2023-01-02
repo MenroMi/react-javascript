@@ -7,10 +7,9 @@ class AnimeResources {
         const req = await fetch(url, {
             header: { "Content-type": "application/vnd.api+json" }
         })
-            .then(data => data.json())
             .catch(() => req.errors)
 
-        return await req;
+        return req.json();
     }
 
     checkDescriptionLength = (descr) => {
@@ -67,13 +66,6 @@ class Anime extends AnimeResources {
     getAnime = async (id) => {
         const oneTitle = await this.getResources(`${this.#apiBase}/${id}`);
         return "errors" in oneTitle ? oneTitle.errors[0] : this.#animeTitle(oneTitle.data);
-        // if ("errors" in oneTitle) {
-        //     let err = oneTitle.errors[0];
-        //     console.log(oneTitle.errors[0]);
-        //     return err;
-        // } else {
-        //     return this.#animeTitle(oneTitle.data);
-        // }
     }
 
     getAnimeCategory = (id) => {
