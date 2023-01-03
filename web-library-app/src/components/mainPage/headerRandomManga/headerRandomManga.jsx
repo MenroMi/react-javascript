@@ -28,6 +28,7 @@ class HeaderRandomManga extends Component {
             homepage: null,
             wiki: null,
             alt: "random manga",
+            key: null
         },
         loading: true,
         error: false,

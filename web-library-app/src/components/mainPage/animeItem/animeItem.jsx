@@ -1,5 +1,5 @@
 // basics
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 // components
 import Spinner from '../../reusabilityComponents/spinnerLoading/Spinner';
@@ -28,7 +28,7 @@ class AnimeItem extends Component {
     render() {
 
         const { loading, error } = this.state;
-        const { posterImage, title } = this.props;
+        const { posterImage, title, onVisible, ID, homepage } = this.props;
 
         const styleSpinner = {
             position: "relative",
@@ -38,10 +38,10 @@ class AnimeItem extends Component {
 
         const errMessage = error ? <ErrorMessage /> : null;
         const load = loading ? <Spinner styles={styleSpinner} /> : null;
-        const content = !(load || errMessage) ? <ViewAnimeItem image={posterImage} title={title} /> : null;
+        const content = !(load || errMessage) ? <ViewAnimeItem image={posterImage} title={title} homepage={homepage} /> : null;
 
         return (
-            <li className="card" tabIndex='0'>
+            <li className="card" tabIndex='0' onClick={() => onVisible(ID)} >
                 {errMessage}
                 {load}
                 {content}
@@ -51,14 +51,14 @@ class AnimeItem extends Component {
     }
 }
 
-const ViewAnimeItem = ({ image, title }) => {
+const ViewAnimeItem = ({ image, title, homepage }) => { // rendering component without logic
     return (
-        <>
+        <React.Fragment>
             <img src={image} alt={title} className="card__image" />
-            <div className="title title_card">{title}
-                <a href='#top'>More Info</a>
+            <div className="title title_card" >{title}
+                <a href={homepage} target="_blank" rel='noreferrer'>More Info</a>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

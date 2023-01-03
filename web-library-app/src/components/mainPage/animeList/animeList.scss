@@ -3,6 +3,7 @@
 
 .cards-with-info {
     display: grid;
+    position: relative;
     margin-top: 50px;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: repeat(3, auto);

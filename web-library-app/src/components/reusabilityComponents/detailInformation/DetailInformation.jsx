@@ -5,19 +5,19 @@ import { Component } from 'react';
 // images 
 
 // styles
-import './InformationAboutTitle.scss';
+import './DetailInformation.scss';
 
 class DetailInformation extends Component {
     render() {
-        const { data } = this.props;
+        const { data: [{ title, description, posterImage, homepage, wiki }] } = this.props;
         return (
             <div className="title-details">
                 <div className="title-details__container">
-                    <img src={data[1].image} alt={data[1].title} className="title-details__img" />
-                    <h2 className="title">SPY×FAMILY</h2>
-                    <button className="button button_main">Homepage</button>
-                    <button className="button button_submain">WIKI</button>
-                    <div className="title-details__descr">At a time when all nations of the world were involved in a fierce war of information happening behind closed doors, Ostania and Westalis had been in a state of cold war against one another for decades. The Westalis Intelligence Services' Eastern-Focused Division (WISE) sends their most talented spy, "Twilight," on a top-secret mission to investigate the movements of Donovan Desmond, the chairman of Ostania's National Unity Party, who is threatening peace efforts between the two nations.</div>
+                    <img src={posterImage} alt={title} className="title-details__img" />
+                    <h2 className="title">{title}</h2>
+                    <a className='title-details__links' href={homepage}><button className='button button_main'>Homepage</button></a>
+                    <a className='title-details__links' href={wiki}><button className='button button_submain'>WIKI</button></a>
+                    <div className="title-details__descr">{description}</div>
                 </div>
                 <div className="title-details__manga">
                     <h3 className="title-details__manga-subtitle">More from series:</h3>

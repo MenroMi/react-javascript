@@ -1,5 +1,7 @@
 import plugIMG from "../../assets/icons/icons8-kuromi.svg";
 
+// plugins
+import { v4 as uuid4 } from 'uuid';
 
 class AnimeResources {
 
@@ -20,7 +22,7 @@ class AnimeResources {
     }
 
     checkTitleLength = (title) => {
-        return title.length > 30 ? `${title.slice(0, 30)}...` : title;
+        return title.length > 27 ? `${title.slice(0, 27)}...` : title;
     }
 
     isEmptyDescription = (descr) => {
@@ -49,6 +51,7 @@ class Anime extends AnimeResources {
             homepage: res.links.self,
             wiki: res.relationships.animeCharacters.links.related,
             alt: res.slug,
+            key: uuid4(),
         }
     }
 

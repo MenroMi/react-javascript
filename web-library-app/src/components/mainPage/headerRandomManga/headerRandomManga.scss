@@ -5,6 +5,8 @@
 .random {
     display: flex;
     align-items: center;
+    width: 100%;
+    height: 100%;
     margin-top: 50px;
     box-shadow: $shadow;
 
@@ -143,6 +145,10 @@
         .random-manga {
             max-width: 550px;
             height: 250px;
+
+            &__img {
+                object-fit: contain;
+            }
         }
 
         .choose-random-manga {
@@ -234,21 +240,24 @@
 
 @media (max-width: 576px) {
     .random {
+        width: 220px;
+        margin: 50px auto 0 auto;
 
         .random-manga {
-            grid-template: 1fr 1fr / 1fr;
-            height: 300px;
-            padding: 35px;
+            grid-template: 250px 200px / 1fr;
+            height: 100%;
+            padding: 20px;
 
 
             &__img {
+                object-fit: contain;
                 height: 100%;
                 margin: 0 auto;
             }
 
             &__info {
                 text-align: center;
-                grid-template-rows: repeat(3, 1fr);
+                grid-template-rows: 70px repeat(2, 50px);
 
                 div {
                     &:first-child {
