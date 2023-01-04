@@ -9,12 +9,10 @@ import { Anime } from "../../services/AnimeResources";
 // Components
 import AnimeItem from '../animeItem/AnimeItem';
 import DetailInformation from '../../reusabilityComponents/detailInformation/DetailInformation';
-
+import ErrorMessage from '../../reusabilityComponents/errorValidate/ErrorValidate';
+import Spinner from '../../reusabilityComponents/spinnerLoading/Spinner';
 // styles
 import './AnimeList.scss';
-
-// object
-const arr = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 
 class AnimeList extends Component {
@@ -22,7 +20,7 @@ class AnimeList extends Component {
     anime = new Anime();
 
     state = {
-        data: arr.map(obj => {
+        data: this.props.arr.map(obj => {
 
             obj = {
                 title: null,
@@ -31,7 +29,7 @@ class AnimeList extends Component {
                 homepage: null,
                 wiki: null,
                 alt: null,
-                key: uuid4(),
+                id: uuid4(),
             };
 
             return obj;
@@ -39,25 +37,25 @@ class AnimeList extends Component {
         loading: true,
         error: false,
         visible: false,
-        ID: null,
+        numb: '1',
     }
 
     componentDidMount() {
         this.giveAllAnime();
     }
 
-    onChangeVisibleDetails = (id) => {
-        this.setState({ visible: true, ID: id });
+    onChangeVisibleDetails = (numb) => {
+        this.setState({ numb });
     }
 
     iterationItems = (data, loading, error) => {
 
-        return data.map(({ key, ...info }) => {
+        return data.map(({ id, ...info }) => {
             return <AnimeItem {...info}
                 loading={loading}
                 error={error}
-                key={key}
-                ID={key}
+                key={id}
+                id={id}
                 onVisible={(id) => this.onChangeVisibleDetails(id)}
             />
         })
@@ -65,14 +63,18 @@ class AnimeList extends Component {
 
     giveAllAnime = async () => {
         const list = await this.anime.getAllAnime();  // request for list of anime
-        return this.setState({ data: list, loading: false, error: false });
+        this.setState({ data: list, loading: false, error: false, visible: true });
     }
 
-    render() {
-        const { data, loading, error, visible, ID } = this.state;
-        const items = this.iterationItems(data, loading, error);
-        const details = data.filter(item => item.key === ID);
 
+    render() {
+        const { data, loading, error, visible, numb, series } = this.state;
+
+        const items = this.iterationItems(data, loading, error);
+        const visibleDetails = data.filter(item => item.id === numb);
+
+        const errorMessage = error ? <ErrorMessage /> : null;
+        const details = visible ? <DetailInformation data={visibleDetails} onChangeVisible={this.onChangeVisibleDetails} /> : null
         return (
             <div className="cards-with-info">
                 <ul className='list'>
@@ -81,7 +83,8 @@ class AnimeList extends Component {
                         <button className='button button_load'>Load more</button>
                     </li>
                 </ul>
-                {visible ? <DetailInformation data={details} id={ID} /> : null}
+                {errorMessage}
+                {details}
             </div>
         );
     }

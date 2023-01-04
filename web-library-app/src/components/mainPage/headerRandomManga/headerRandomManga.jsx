@@ -21,14 +21,14 @@ class HeaderRandomManga extends Component {
     anime = new Anime();
 
     state = {
-        character: {
+        manga: {
             title: null,
             description: null,
             posterImage: null,
             homepage: null,
             wiki: null,
             alt: "random manga",
-            key: null
+            id: null
         },
         loading: true,
         error: false,
@@ -37,22 +37,21 @@ class HeaderRandomManga extends Component {
     componentDidMount() {
         this.updateState();
     }
-    componentDidUpdate() {
 
-        if (this.state.loading) {
-            this.updateState();
-        }
+
+    onLoadedAnime = (manga) => {
+        this.setState({ manga, loading: false });
     }
 
-    onLoadedAnime = (anime) => {
-        this.setState({ character: anime, loading: false });
+    onLoadingAnime = () => {
+        this.setState({ loading: true });
     }
 
     onErrorLoad = (status) => {
 
         switch (status) {
             case "404":
-                this.setState({ loading: true, error: false });
+                this.updateState();
                 break;
             case status >= "500":
                 alert("problems with server");
@@ -73,12 +72,21 @@ class HeaderRandomManga extends Component {
         }
     }
 
+
+    checkDescriptionLength = (descr) => {
+        if (descr.length > 200) {
+            return `${descr.slice(0, 200)}...`;
+        }
+        return descr;
+    }
+
     getRandomNumber = (min, max) => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
     updateState = async () => {
         // let maxCount = await this.anime.getCountAllAnime();
+        this.onLoadingAnime();
         const id = this.getRandomNumber(0, 18500);
         await this.anime.getAnime(id)
             .then(data => {
@@ -91,7 +99,8 @@ class HeaderRandomManga extends Component {
     }
 
     render() {
-        const { character, loading, error, statusCode } = this.state;
+        const { manga, loading, error, statusCode } = this.state;
+
 
         const styleSpinner = {
             margin: "0 auto",
@@ -101,7 +110,7 @@ class HeaderRandomManga extends Component {
 
         const errorMessage = error ? <ErrorMessage statusCode={statusCode} /> : null;
         const load = loading ? <Spinner styles={styleSpinner} /> : null;
-        const content = !(errorMessage || load) ? <ViewRandomManga character={character} /> : null;
+        const content = !(errorMessage || load) ? <ViewRandomManga manga={manga} checkLength={this.checkDescriptionLength} /> : null;
 
 
         return (
@@ -130,16 +139,16 @@ class HeaderRandomManga extends Component {
 }
 
 
-const ViewRandomManga = ({ character }) => { // Render component without logic
+const ViewRandomManga = ({ manga, checkLength }) => { // Render component without logic
 
-    const { title, description, posterImage, homepage, wiki, alt } = character;
+    const { title, description, posterImage, homepage, wiki, alt } = manga;
 
     return (
         <div className="random-manga">
             <img className='random-manga__img' src={posterImage} alt={alt} />
             <div className="random-manga__info">
                 <div className="title" >{title}</div>
-                <div className="random-manga__descr">{description}</div>
+                <div className="random-manga__descr">{checkLength(description)}</div>
                 <div className="random-manga__btns">
                     <a href={homepage} target="_blank" rel='noreferrer'> <button type="button" className="button button_main">Homepage</button> </a>
                     <a href={wiki} target="_blank" rel='noreferrer'> <button type="button" className="button button_submain">WIKI</button> </a></div>

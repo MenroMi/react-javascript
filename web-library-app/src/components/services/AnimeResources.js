@@ -1,8 +1,4 @@
 import plugIMG from "../../assets/icons/icons8-kuromi.svg";
-
-// plugins
-import { v4 as uuid4 } from 'uuid';
-
 class AnimeResources {
 
     getResources = async (url) => {
@@ -13,14 +9,6 @@ class AnimeResources {
 
         return req.json();
     }
-
-    checkDescriptionLength = (descr) => {
-        if (descr.length > 200) {
-            return `${descr.slice(0, 200)}...`;
-        }
-        return descr;
-    }
-
     checkTitleLength = (title) => {
         return title.length > 27 ? `${title.slice(0, 27)}...` : title;
     }
@@ -46,12 +34,12 @@ class Anime extends AnimeResources {
 
         return {
             title: this.checkTitleLength(data.canonicalTitle),
-            description: this.checkDescriptionLength(this.isEmptyDescription(data.description)),
+            description: this.isEmptyDescription(data.description),
             posterImage: this.isEmptyPicture(data.posterImage.small),
             homepage: res.links.self,
             wiki: res.relationships.animeCharacters.links.related,
             alt: res.slug,
-            key: uuid4(),
+            id: res.id,
         }
     }
 
@@ -74,6 +62,11 @@ class Anime extends AnimeResources {
     getAnimeCategory = (id) => {
         return this.getResources(`${this.#apiBase}/${id}/categories`);
     }
+
+    getAnimeRelationship = async (id) => {
+        return await this.getResources(`${this.#apiBase}/${id}/?include=mediaRelationships.destination`);
+    }
+
 }
 
 export { Anime };

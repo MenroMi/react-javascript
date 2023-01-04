@@ -16,10 +16,14 @@ class AnimeItem extends Component {
     }
 
     componentDidMount() {
-        this.changeState();
+        this.changeStateLoadingError();
     }
 
-    changeState = () => {
+
+
+
+
+    changeStateLoadingError = () => {
         let loadStatus = this.props.loading;
         let errorStatus = this.props.error;
         this.setState({ loading: loadStatus, error: errorStatus });
@@ -28,7 +32,7 @@ class AnimeItem extends Component {
     render() {
 
         const { loading, error } = this.state;
-        const { posterImage, title, onVisible, ID, homepage } = this.props;
+        const { title, posterImage, id, homepage, onVisible } = this.props;
 
         const styleSpinner = {
             position: "relative",
@@ -36,12 +40,13 @@ class AnimeItem extends Component {
             transform: "translateY(-50%)",
         }
 
+
         const errMessage = error ? <ErrorMessage /> : null;
         const load = loading ? <Spinner styles={styleSpinner} /> : null;
         const content = !(load || errMessage) ? <ViewAnimeItem image={posterImage} title={title} homepage={homepage} /> : null;
 
         return (
-            <li className="card" tabIndex='0' onClick={() => onVisible(ID)} >
+            <li className="card" tabIndex='0' onFocus={() => onVisible(id)}>
                 {errMessage}
                 {load}
                 {content}
@@ -63,4 +68,3 @@ const ViewAnimeItem = ({ image, title, homepage }) => { // rendering component w
 }
 
 export default AnimeItem;
-

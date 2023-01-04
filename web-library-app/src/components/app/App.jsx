@@ -26,26 +26,21 @@ import './App.scss';
 
 class App extends Component {
 
+    render() {
 
-  state = {
-    state: false
-  }
-
-  render() {
-
-    return (
-      <div className="App">
-        {/* Main page */}
-        <HeaderRandomManga />
-        <AnimeList />
-        <img className="girl-bg" src={girlBackground} alt="Anime girl on background" />
-        {/* Mangas page */}
-        {/* <MangasPage /> */}
-        {/* Page with choosen manga */}
-        {/* <MangaPage /> */}
-      </div>
-    );
-  }
+        return (
+            <div className="App">
+                {/* Main page */}
+                <HeaderRandomManga />
+                <AnimeList arr={[{}, {}, {}, {}, {}, {}, {}, {}, {}]} />
+                <img className="girl-bg" src={girlBackground} alt="Anime girl on background" />
+                {/* Mangas page */}
+                {/* <MangasPage /> */}
+                {/* Page with choosen manga */}
+                {/* <MangaPage /> */}
+            </div>
+        );
+    }
 }
 
 export default App;
