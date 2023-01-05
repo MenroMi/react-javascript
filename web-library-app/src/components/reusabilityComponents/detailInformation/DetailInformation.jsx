@@ -4,9 +4,6 @@ import { Component } from 'react';
 // services
 import { Anime } from "../../services/AnimeResources";
 
-// plugins
-import Skeleton from "@mui/material/Skeleton";
-
 // components
 import Spinner from '../spinnerLoading/Spinner';
 import ErrorMessage from '../errorValidate/ErrorValidate';
@@ -21,32 +18,19 @@ class DetailInformation extends Component {
     state = {
         loading: true,
         error: false,
-        visible: false,
         series: null,
-        numb: "1",
     }
 
     componentDidMount() {
         this.checkRelation();
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-
-    //     let numb = this.state.numb,
-    //         visible = this.state.visible;
-
-    //     if (this.state.visible !== prevState.visible) {
-    //         this.props.onChangeVisible(numb, visible)
-    //     }
-    // }
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     const { numb } = this.state;
-    //     console.log("update");
-    //     if (numb !== prevState.numb) {
-    //         this.checkRelation();
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        const { data: [{ id }] } = this.props;
+        if (id !== prevProps.data[0].id) {
+            this.checkRelation();
+        }
+    }
 
     onLoadingAnime = () => {
         this.setState({ loading: true });
@@ -63,46 +47,52 @@ class DetailInformation extends Component {
 
     }
 
+    lengthDescription = (arr) => {
+        if (arr.length === 0) return;
+
+        return arr[0].description.length >= 800 ? `${arr[0].description.slice(0, 800)}...` : arr[0].description;
+
+    }
+
     onErrorMessage = () => {
         this.setState({ error: true });
     }
 
     checkRelation = async () => {
-        const { numb } = this.state;
+
+        const { data: [{ id }] } = this.props;
         this.onLoadingAnime();
-        let series = await this.anime.getAnimeRelationship(numb).then(data => data.included).catch(() => this.onErrorMessage());
+        let series = await this.anime.getAnimeRelationship(id).then(data => data.included).catch(() => this.onErrorMessage());
         if (series === undefined || series.length === 0 || !series) {
-            this.setState({ series: [], visible: true });
+            this.setState({ series: [], loading: false });
         } else {
             let arrSeries = series.map(item => {
                 return item.type === "anime" || item.type === "manga" ? { title: item.attributes.canonicalTitle, type: item.type } : null
             }).filter(item => item !== null);
 
-            this.setState({ series: arrSeries, visible: true, loading: false });
+            this.setState({ series: arrSeries, loading: false });
         }
 
     }
 
     render() {
-        const { loading, error, series, visible } = this.state;
+        const { loading, error, series } = this.state;
         const { data } = this.props;
         let moreFromSeries = series === null ? null : this.lengthSeries(series);
-        let shortDescr = data[0].description.length >= 800 ? `${data[0].description.slice(0, 800)}...` : data[0].description;
+
+        let shortDescr = this.lengthDescription(data);
 
 
         // let skeleton = !(loading || error || visible) ? <Skeleton variant="circular"><ViewDetails data={data[0]} series={moreFromSeries} descr={shortDescr} /></Skeleton> : null;
         let load = loading ? <Spinner /> : null;
         let errorMessage = error ? <ErrorMessage /> : null;
-        let details = !(loading || error || !visible) ? <ViewDetails data={data[0]} series={moreFromSeries} descr={shortDescr} /> : null;
-
-        // let loaded = loading ? <Spinner /> : null;
-        // let errorMessage = error ? <ErrorMessage /> : null;
+        let details = !(loading || error) ? <ViewDetails data={data.length === 0 ? [{ title: "unknowed" }] : data[0]} series={moreFromSeries} descr={shortDescr} /> : null;
 
         return (
             <div className="title-details">
-                {/* {skeleton} */}
-                {load}
                 {errorMessage}
+                {load}
+
                 {details}
             </div>
         );
@@ -113,7 +103,6 @@ class DetailInformation extends Component {
 const ViewDetails = ({ data, series, descr }) => {
 
     const { title, posterImage, homepage, wiki } = data;
-
     return (
         <>
             <div className="title-details__container">

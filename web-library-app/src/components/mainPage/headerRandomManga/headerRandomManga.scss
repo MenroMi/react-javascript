@@ -17,7 +17,7 @@
     grid-template: 100% / 1fr 2fr;
     column-gap: 30px;
     padding: 35px 35px 35px 40px;
-    max-width: 550px;
+    width: 550px;
     height: 250px;
     background: #FFFFFF;
     transition: $transition;
@@ -246,6 +246,7 @@
         .random-manga {
             grid-template: 250px 200px / 1fr;
             height: 100%;
+            width: 220px;
             padding: 20px;
 
 

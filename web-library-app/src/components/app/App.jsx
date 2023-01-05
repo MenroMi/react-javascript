@@ -32,7 +32,7 @@ class App extends Component {
             <div className="App">
                 {/* Main page */}
                 <HeaderRandomManga />
-                <AnimeList arr={[{}, {}, {}, {}, {}, {}, {}, {}, {}]} />
+                <AnimeList />
                 <img className="girl-bg" src={girlBackground} alt="Anime girl on background" />
                 {/* Mangas page */}
                 {/* <MangasPage /> */}

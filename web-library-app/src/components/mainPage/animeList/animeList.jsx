@@ -1,9 +1,5 @@
 // basics
 import { Component } from 'react';
-
-// plugins
-import { v4 as uuid4 } from 'uuid';
-
 // services
 import { Anime } from "../../services/AnimeResources";
 // Components
@@ -20,23 +16,9 @@ class AnimeList extends Component {
     anime = new Anime();
 
     state = {
-        data: this.props.arr.map(obj => {
-
-            obj = {
-                title: null,
-                description: null,
-                posterImage: null,
-                homepage: null,
-                wiki: null,
-                alt: null,
-                id: uuid4(),
-            };
-
-            return obj;
-        }),
+        data: [],
         loading: true,
         error: false,
-        visible: false,
         numb: '1',
     }
 
@@ -49,7 +31,6 @@ class AnimeList extends Component {
     }
 
     iterationItems = (data, loading, error) => {
-
         return data.map(({ id, ...info }) => {
             return <AnimeItem {...info}
                 loading={loading}
@@ -61,29 +42,58 @@ class AnimeList extends Component {
         })
     }
 
-    giveAllAnime = async () => {
-        const list = await this.anime.getAllAnime();  // request for list of anime
-        this.setState({ data: list, loading: false, error: false, visible: true });
+    onLoadedAnime = (data) => {
+        this.setState({ data, loading: false });
     }
 
+    onLoadingAnime = () => {
+        this.setState({ loading: true });
+    }
+
+    onErrorLoad = () => {
+        this.setState({ loading: false, error: true });
+    }
+
+    giveAllAnime = async () => {
+        await this.anime.getAllAnime()  // request for list of anime
+            .then(this.onLoadedAnime)
+            .catch(this.onErrorLoad)
+    }
+
+    detailsInfo = (loading, error, visibleDetails) => {
+        if (!loading && !error) {
+            return (<DetailInformation data={visibleDetails} onChangeVisible={this.onChangeVisibleDetails} />)
+        } else if (loading && !error) {
+            return <Spinner />;
+        } else {
+            return <ErrorMessage />
+        }
+    }
 
     render() {
-        const { data, loading, error, visible, numb, series } = this.state;
+        const { data, loading, error, numb } = this.state;
+
+        const styleSpinner = {
+            gridColumn: "1/4",
+        }
 
         const items = this.iterationItems(data, loading, error);
         const visibleDetails = data.filter(item => item.id === numb);
 
-        const errorMessage = error ? <ErrorMessage /> : null;
-        const details = visible ? <DetailInformation data={visibleDetails} onChangeVisible={this.onChangeVisibleDetails} /> : null
+
+        const errorMessage = error && !loading ? <ErrorMessage /> : null;
+        const load = loading ? <Spinner styles={styleSpinner} /> : null;
+        const details = this.detailsInfo(loading, error, visibleDetails)
         return (
             <div className="cards-with-info">
                 <ul className='list'>
+                    {load}
+                    {errorMessage}
                     {items}
                     <li>
                         <button className='button button_load'>Load more</button>
                     </li>
                 </ul>
-                {errorMessage}
                 {details}
             </div>
         );

@@ -66,7 +66,6 @@ class HeaderRandomManga extends Component {
                 this.setState({ loading: false, error: true });
                 break;
             default:
-                alert("Please contact with administration");
                 this.setState({ loading: false, error: true });
                 break;
         }
@@ -95,7 +94,8 @@ class HeaderRandomManga extends Component {
                 } else {
                     return this.onLoadedAnime(data);
                 }
-            }) // == .then(data => this.onChangeAnime(data))
+            })
+            .catch(this.onErrorLoad) // == .then(data => this.onChangeAnime(data))
     }
 
     render() {
