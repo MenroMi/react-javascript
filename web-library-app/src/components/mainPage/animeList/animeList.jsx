@@ -7,6 +7,10 @@ import AnimeItem from '../animeItem/AnimeItem';
 import DetailInformation from '../../reusabilityComponents/detailInformation/DetailInformation';
 import ErrorMessage from '../../reusabilityComponents/errorValidate/ErrorValidate';
 import Spinner from '../../reusabilityComponents/spinnerLoading/Spinner';
+import ErrorBoundary from '../../errorBoundary/ErrorBoundary';
+
+// icons
+import loadingSVG from "../../../assets/icons/loadingMorePage.svg";
 // styles
 import './AnimeList.scss';
 
@@ -18,12 +22,15 @@ class AnimeList extends Component {
     state = {
         data: [],
         loading: true,
+        loadingMore: false,
         error: false,
         numb: '1',
+        offset: 0,
+        endedOffset: false,
     }
 
     componentDidMount() {
-        this.giveAllAnime();
+        this.onRequestAnime();
     }
 
     onChangeVisibleDetails = (numb) => {
@@ -42,8 +49,19 @@ class AnimeList extends Component {
         })
     }
 
-    onLoadedAnime = (data) => {
-        this.setState({ data, loading: false });
+    onLoadedAnime = (newItems) => {
+        let end = false;
+        if (newItems.length < 9) {
+            end = true;
+        }
+
+        this.setState(({ offset, data }) => ({
+            data: [...data, ...newItems],
+            loading: false,
+            offset: offset + 9,
+            endedOffset: end,
+            loadingMore: false,
+        }));
     }
 
     onLoadingAnime = () => {
@@ -54,15 +72,23 @@ class AnimeList extends Component {
         this.setState({ loading: false, error: true });
     }
 
-    giveAllAnime = async () => {
-        await this.anime.getAllAnime()  // request for list of anime
+    onRequestAnime = async (offset = null) => {
+        this.onAnimeListLoading();
+        await this.anime.getAllAnime(offset)  // request for list of anime
             .then(this.onLoadedAnime)
-            .catch(this.onErrorLoad)
+            .catch(this.onErrorLoad);
+    }
+
+    onAnimeListLoading = () => {
+        this.setState({ loadingMore: true });
     }
 
     detailsInfo = (loading, error, visibleDetails) => {
-        if (!loading && !error) {
-            return (<DetailInformation data={visibleDetails} onChangeVisible={this.onChangeVisibleDetails} />)
+        if (!(loading || error)) {
+            return (<DetailInformation
+                data={visibleDetails}
+                onChangeVisible={this.onChangeVisibleDetails}
+            />)
         } else if (loading && !error) {
             return <Spinner />;
         } else {
@@ -71,7 +97,7 @@ class AnimeList extends Component {
     }
 
     render() {
-        const { data, loading, error, numb } = this.state;
+        const { data, loading, error, numb, offset, endedOffset, loadingMore } = this.state;
 
         const styleSpinner = {
             gridColumn: "1/4",
@@ -80,10 +106,9 @@ class AnimeList extends Component {
         const items = this.iterationItems(data, loading, error);
         const visibleDetails = data.filter(item => item.id === numb);
 
-
-        const errorMessage = error && !loading ? <ErrorMessage /> : null;
         const load = loading ? <Spinner styles={styleSpinner} /> : null;
-        const details = this.detailsInfo(loading, error, visibleDetails)
+        const errorMessage = error ? <ErrorMessage /> : null;
+        const details = this.detailsInfo(loading, error, visibleDetails);
         return (
             <div className="cards-with-info">
                 <ul className='list'>
@@ -91,10 +116,25 @@ class AnimeList extends Component {
                     {errorMessage}
                     {items}
                     <li>
-                        <button className='button button_load'>Load more</button>
+                        <button
+                            className='button button_load'
+                            disabled={loadingMore}
+                            style={{ display: endedOffset ? "none" : 'block' }}
+                            onClick={() => this.onRequestAnime(offset)}
+                        >{loadingMore ? <img
+                            src={loadingSVG}
+                            alt="loading"
+                            style={{
+                                position: "relative",
+                                top: "50%",
+                                transform: "translateY(-50%)",
+                                width: "50px",
+                            }} /> : "load more"}</button>
                     </li>
                 </ul>
-                {details}
+                <ErrorBoundary>
+                    {details}
+                </ErrorBoundary>
             </div>
         );
     }

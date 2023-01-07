@@ -28,6 +28,8 @@ class Anime extends AnimeResources {
 
     #apiBase = "https://kitsu.io/api/edge/anime";
 
+    #baseOffset = 0;
+
     #animeTitle = (res) => {
         let data = res.attributes;
 
@@ -43,9 +45,10 @@ class Anime extends AnimeResources {
         }
     }
 
-    getAllAnime = async () => {
-        let animeList = await this.getResources(`${this.#apiBase}?page[limit]=9&page[offset]=0`)
+    getAllAnime = async (offset = this.#baseOffset) => {
+        let animeList = await this.getResources(`${this.#apiBase}?page[limit]=9&page[offset]=${offset}`)
             .then(data => data.data);
+
         return animeList.map(item => this.#animeTitle(item));
     }
 

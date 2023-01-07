@@ -29,6 +29,10 @@
         width: 170px;
         grid-column: 1/4;
         margin: 0 auto;
+
+        &:disabled {
+            filter: grayscale(80%)
+        }
     }
 }
 
