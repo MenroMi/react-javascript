@@ -7,7 +7,7 @@ import HeaderRandomManga from '../mainPage/headerRandomManga/HeaderRandomManga';
 import AnimeList from '../mainPage/animeList/AnimeList';
 
 /* Manga Page */
-import MangasPage from '../mangasPage/MangasPage';
+// import MangasPage from '../mangasPage/MangasPage';
 
 /* Choosen Manga Page */
 // import MangaPage from '../reusabilityComponents/mangaPage/MangaPage';
@@ -31,11 +31,11 @@ class App extends Component {
         return (
             <div className="App">
                 {/* Main page */}
-                {/* <HeaderRandomManga />
+                <HeaderRandomManga />
                 <AnimeList />
-                <img className="girl-bg" src={girlBackground} alt="Anime girl on background" /> */}
+                <img className="girl-bg" src={girlBackground} alt="Anime girl on background" />
                 {/* Mangas page */}
-                <MangasPage />
+                {/* <MangasPage /> */}
                 {/* Page with choosen manga */}
                 {/* <MangaPage /> */}
             </div>

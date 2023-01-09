@@ -29,8 +29,21 @@ class AnimeList extends Component {
         endedOffset: false,
     }
 
+    autoScroll = () => {
+        if (parseInt(window.innerHeight + document.documentElement.scrollTop) !== document.documentElement.offsetHeight + 10) {
+            console.log("1.", parseInt(window.innerHeight + document.documentElement.scrollTop), document.documentElement.offsetHeight + 10);
+            return;
+        }
+        console.log("2.", parseInt(window.innerHeight + document.documentElement.scrollTop), document.documentElement.offsetHeight + 10);
+
+        this.onRequestAnime(this.state.offset);
+    }
+
     componentDidMount() {
         this.onRequestAnime();
+    }
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.autoScroll)
     }
 
     onChangeVisibleDetails = (numb) => {
@@ -50,6 +63,8 @@ class AnimeList extends Component {
     }
 
     onLoadedAnime = (newItems) => {
+        window.addEventListener("scroll", this.autoScroll);
+
         let end = false;
         if (newItems.length < 9) {
             end = true;
@@ -105,6 +120,7 @@ class AnimeList extends Component {
 
         const items = this.iterationItems(data, loading, error);
         const visibleDetails = data.filter(item => item.id === numb);
+
 
         const load = loading ? <Spinner styles={styleSpinner} /> : null;
         const errorMessage = error ? <ErrorMessage /> : null;
