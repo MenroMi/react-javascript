@@ -1,6 +1,9 @@
 // basics
 import { Component } from 'react';
 
+// plugins
+import PropTypes from "prop-types";
+
 // services
 import { Anime } from "../../services/AnimeResources";
 
@@ -59,10 +62,13 @@ class DetailInformation extends Component {
     }
 
     checkRelation = async () => {
-
         const { data: [{ id }] } = this.props;
+
         this.onLoadingAnime();
-        let series = await this.anime.getAnimeRelationship(id).then(data => data.included).catch(() => this.onErrorMessage());
+        let series = await this.anime.getAnimeRelationship(id)
+            .then(data => data.included)
+            .catch(() => this.onErrorMessage());
+
         if (series === undefined || series.length === 0 || !series) {
             this.setState({ series: [], loading: false });
         } else {
@@ -79,7 +85,6 @@ class DetailInformation extends Component {
         const { loading, error, series } = this.state;
         const { data } = this.props;
         let moreFromSeries = series === null ? null : this.lengthSeries(series);
-
         let shortDescr = this.lengthDescription(data);
 
 
@@ -120,6 +125,11 @@ const ViewDetails = ({ data, series, descr }) => {
             </div>
         </>
     )
+}
+
+DetailInformation.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.object.isRequired),
+    onChangeVisible: PropTypes.func.isRequired
 }
 
 export default DetailInformation;

@@ -1,6 +1,10 @@
 // basics
 import React, { Component } from 'react';
 
+// plugins
+import PropTypes from 'prop-types';
+
+
 // styles
 import './AnimeItem.scss';
 
@@ -26,7 +30,6 @@ class AnimeItem extends Component {
         const { loading, error } = this.state;
         const { title, posterImage, id, homepage, onVisible } = this.props;
 
-
         const content = !(loading || error) ? <ViewAnimeItem image={posterImage} title={title} homepage={homepage} /> : null;
 
         return (
@@ -47,6 +50,10 @@ const ViewAnimeItem = ({ image, title, homepage }) => { // rendering component w
             </div>
         </>
     )
+}
+
+AnimeItem.propTypes = {
+    id: PropTypes.number
 }
 
 export default AnimeItem;

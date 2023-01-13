@@ -24,17 +24,15 @@ class AnimeList extends Component {
         loading: true,
         loadingMore: false,
         error: false,
-        numb: '1',
+        numb: 1,
         offset: 0,
         endedOffset: false,
     }
 
     autoScroll = () => {
         if (parseInt(window.innerHeight + document.documentElement.scrollTop) !== document.documentElement.offsetHeight + 10) {
-            console.log("1.", parseInt(window.innerHeight + document.documentElement.scrollTop), document.documentElement.offsetHeight + 10);
             return;
         }
-        console.log("2.", parseInt(window.innerHeight + document.documentElement.scrollTop), document.documentElement.offsetHeight + 10);
 
         this.onRequestAnime(this.state.offset);
     }
@@ -69,7 +67,6 @@ class AnimeList extends Component {
         if (newItems.length < 9) {
             end = true;
         }
-
         this.setState(({ offset, data }) => ({
             data: [...data, ...newItems],
             loading: false,
@@ -113,14 +110,11 @@ class AnimeList extends Component {
 
     render() {
         const { data, loading, error, numb, offset, endedOffset, loadingMore } = this.state;
-
         const styleSpinner = {
             gridColumn: "1/4",
         }
-
         const items = this.iterationItems(data, loading, error);
         const visibleDetails = data.filter(item => item.id === numb);
-
 
         const load = loading ? <Spinner styles={styleSpinner} /> : null;
         const errorMessage = error ? <ErrorMessage /> : null;

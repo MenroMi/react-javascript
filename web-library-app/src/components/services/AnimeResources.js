@@ -32,16 +32,14 @@ class Anime extends AnimeResources {
 
     #animeTitle = (res) => {
         let data = res.attributes;
-
-
         return {
             title: this.checkTitleLength(data.canonicalTitle),
             description: this.isEmptyDescription(data.description),
             posterImage: this.isEmptyPicture(data.posterImage.small),
             homepage: res.links.self,
             wiki: res.relationships.animeCharacters.links.related,
-            alt: res.slug,
-            id: res.id,
+            alt: data.slug,
+            id: +res.id,
         }
     }
 

@@ -10,7 +10,6 @@ import ErrorMessage from '../../reusabilityComponents/errorValidate/ErrorValidat
 import { Anime } from '../../services/AnimeResources';
 
 // images 
-// import plugPic from "../../../assets/icons/icons8-kuromi.svg";
 import girlRandom from "../../../assets/imgs/girlRandomManga.png";
 
 // styles
