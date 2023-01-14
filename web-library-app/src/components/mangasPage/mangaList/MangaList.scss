@@ -1,0 +1,79 @@
+@import url(../../../styles/elements/button.scss);
+@import "../../../styles/variables.scss";
+@import "../../../styles/elements/title.scss";
+
+.cardsManga {
+    display: grid;
+    margin: 50px 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+    justify-items: center;
+    transition: .3s ease;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(4, 225px);
+    column-gap: 67px;
+    transition: .3s ease;
+    row-gap: 50px;
+
+    li {
+        &:last-child {
+            grid-column: 1/5;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+
+    .list {
+        grid-template-columns: repeat(3, 225px);
+
+        li {
+            &:last-child {
+                grid-column: 1/4;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+
+    .list {
+        column-gap: 46px;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .list {
+        grid-template-columns: repeat(auto-fill, 150px);
+
+        li {
+            &:last-child {
+                grid-column: 1/4;
+                margin: 0 auto;
+            }
+        }
+    }
+
+}
+
+@media (max-width: 576px) {
+    .list {
+        grid-template-columns: 220px;
+
+        li {
+            &:last-child {
+                grid-column: 1;
+                margin: 0 auto;
+                width: 100%;
+
+            }
+        }
+    }
+
+}

@@ -1,0 +1,149 @@
+.searchManga {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 100%;
+    height: 100px;
+    margin-top: 25px;
+    background-color: #fff;
+    border: 3px solid #00B4D8;
+    column-gap: 10px;
+
+    &__categories {
+        grid-row: 2;
+        grid-column: 2/6;
+        align-self: center;
+        box-shadow: 1px 0px 26px -10px rgba(66, 68, 90, 1);
+    }
+
+    &__search {
+        padding: 2px 10px;
+        font-size: 16px;
+        height: 38px;
+        grid-row: 2;
+        grid-column: 6/10;
+        border-radius: 0;
+        border: 1px solid black;
+        box-shadow: 1px 0px 26px -10px rgba(66, 68, 90, 1);
+
+        &:focus {
+            border: none;
+            outline: 3px solid #48CAE4;
+        }
+
+
+    }
+
+}
+
+.cross {
+    position: absolute;
+    opacity: 0;
+    right: 105px;
+    top: 50%;
+    z-index: -1;
+    transform: translateY(-50%);
+    background: url(../../../assets/icons/crossForInput.svg) right (center/13px) no-repeat;
+    width: 13px;
+    height: 13px;
+    transition: .2s ease;
+    animation-name: unvisibleCross;
+    animation-duration: .2s;
+    animation-fill-mode: forwards;
+
+    &_active {
+        z-index: 1;
+        animation-name: visibleCross;
+        animation-duration: .2s;
+        animation-fill-mode: forwards;
+        cursor: pointer;
+        right: 125px;
+    }
+}
+
+@keyframes visibleCross {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes unvisibleCross {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .cross {
+        right: 105px;
+
+        &_active {
+            right: 115px;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .cross {
+        right: 90px;
+
+        &_active {
+            right: 100px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .cross {
+        right: 70px;
+
+        &_active {
+            right: 80px;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+
+    .searchManga {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        align-items: center;
+        border: none;
+
+
+        &__categories {
+            grid-row: 1;
+            grid-column: 1;
+            align-self: center;
+            box-shadow: 1px 0px 26px -10px rgba(66, 68, 90, 1);
+        }
+
+        &__search {
+            grid-row: 2;
+            grid-column: 1;
+
+        }
+    }
+
+    .cross {
+        right: 10px;
+        top: 75%;
+        transform: translateY(-50%);
+
+        &_active {
+            right: 20px;
+        }
+    }
+
+}
