@@ -92,7 +92,6 @@ class DetailInformation extends Component {
         let moreFromSeries = series === null ? null : this.lengthSeries(series);
         let shortDescr = this.lengthDescription(data);
 
-        console.log(moreFromSeries);
         // let skeleton = !(loading || error || visible) ? <Skeleton variant="circular"><ViewDetails data={data[0]} series={moreFromSeries} descr={shortDescr} /></Skeleton> : null;
         let load = loading ? <Spinner /> : null;
         let errorMessage = error ? <ErrorMessage /> : null;
