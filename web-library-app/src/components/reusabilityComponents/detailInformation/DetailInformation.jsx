@@ -45,8 +45,13 @@ class DetailInformation extends Component {
         }
 
         return arr.map((item, i) => {
+
+            if (i >= 15) {
+                return null;
+            }
+
             return <li key={i} className="title-details__manga-item">{item.title}</li>
-        })
+        }).filter(item => item !== null);
 
     }
 
@@ -87,7 +92,7 @@ class DetailInformation extends Component {
         let moreFromSeries = series === null ? null : this.lengthSeries(series);
         let shortDescr = this.lengthDescription(data);
 
-
+        console.log(moreFromSeries);
         // let skeleton = !(loading || error || visible) ? <Skeleton variant="circular"><ViewDetails data={data[0]} series={moreFromSeries} descr={shortDescr} /></Skeleton> : null;
         let load = loading ? <Spinner /> : null;
         let errorMessage = error ? <ErrorMessage /> : null;
@@ -113,8 +118,8 @@ const ViewDetails = ({ data, series, descr }) => {
             <div className="title-details__container">
                 <img src={posterImage} alt={title} className="title-details__img" />
                 <h2 className="title">{title}</h2>
-                <a className='title-details__links' href={homepage}><button className='button button_main'>Homepage</button></a>
-                <a className='title-details__links' href={wiki}><button className='button button_submain'>WIKI</button></a>
+                <a className='title-details__links' href={homepage}><button tabIndex="-1" className='button button_main'>Homepage</button></a>
+                <a className='title-details__links' href={wiki}><button tabIndex="-1" className='button button_submain'>WIKI</button></a>
                 <div className="title-details__descr">{descr}</div>
             </div>
             <div className="title-details__manga">

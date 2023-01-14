@@ -9,9 +9,7 @@ class AnimeResources {
 
         return req.json();
     }
-    checkTitleLength = (title) => {
-        return title.length > 27 ? `${title.slice(0, 27)}...` : title;
-    }
+
 
     isEmptyDescription = (descr) => {
         return descr.length <= 0 ? "Sorry, but this title dont have any description" : descr;
@@ -33,7 +31,7 @@ class Anime extends AnimeResources {
     #animeTitle = (res) => {
         let data = res.attributes;
         return {
-            title: this.checkTitleLength(data.canonicalTitle),
+            title: data.canonicalTitle,
             description: this.isEmptyDescription(data.description),
             posterImage: this.isEmptyPicture(data.posterImage.small),
             homepage: res.links.self,

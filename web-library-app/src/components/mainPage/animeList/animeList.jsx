@@ -1,5 +1,6 @@
 // basics
-import { Component } from 'react';
+import React, { Component } from 'react';
+
 // services
 import { Anime } from "../../services/AnimeResources";
 // Components
@@ -40,6 +41,8 @@ class AnimeList extends Component {
     componentDidMount() {
         this.onRequestAnime();
     }
+
+
     componentWillUnmount() {
         window.removeEventListener("scroll", this.autoScroll)
     }

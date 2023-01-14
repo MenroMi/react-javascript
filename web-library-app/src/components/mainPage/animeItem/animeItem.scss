@@ -9,6 +9,7 @@
         display: none;
     }
 
+
     &:hover,
     &:focus {
         box-shadow: 5px 5px 20px #023E8A;
@@ -17,6 +18,7 @@
         animation-duration: .5s;
         animation-fill-mode: forwards;
     }
+
 
     &__image {
         width: 200px;
