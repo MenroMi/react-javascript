@@ -38,7 +38,7 @@ const ConverterCurrency = ({ getMoney, changeType, type }) => {
 
     const [currency, setCurrency] = useState(0); // view of actual currency
     const [exchangeCurrency, setExchangeCurrency] = useState(0); // input value
-    const [btnsGroup] = useState([
+    const [btnsGroup] = useState([ // array with btns
         { name: "EUR" },
         { name: "USD" },
         { name: "UAH" },
@@ -51,8 +51,6 @@ const ConverterCurrency = ({ getMoney, changeType, type }) => {
     }
 
     useEffect(() => {
-        console.log("effect - 2");
-
         async function getChange() {
             let res = await getMoney();
             if (!res) {
@@ -72,6 +70,7 @@ const ConverterCurrency = ({ getMoney, changeType, type }) => {
         return <button key={id} onClick={() => changeType(code)}>{code}</button>
     }
 
+
     return (
         <>
             <main className="background">
@@ -80,9 +79,10 @@ const ConverterCurrency = ({ getMoney, changeType, type }) => {
                         onChange={setExchangeCurr}
                         type="text"
                         value={exchangeCurrency}
-                        placeholder="How much?" />
-                    <div className="result-currency">{currency.toFixed(2)} pln</div>
-                    <p>{type ? type : 'change type'}</p>
+                        placeholder="How much?"
+                    />
+                    <div className="result-currency">{currency.toFixed(2)} PLN</div>
+                    <p>{type ? type : 'Choose type'}</p>
                 </div>
                 <div className="btn-group">
                     {btnsGroup.map((item, i) => btns(item.name, i))}
@@ -113,11 +113,6 @@ const App = () => {
         }
 
     }
-
-    useEffect(() => {
-        console.log("effect - 1");
-        getMoney(typeCurr);
-    })
 
 
     return (
