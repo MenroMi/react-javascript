@@ -34,8 +34,10 @@ class CurrencyReq {
 
 
 
-const ConverterCurrency = ({ getMoney, changeType, type }) => {
+const ConverterCurrency = () => {
 
+    let curr = new CurrencyReq(); // instance
+    const [typeCurr, setType] = useState(""); // type of currency
     const [currency, setCurrency] = useState(0); // view of actual currency
     const [exchangeCurrency, setExchangeCurrency] = useState(0); // input value
     const [btnsGroup] = useState([ // array with btns
@@ -50,21 +52,23 @@ const ConverterCurrency = ({ getMoney, changeType, type }) => {
         setExchangeCurrency(value);
     }
 
+    const changeType = (code) => {
+        setType(code);
+    }
+
+    const getCurrency = async (code) => {
+        let res = await curr.getCurrency(code);
+        return res;
+    }
+
     useEffect(() => {
-        async function getChange() {
-            let res = await getMoney();
-            if (!res) {
-                return 0;
-            } else {
-                setCurrency(res * exchangeCurrency);
-            }
+        if (typeCurr.length <= 0) {
+            return;
+        }
 
-        };
+        getCurrency(typeCurr).then(res => setCurrency(res.mid * exchangeCurrency));
 
-        getChange();
-
-    }, [getMoney, exchangeCurrency])
-
+    }, [typeCurr, exchangeCurrency])
 
     const btns = (code, id) => {
         return <button key={id} onClick={() => changeType(code)}>{code}</button>
@@ -82,7 +86,7 @@ const ConverterCurrency = ({ getMoney, changeType, type }) => {
                         placeholder="How much?"
                     />
                     <div className="result-currency">{currency.toFixed(2)} PLN</div>
-                    <p>{type ? type : 'Choose type'}</p>
+                    <p>{typeCurr ? typeCurr : 'Choose type'}</p>
                 </div>
                 <div className="btn-group">
                     {btnsGroup.map((item, i) => btns(item.name, i))}
@@ -95,32 +99,10 @@ const ConverterCurrency = ({ getMoney, changeType, type }) => {
 
 const App = () => {
 
-    let curr = new CurrencyReq(); // instance
-    const [typeCurr, setType] = useState(""); // type of currency
-
-    const getMoney = async (code) => {
-
-        if (code.length <= 0) {
-            return;
-        }
-
-        try {
-            let res = await curr.getCurrency(code);
-            return res.mid;
-
-        } catch {
-            return "Please change type of currency"
-        }
-
-    }
-
 
     return (
         <>
-            <ConverterCurrency
-                getMoney={() => getMoney(typeCurr)}
-                changeType={setType}
-                type={typeCurr} />
+            <ConverterCurrency />
         </>
     )
 }
