@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Temperature from './App/App';
-// import Forms from './Forms';
+import App from "./App/App"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
-root.render(<Temperature/>);
+root.render(<App />);
 
