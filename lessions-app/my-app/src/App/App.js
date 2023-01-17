@@ -36,7 +36,6 @@ class CurrencyReq {
 
 const ConverterCurrency = () => {
 
-    let curr = new CurrencyReq(); // instance
     const [typeCurr, setType] = useState(""); // type of currency
     const [currency, setCurrency] = useState(0); // view of actual currency
     const [exchangeCurrency, setExchangeCurrency] = useState(0); // input value
@@ -49,19 +48,28 @@ const ConverterCurrency = () => {
 
     const setExchangeCurr = (e) => { // rerender state of input value
         let value = e.target.value;
+        let pattern = /(?=(.*[a-zA-Z]))|(?=.*[!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])/;
+        if (pattern.test(value)) {
+            return;
+        }
+
         setExchangeCurrency(value);
+
     }
 
     const changeType = (code) => {
         setType(code);
     }
 
-    const getCurrency = async (code) => {
-        let res = await curr.getCurrency(code);
-        return res;
-    }
-
     useEffect(() => {
+        
+        let curr = new CurrencyReq(); // instance
+
+        const getCurrency = async (code) => {
+            let res = await curr.getCurrency(code);
+            return res;
+        }
+
         if (typeCurr.length <= 0) {
             return;
         }
