@@ -1,65 +1,62 @@
 // basics
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
 
 // plugins
-import PropTypes from 'prop-types';
-
+import PropTypes from "prop-types";
 
 // styles
-import './AnimeItem.scss';
+import "./AnimeItem.scss";
 
-class AnimeItem extends Component {
+const AnimeItem = (props) => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-    itemRef = React.createRef();
+  const checkTitleLength = (title) => {
+    return title.length > 27 ? `${title.slice(0, 27)}...` : title;
+  };
 
-    state = {
-        loading: true,
-        error: false,
-    }
+  const changeStateLoadingError = () => {
+    setLoading(props.loading);
+    setError(props.error);
+  };
 
-    componentDidMount() {
-        this.changeStateLoadingError();
-    }
+  useEffect(() => {
+    changeStateLoadingError();
+  }, []);
 
-    checkTitleLength = (title) => {
-        return title.length > 27 ? `${title.slice(0, 27)}...` : title;
-    }
+  const validTitle = checkTitleLength(props.title);
+  const content = !(loading || error) ? (
+    <ViewAnimeItem
+      image={props.posterImage}
+      validTitle={validTitle}
+      title={props.title}
+      homepage={props.homepage}
+    />
+  ) : null;
+  return (
+    <li className="card" tabIndex="0" onFocus={() => props.onVisible(props.id)}>
+      {content}
+    </li>
+  );
+};
 
-    changeStateLoadingError = () => {
-        let loadStatus = this.props.loading;
-        let errorStatus = this.props.error;
-        this.setState({ loading: loadStatus, error: errorStatus, elemRef: this.itemRef });
-    }
-
-    render() {
-
-        const { loading, error } = this.state;
-        const { title, posterImage, id, homepage, onVisible } = this.props;
-        const validTitle = this.checkTitleLength(title);
-
-        const content = !(loading || error) ? <ViewAnimeItem image={posterImage} validTitle={validTitle} title={title} homepage={homepage} /> : null;
-        return (
-            <li ref={this.itemRef} className="card" tabIndex='0' onFocus={() => onVisible(id)}>
-                {content}
-            </li>
-
-        );
-    }
-}
-
-const ViewAnimeItem = ({ image, title, validTitle, homepage }) => { // rendering component without logic
-    return (
-        <>
-            <img src={image} alt={title} className="card__image" />
-            <div className="title title_card" >{validTitle}
-                <a href={homepage} target="_blank" rel='noreferrer'>More Info</a>
-            </div>
-        </>
-    )
-}
+const ViewAnimeItem = ({ image, title, validTitle, homepage }) => {
+  // rendering component without logic
+  return (
+    <>
+      <img src={image} alt={title} className="card__image" />
+      <div className="title title_card">
+        {validTitle}
+        <a href={homepage} target="_blank" rel="noreferrer">
+          More Info
+        </a>
+      </div>
+    </>
+  );
+};
 
 AnimeItem.propTypes = {
-    id: PropTypes.number
-}
+  id: PropTypes.number,
+};
 
 export default AnimeItem;
