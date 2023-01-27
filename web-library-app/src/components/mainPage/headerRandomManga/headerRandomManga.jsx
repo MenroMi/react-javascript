@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 
 //Components
-import Nav from "../../reusabilityComponents/navigation/Navigation";
 import Spinner from "../../reusabilityComponents/spinnerLoading/Spinner";
 import ErrorMessage from "../../reusabilityComponents/errorValidate/ErrorValidate";
 
@@ -105,8 +104,8 @@ const HeaderRandomManga = () => {
   };
 
   const checkTitleLength = (title) => {
-    if (title.length > 30) {
-      return `${title.slice(0, 30)}...`;
+    if (title.length > 27) {
+      return `${title.slice(0, 27)}...`;
     }
     return title;
   };

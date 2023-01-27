@@ -21,7 +21,7 @@ const AnimeList = () => {
   // states
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(true);
   const [error, setError] = useState(false);
   const [numb, setNumb] = useState(1);
   const [offset, setOffset] = useState(0);
@@ -65,7 +65,10 @@ const AnimeList = () => {
       .getAllAnime(offset) // request for list of anime
       .then(onLoadedAnime)
       .catch(onErrorLoad)
-      .finally(setNewItemsLoading(false));
+      .finally((info) => {
+        setLoadingMore(false);
+        setNewItemsLoading(false);
+      });
   }
 
   const iterationItems = (data, loading, error) => {
