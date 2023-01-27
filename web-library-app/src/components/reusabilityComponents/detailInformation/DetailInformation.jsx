@@ -1,5 +1,5 @@
 // basics
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 
 // plugins
 import PropTypes from "prop-types";
@@ -57,8 +57,8 @@ const DetailInformation = ({ data }) => {
       : arr[0].description;
   };
 
-  const information = useMemo(() => data[0], [data]);
-
+  const variable = data[0].id;
+  const information = useMemo(() => variable, [variable]);
   useEffect(() => {
     checkRelation();
   }, [information]);
