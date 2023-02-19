@@ -5,8 +5,11 @@ import { useState, useEffect } from "react";
 import Spinner from "../../reusabilityComponents/spinnerLoading/Spinner";
 import ErrorMessage from "../../reusabilityComponents/errorValidate/ErrorValidate";
 
+// hooks
+// import useCheckLength from "../../hooks/UseCheckLength";
+
 // Services
-import { Anime } from "../../services/AnimeResources";
+import useAnimeResources from "../../services/AnimeResources";
 
 // images
 import girlRandom from "../../../assets/imgs/girlRandomManga.png";
@@ -15,20 +18,9 @@ import girlRandom from "../../../assets/imgs/girlRandomManga.png";
 import "./HeaderRandomManga.scss";
 
 const HeaderRandomManga = () => {
-  const anime = new Anime();
-
   // states
-  const [manga, setManga] = useState({
-    title: null,
-    description: null,
-    posterImage: null,
-    homepage: null,
-    wiki: null,
-    alt: "random manga",
-    id: null,
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [manga, setManga] = useState({});
+  const { loading, error, getAnime } = useAnimeResources();
 
   const styleSpinner = {
     margin: "0 auto",
@@ -38,11 +30,6 @@ const HeaderRandomManga = () => {
 
   const onLoadedAnime = (manga) => {
     setManga(manga);
-    setLoading(false);
-  };
-
-  const onLoadingAnime = () => {
-    setLoading(true);
   };
 
   const getRandomNumber = (min, max) => {
@@ -56,35 +43,25 @@ const HeaderRandomManga = () => {
         break;
       case status >= "500":
         alert("problems with server");
-        setLoading(false);
-        setError(true);
         break;
       case "400":
         alert("Bad Request - malformed request");
-        setLoading(false);
-        setError(true);
         break;
       case "401":
         alert("Unauthorized - invalid or no authentication details provided");
-        setLoading(false);
-        setError(true);
         break;
       default:
-        setLoading(false);
-        setError(true);
         break;
     }
   };
 
   async function updateState() {
     // let maxCount = await this.anime.getCountAllAnime();
-    onLoadingAnime();
     const id = getRandomNumber(0, 18500);
-    await anime
-      .getAnime(id)
+    await getAnime(id)
       .then((data) => {
-        if ("status" in data) {
-          onErrorLoad(data.status);
+        if (parseInt(data)) {
+          onErrorLoad(data);
         } else {
           onLoadedAnime(data);
         }
@@ -160,9 +137,9 @@ const ViewRandomManga = ({
     <div className="random-manga">
       <img className="random-manga__img" src={posterImage} alt={alt} />
       <div className="random-manga__info">
-        <div className="title">{checkTitleLength(title)}</div>
+        <div className="title">{!title ? null : checkTitleLength(title)}</div>
         <div className="random-manga__descr">
-          {checkDescriptionLength(description)}
+          {!description ? null : checkDescriptionLength(description)}
         </div>
         <div className="random-manga__btns">
           <a href={homepage} target="_blank" rel="noreferrer">

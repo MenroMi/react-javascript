@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 // services
-import { Anime } from "../../services/AnimeResources";
+import useAnimeResources from "../../services/AnimeResources";
 // Components
 import AnimeItem from "../animeItem/AnimeItem";
 import DetailInformation from "../../reusabilityComponents/detailInformation/DetailInformation";
@@ -16,17 +16,15 @@ import loadingSVG from "../../../assets/icons/loadingMorePage.svg";
 import "./AnimeList.scss";
 
 const AnimeList = () => {
-  const anime = new Anime();
-
   // states
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(true);
-  const [error, setError] = useState(false);
   const [numb, setNumb] = useState(1);
   const [offset, setOffset] = useState(0);
   const [endedOffset, setEndedOffset] = useState(false);
   const [newItemsLoading, setNewItemsLoading] = useState(true);
+
+  const { loading, error, getAllAnime } = useAnimeResources();
 
   const styleSpinner = {
     gridColumn: "1/4",
@@ -38,37 +36,22 @@ const AnimeList = () => {
       end = true;
     }
 
+    console.log("render");
     setOffset((off) => off + 9);
     setData((data) => [...data, ...newItems]);
-    setLoading(false);
     setEndedOffset(end);
     setLoadingMore(false);
+    setNewItemsLoading(false);
   };
-
-  const onErrorLoad = () => {
-    setLoading(false);
-    setError(true);
-  };
-
-  const onAnimeListLoading = () => {
-    setLoadingMore(true);
-  };
-
   const onChangeVisibleDetails = (numb) => {
     setNumb(numb);
   };
 
   async function onRequestAnime() {
-    onAnimeListLoading();
+    setLoadingMore(true);
     // const req = await this.anime.getAllAnime(offset);
-    await anime
-      .getAllAnime(offset) // request for list of anime
-      .then(onLoadedAnime)
-      .catch(onErrorLoad)
-      .finally((info) => {
-        setLoadingMore(false);
-        setNewItemsLoading(false);
-      });
+    await getAllAnime(offset) // request for list of anime
+      .then(onLoadedAnime);
   }
 
   const iterationItems = (data, loading, error) => {
@@ -87,7 +70,7 @@ const AnimeList = () => {
   };
 
   const detailsInfo = (loading, error, visibleDetails) => {
-    if (!(loading || error)) {
+    if (!(loading || error) && visibleDetails.length > 0) {
       return (
         <DetailInformation
           data={visibleDetails}
@@ -103,13 +86,13 @@ const AnimeList = () => {
 
   const autoChangeOffset = () => {
     if (
-      parseInt(window.innerHeight + document.documentElement.scrollTop) !==
+      parseInt(window.innerHeight + document.documentElement.scrollTop) ===
       document.documentElement.offsetHeight + 10
     ) {
-      return;
+      setNewItemsLoading(true);
     }
 
-    setNewItemsLoading(true);
+    return;
   };
 
   useEffect(() => {
@@ -139,7 +122,7 @@ const AnimeList = () => {
           <button
             className="button button_load"
             disabled={loadingMore}
-            style={{ display: endedOffset ? "none" : "block" }}
+            style={{ display: endedOffset || error ? "none" : "block" }}
             onClick={() => onRequestAnime(offset)}
           >
             {loadingMore ? (

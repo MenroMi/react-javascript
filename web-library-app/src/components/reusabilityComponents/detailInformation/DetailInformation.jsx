@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import PropTypes from "prop-types";
 
 // services
-import { Anime } from "../../services/AnimeResources";
+import useAnimeResources from "../../services/AnimeResources";
 
 // components
 import Spinner from "../spinnerLoading/Spinner";
@@ -15,19 +15,9 @@ import ErrorMessage from "../errorValidate/ErrorValidate";
 import "./DetailInformation.scss";
 
 const DetailInformation = ({ data }) => {
-  const anime = new Anime();
-
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [series, setSeries] = useState(null);
 
-  const onLoadingAnime = () => {
-    setLoading(true);
-  };
-
-  const onErrorMessage = () => {
-    setError(true);
-  };
+  const { loading, error, getAnimeRelationship } = useAnimeResources();
 
   const checkLengthSeries = (arr) => {
     if (arr.length <= 0) {
@@ -56,7 +46,6 @@ const DetailInformation = ({ data }) => {
       ? `${arr[0].description.slice(0, 800)}...`
       : arr[0].description;
   };
-
   const variable = data[0].id;
   const information = useMemo(() => variable, [variable]);
   useEffect(() => {
@@ -66,14 +55,11 @@ const DetailInformation = ({ data }) => {
   async function checkRelation() {
     const [{ id }] = data;
 
-    onLoadingAnime();
-    let series = await anime
-      .getAnimeRelationship(id)
-      .then((data) => data.included)
-      .catch(() => onErrorMessage);
+    // onLoadingAnime();
+    let series = await getAnimeRelationship(id).then((data) => data.included);
     if (series === undefined || series.length === 0 || !series) {
       setSeries([]);
-      setLoading(false);
+      // setLoading(false);
     } else {
       let arrSeries = series
         .map((item) => {
@@ -84,7 +70,6 @@ const DetailInformation = ({ data }) => {
         .filter((item) => item !== null);
 
       setSeries(arrSeries);
-      setLoading(false);
     }
   }
 
