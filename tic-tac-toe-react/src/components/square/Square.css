@@ -1,0 +1,24 @@
+.square {
+  background-color: black;
+  border-radius: 0.5rem;
+  color: white;
+  width: 90px;
+  height: 90px;
+  font-size: 3em;
+  margin: 3px;
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+button.square:hover,
+button.square:focus {
+  outline: 1px solid rgb(94, 94, 230);
+}
+
+button.square:focus {
+  outline: 1px solid rgb(94, 94, 230);
+}
+
+.red {
+  border: 1px solid rgb(245, 70, 70);
+}
