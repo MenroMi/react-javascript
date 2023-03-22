@@ -10,6 +10,7 @@ button {
 }
 
 .App {
+  animation: on 1s ease forwards;
   position: relative;
   width: 600px;
   margin: 0 auto;
@@ -65,4 +66,13 @@ button {
 
 .choice:disabled:hover {
   outline: 1px solid rgb(255, 94, 94);
+}
+
+@keyframes on {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

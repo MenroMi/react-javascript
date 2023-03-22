@@ -81,7 +81,7 @@ export default function App() {
     setHistory((obj) => ({ ...obj, [e.target.id]: isNext }));
 
     if (steps >= 8) {
-      actualValue.onSetNewValue("Draw ><");
+      actualValue.onSetNewValue(`Draw ${String.fromCodePoint(0x1f643)}`);
     } else {
       actualValue.onSetNewValue(
         steps % 2 === 1 ? startChoice.value : nextSymbol
@@ -112,7 +112,9 @@ export default function App() {
   return (
     <div className="App">
       <h1>
-        {winner.value ? `WIN: ${winner.value} =)` : `Now: ${actualValue.value}`}
+        {winner.value
+          ? `WIN: ${winner.value} ${String.fromCodePoint(0x1f973)}`
+          : `Now: ${actualValue.value}`}
       </h1>
       <Board
         history={history}
