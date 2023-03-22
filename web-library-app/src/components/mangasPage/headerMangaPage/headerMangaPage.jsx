@@ -1,5 +1,5 @@
 // Components
-import Banner from "../../reusabilityComponents/bannerHeader/BannerHeader";
+import Banner from "../../reusabilityComponents/bannerHeader/bannerHeader";
 // images
 const NavManga = () => {
   return (

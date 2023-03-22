@@ -3,10 +3,9 @@ import { useState } from "react";
 import Select from "react-select";
 
 // styles
-import "./SearchManga.scss";
+import "./searchManga.scss";
 
 const SearchPanelManga = (props) => {
-  const [search, setSearch] = useState("");
   const [valueCategory, setValueCategory] = useState("");
   const [category, setCategory] = useState([
     { value: "all", label: "all" },
@@ -20,25 +19,23 @@ const SearchPanelManga = (props) => {
 
   const changeSelectValue = (e) => {
     let res = e.value;
-    setCategory(res);
+    setValueCategory(res);
     props.onChangeValueCategory(res);
   };
 
   const changeSearchValue = (e) => {
     let value = e.target.value,
       crossForReset = e.target.nextElementSibling;
-
     if (value.length > 0) {
       crossForReset.classList.add("cross_active");
     } else {
       crossForReset.classList.remove("cross_active");
     }
 
-    setSearch(value);
     props.onChangeSearchValue(value);
   };
+
   const onResetValue = (e) => {
-    this.setState({ search: "" });
     props.onResetValue();
     e.target.classList.remove("cross_active");
   };
@@ -73,9 +70,9 @@ const SearchPanelManga = (props) => {
 
       <input
         onChange={changeSearchValue}
-        type="search"
+        type="text"
         className="searchManga__search"
-        value={search}
+        value={props.propSearch}
         placeholder="Search title..."
       />
 

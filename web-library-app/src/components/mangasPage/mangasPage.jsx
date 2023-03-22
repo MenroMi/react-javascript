@@ -2,9 +2,9 @@
 import { useState, useEffect } from "react";
 
 // Components
-import NavManga from "./headerMangaPage/HeaderMangaPage";
-import MangaList from "./mangaList/MangaList";
-import SearchPanelManga from "./searchManga/SearchManga";
+import NavManga from "./headerMangaPage/headerMangaPage";
+import MangaList from "./mangaList/mangaList";
+import SearchPanelManga from "./searchManga/searchManga";
 
 // images
 import onePiece from "../../assets/imgs/cards/one-piece.jpg";
@@ -12,6 +12,8 @@ import spyFamily from "../../assets/imgs/cards/spy-family.jpeg";
 import chainsawMan from "../../assets/imgs/cards/chaisaw-man.jpeg";
 
 const MangasPage = () => {
+  const [valueCategory, setValueCategory] = useState("");
+  const [search, setSearch] = useState("");
   const [data, setData] = useState([
     {
       title: "One Piece",
@@ -68,8 +70,6 @@ const MangasPage = () => {
       category: "romantic",
     },
   ]);
-  const [valueCategory, setValueCategory] = useState("");
-  const [search, setSearch] = useState("");
 
   const onChangeValueCategory = (res) => {
     setValueCategory(res);
@@ -111,6 +111,7 @@ const MangasPage = () => {
     <div className="mangaPage">
       <NavManga />
       <SearchPanelManga
+        propSearch={search}
         onResetValue={onResetValue}
         onChangeValueCategory={onChangeValueCategory}
         chooseCategory={onSearchByCategory}

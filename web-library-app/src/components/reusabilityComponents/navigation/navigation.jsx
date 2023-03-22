@@ -1,7 +1,7 @@
 // images
 
 // styles
-import "./Navigation.scss";
+import "./navigation.scss";
 
 const Nav = () => {
   return (

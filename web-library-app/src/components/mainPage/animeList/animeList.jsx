@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 // services
 import useAnimeResources from "../../services/AnimeResources";
 // Components
-import AnimeItem from "../animeItem/AnimeItem";
+import AnimeItem from "../animeItem/animeItem";
 import DetailInformation from "../../reusabilityComponents/detailInformation/DetailInformation";
 import ErrorMessage from "../../reusabilityComponents/errorValidate/ErrorValidate";
 import Spinner from "../../reusabilityComponents/spinnerLoading/Spinner";
@@ -13,7 +13,7 @@ import ErrorBoundary from "../../errorBoundary/ErrorBoundary";
 // icons
 import loadingSVG from "../../../assets/icons/loadingMorePage.svg";
 // styles
-import "./AnimeList.scss";
+import "./animeList.scss";
 
 const AnimeList = () => {
   // states

@@ -1,5 +1,5 @@
 // styles
-import "./MangaItem.scss";
+import "./mangaItem.scss";
 
 const MangaItem = ({ image, title, available }) => {
   return (

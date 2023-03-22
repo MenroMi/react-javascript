@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 // styles
-import "./AnimeItem.scss";
+import "./animeItem.scss";
 
 const AnimeItem = (props) => {
   const [loading, setLoading] = useState(true);

@@ -3,7 +3,7 @@ import bannerMan from "../../../assets/imgs/bannerMan.png";
 import bannerGirl from "../../../assets/imgs/bannerGirl.png";
 
 // styles
-import "./BannerHeader.scss";
+import "./bannerHeader.scss";
 
 const Banner = () => {
   return (

@@ -15,7 +15,7 @@ import useAnimeResources from "../../services/AnimeResources";
 import girlRandom from "../../../assets/imgs/girlRandomManga.png";
 
 // styles
-import "./HeaderRandomManga.scss";
+import "./headerRandomManga.scss";
 
 const HeaderRandomManga = () => {
   // states

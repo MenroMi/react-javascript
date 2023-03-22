@@ -2,10 +2,10 @@
 import { v4 as uuidv4 } from "uuid";
 
 // Components
-import MangaItem from "../mangaItem/MangaItem";
+import MangaItem from "../mangaItem/mangaItem";
 
 // styles
-import "./MangaList.scss";
+import "./mangaList.scss";
 
 const MangaList = ({ data }) => {
   const iterationItems = (data) => {
