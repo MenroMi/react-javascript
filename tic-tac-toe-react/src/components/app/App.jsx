@@ -4,8 +4,13 @@ import { useState, useEffect } from "react";
 // hooks
 import useInputInfo from "../../hooks/useInfo";
 
+// additional functions
+import checkWinner from "../../functions/checkingWinner";
+
 // components
 import Board from "../board/Board";
+import Information from "../header-information/HeaderInformation";
+import CreateButton from "../buttons/Buttons";
 
 // styles
 import "./App.css";
@@ -17,17 +22,6 @@ export default function App() {
   const startChoice = useInputInfo("Choose your side");
   const actualValue = useInputInfo("Choose your side");
   const winner = useInputInfo("");
-
-  let winnerSteps = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    [1, 4, 7],
-    [2, 5, 8],
-    [3, 6, 9],
-    [1, 5, 9],
-    [3, 5, 7],
-  ];
 
   useEffect(() => {
     if (reset) {
@@ -41,33 +35,7 @@ export default function App() {
 
     if (winner.value.length > 0) return;
 
-    const checkWinner = (stepsDone) => {
-      if (Object.keys(stepsDone).length <= 0) {
-        return;
-      }
-
-      let lines = winnerSteps
-        .map((lines) =>
-          lines
-            .map((line) => (stepsDone[line] ? stepsDone[line] : null))
-            .filter((elem) => elem)
-        )
-        .filter((item) => item.length === 3);
-
-      if (lines.length >= 1) {
-        let isWinner = lines.map((arr) =>
-          arr.reduce((prev, curr) => {
-            return prev === curr ? curr : false;
-          })
-        );
-        isWinner = isWinner.filter((elem) => elem).join("");
-        return isWinner ? winner.onSetNewValue(isWinner) : null;
-      }
-
-      return;
-    };
-
-    checkWinner(history);
+    checkWinner(history, winner); // additional function for validate game result
   }, [history, winner.value, reset]);
 
   const isOver = () => {
@@ -76,7 +44,6 @@ export default function App() {
 
   const onCurrStep = (e) => {
     let nextSymbol = startChoice.value === "X" ? "O" : "X";
-    console.log(steps);
     let isNext = steps % 2 === 0 ? startChoice.value : nextSymbol;
     setHistory((obj) => ({ ...obj, [e.target.id]: isNext }));
 
@@ -89,33 +56,9 @@ export default function App() {
     }
   };
 
-  const onChooseYourSideBtns = () => {
-    const btns = [
-      { className: "choice choice_cross", content: "X", id: 1 },
-      { className: "choice choice_zero", content: "O", id: 2 },
-    ];
-
-    return btns.map(({ content, id, ...btns }) => {
-      return (
-        <button
-          onClick={() => startChoice.onSetNewValue(content)}
-          disabled={startChoice.value.length === 1 && steps <= 9 ? true : false}
-          key={id}
-          {...btns}
-        >
-          {content}
-        </button>
-      );
-    });
-  };
-
   return (
     <div className="App">
-      <h1>
-        {winner.value
-          ? `WIN: ${winner.value} ${String.fromCodePoint(0x1f973)}`
-          : `Now: ${actualValue.value}`}
-      </h1>
+      <Information winner={winner} actualValue={actualValue} />
       <Board
         history={history}
         onCurrStep={onCurrStep}
@@ -124,7 +67,9 @@ export default function App() {
         reset={reset}
         win={winner.value}
       />
-      <div className="wrapper-btns">{onChooseYourSideBtns()}</div>
+      <div className="wrapper-btns">
+        <CreateButton startChoice={startChoice} steps={steps} />
+      </div>
       <button
         onClick={() => setReset(true)}
         className={`choice choice_again${steps <= 0 ? "" : " active"}`}
