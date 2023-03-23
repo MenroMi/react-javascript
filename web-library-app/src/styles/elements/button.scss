@@ -1,0 +1,46 @@
+.button {
+    width: 101px;
+    height: 38px;
+    border: none;
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .3s ease;
+
+    &:hover {
+        background-color: #0077B6;
+    }
+
+    &_main {
+        background-color: #0096C7;
+    }
+
+    &_submain {
+        background-color: #a7babe;
+
+        &:hover {
+            background-color: #889193;
+        }
+    }
+
+    &_load {
+        background-color: #0096C7;
+        width: 170px;
+        grid-column: 1/4;
+        margin: 0 auto;
+
+        &:disabled {
+            filter: grayscale(80%)
+        }
+    }
+}
+
+
+@media (max-width: 576px) {
+    .button {
+        &_load {
+            width: 100%;
+        }
+    }
+}

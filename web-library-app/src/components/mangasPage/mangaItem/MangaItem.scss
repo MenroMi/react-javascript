@@ -1,0 +1,160 @@
+.mangaItem {
+    position: relative;
+    max-width: 225px;
+    height: 350px;
+    background: #232222;
+    transition: .3s ease;
+
+    &__image {
+        width: 225px;
+        max-height: 300px;
+        object-fit: cover;
+        transition: .3s ease;
+
+    }
+
+    a {
+        display: none;
+    }
+
+    &__subtitle {
+        color: white;
+        font-size: 15px;
+        opacity: 0;
+    }
+
+    &:hover,
+    &:focus {
+        .mangaItem {
+            &__image {
+                outline: 0;
+                animation-name: cardsWrapper;
+                animation-duration: .2s;
+                animation-fill-mode: forwards;
+            }
+
+            &__subtitle {
+                color: #90E0EF;
+                margin-top: 10px;
+                animation-name: btnMoreInfo;
+                animation-duration: .2s;
+                animation-fill-mode: forwards;
+            }
+        }
+
+        a {
+            display: block;
+            margin: 20px 0 0 0;
+            transition: .1s linear;
+            width: 100px;
+            animation-name: btnMoreInfo;
+            animation-duration: .3s;
+            animation-fill-mode: forwards;
+
+            &:hover {
+                background-color: #fff;
+                color: black;
+            }
+
+        }
+    }
+
+
+}
+
+
+@media (max-width: 768px) {
+    .mangaItem {
+        max-width: 150px;
+        height: 200px;
+
+        &__image {
+            width: 150px;
+            max-height: 150px;
+        }
+
+        &:hover,
+        &:focus {
+            .mangaItem__image {
+                animation-name: cardsWrapperFor768;
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .mangaItem {
+        max-width: 220px;
+        height: 270px;
+
+        &__image {
+            width: 220px;
+            max-height: 200px;
+        }
+
+        &:hover,
+        &:focus {
+            .mangaItem__image {
+                animation-name: cardsWrapperFor575;
+            }
+        }
+    }
+}
+
+
+/* ********** */
+/* KEYFRAMES */
+/* ********** */
+
+@keyframes cardsAnimation {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-3%);
+    }
+}
+
+@keyframes cardsWrapper {
+    from {
+        max-height: 300px;
+    }
+
+    to {
+        max-height: 230px;
+    }
+}
+
+@keyframes cardsWrapperFor768 {
+    from {
+        max-height: 150px;
+    }
+
+    to {
+        max-height: 100px;
+    }
+}
+
+@keyframes cardsWrapperFor575 {
+    from {
+        max-height: 200px;
+    }
+
+    to {
+        max-height: 130px;
+    }
+}
+
+@keyframes btnMoreInfo {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0);
+
+    }
+}
