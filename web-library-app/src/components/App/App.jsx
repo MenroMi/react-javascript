@@ -17,8 +17,9 @@ export default function App() {
       <div className="App">
         <Nav />
         <Routes>
-          <Route exact path="/" element={<MainPage />} />
-          <Route exact path="/mangas/*" element={<MangaPage />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="mangas" element={<MangaPage />} />
+
           {/* Page with choosen manga */}
           {/* <MangaPage /> */}
         </Routes>

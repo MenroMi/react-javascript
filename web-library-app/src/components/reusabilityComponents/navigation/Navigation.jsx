@@ -18,7 +18,6 @@ const Nav = () => {
           <ul>
             <li>
               <NavLink
-                exact
                 className={({ isActive, isPending }) =>
                   isActive ? "category-anime" : ""
                 }
@@ -30,11 +29,10 @@ const Nav = () => {
             <li> /</li>
             <li>
               <NavLink
-                exact
                 className={({ isActive, isPending }) =>
                   isActive ? "category-manga" : ""
                 }
-                to="/mangas"
+                to="mangas"
               >
                 Manga
               </NavLink>
