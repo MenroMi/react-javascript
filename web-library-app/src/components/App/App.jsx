@@ -1,6 +1,6 @@
 // basics
 import Nav from "../reusabilityComponents/navigation/Navigation";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 /* Pages */
 import { MainPage, MangaPage } from "../pages";
@@ -16,16 +16,12 @@ export default function App() {
     <Router>
       <div className="App">
         <Nav />
-        <Switch>
-          <Route exact path="/">
-            <MainPage />
-          </Route>
-          <Route exact path="/mangas">
-            <MangaPage />
-          </Route>
+        <Routes>
+          <Route exact path="/" element={<MainPage />} />
+          <Route exact path="/mangas/*" element={<MangaPage />} />
           {/* Page with choosen manga */}
           {/* <MangaPage /> */}
-        </Switch>
+        </Routes>
       </div>
     </Router>
   );
