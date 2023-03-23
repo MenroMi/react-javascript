@@ -27,7 +27,7 @@
 }
 
 @media (max-width: 1200px) {
-  .list {
+  .list-manga {
     grid-template-columns: repeat(3, 225px);
 
     li {
@@ -40,13 +40,13 @@
 }
 
 @media (max-width: 992px) {
-  .list {
+  .list-manga {
     column-gap: 46px;
   }
 }
 
 @media (max-width: 768px) {
-  .list {
+  .list-manga {
     grid-template-columns: repeat(auto-fill, 150px);
 
     li {
@@ -59,7 +59,7 @@
 }
 
 @media (max-width: 576px) {
-  .list {
+  .list-manga {
     grid-template-columns: 220px;
 
     li {

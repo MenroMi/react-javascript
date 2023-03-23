@@ -27,7 +27,7 @@
 }
 
 @media (max-width: 1200px) {
-  .list {
+  .list-anime {
     li {
       &:last-child {
         grid-column: 1/3;
@@ -42,7 +42,7 @@
     grid-template-columns: 1fr;
   }
 
-  .list {
+  .list-anime {
     justify-self: center;
     column-gap: 50px;
 
@@ -56,13 +56,13 @@
 }
 
 @media (max-width: 768px) {
-  .list {
+  .list-anime {
     grid-template-columns: repeat(auto-fill, 150px);
   }
 }
 
 @media (max-width: 576px) {
-  .list {
+  .list-anime {
     grid-template-columns: repeat(1, 1fr);
 
     li {
