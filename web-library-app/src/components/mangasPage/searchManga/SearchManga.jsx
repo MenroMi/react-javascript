@@ -7,7 +7,7 @@ import "./SearchManga.scss";
 
 const SearchPanelManga = (props) => {
   const [valueCategory, setValueCategory] = useState("");
-  const [category, setCategory] = useState([
+  const [category, _] = useState([
     { value: "all", label: "all" },
     { value: "drama", label: "Drama" },
     { value: "romantic", label: "Romantic" },
@@ -15,6 +15,7 @@ const SearchPanelManga = (props) => {
     { value: "adventure", label: "Adventure" },
     { value: "everyday", label: "Everyday" },
     { value: "comedy", label: "Comedy" },
+    { value: "military", label: "Military" },
   ]);
 
   const changeSelectValue = (e) => {

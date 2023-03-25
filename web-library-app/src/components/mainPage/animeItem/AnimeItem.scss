@@ -1,166 +1,168 @@
 .card {
-    position: relative;
-    max-width: 200px;
-    height: 318px;
-    background: #232222;
-    transition: .3s ease;
+  position: relative;
+  max-width: 200px;
+  height: 318px;
+  background: #232222;
 
-    a {
-        display: none;
-    }
+  a {
+    display: none;
+  }
 
+  &:hover,
+  &:focus {
+    box-shadow: 5px 5px 20px #023e8a;
+    outline: 0;
+    animation-name: cardsAnimation;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
 
-    &:hover,
-    &:focus {
-        box-shadow: 5px 5px 20px #023E8A;
-        outline: 0;
-        animation-name: cardsAnimation;
-        animation-duration: .5s;
-        animation-fill-mode: forwards;
-    }
-
-
-    &__image {
-        width: 200px;
-        max-height: 200px;
-        object-fit: cover;
-        transition: .3s ease;
-    }
+  &__image {
+    width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    transition: 0.3s ease;
+  }
 }
 
 @media (max-width: 1200px) {
-    .card {
-        height: 300px;
-    }
+  .card {
+    height: 300px;
+  }
 }
 
 @media (max-width: 992px) {
+  .card {
+    &:hover,
+    &:focus {
+      box-shadow: none;
+      animation-name: none;
 
-    .card {
+      .card__image {
+        outline: 0;
+        animation-name: cardsWrapperFor992;
+        animation-duration: 0.3s;
+        animation-fill-mode: forwards;
+      }
 
-        &:hover,
-        &:focus {
-            box-shadow: none;
-            animation-name: none;
+      a {
+        display: block;
+        margin: 20px 0 0 0;
+        transition: 0.1s linear;
+        width: 100px;
+        animation-name: btnMoreInfo;
+        animation-duration: 0.3s;
+        animation-fill-mode: forwards;
 
-            .card__image {
-                outline: 0;
-                animation-name: cardsWrapper;
-                animation-duration: .3s;
-                animation-fill-mode: forwards;
-            }
-
-            a {
-                display: block;
-                margin: 20px 0 0 0;
-                transition: .1s linear;
-                width: 100px;
-                animation-name: btnMoreInfo;
-                animation-duration: .3s;
-                animation-fill-mode: forwards;
-
-                &:hover {
-                    background-color: #fff;
-                    color: black;
-                }
-            }
+        &:hover {
+          background-color: #fff;
+          color: black;
         }
-
+      }
     }
+  }
 }
 
 @media (max-width: 768px) {
-    .card {
-        max-width: 150px;
-        height: 200px;
+  .card {
+    max-width: 150px;
+    height: 200px;
 
-        &__image {
-            width: 150px;
-            max-height: 150px;
-        }
-
-        &:hover,
-        &:focus {
-            .card__image {
-                animation-name: cardsWrapperFor768;
-            }
-        }
+    &__image {
+      width: 150px;
+      max-height: 150px;
     }
+
+    &:hover,
+    &:focus {
+      .card__image {
+        animation-name: cardsWrapperFor768;
+      }
+    }
+  }
 }
 
 @media (max-width: 576px) {
-    .card {
-        max-width: 220px;
-        height: 270px;
+  .card {
+    max-width: 220px;
+    height: 270px;
 
-        &__image {
-            width: 220px;
-            max-height: 200px;
-        }
-
-        &:hover,
-        &:focus {
-            .card__image {
-                animation-name: cardsWrapperFor575;
-            }
-        }
+    &__image {
+      width: 220px;
+      max-height: 200px;
     }
-}
 
+    &:hover,
+    &:focus {
+      .card__image {
+        animation-name: cardsWrapperFor575;
+      }
+    }
+  }
+}
 
 /* ********** */
 /* KEYFRAMES */
 /* ********** */
 
 @keyframes cardsAnimation {
-    from {
-        transform: translateY(0);
-    }
+  from {
+    transform: translateY(0);
+  }
 
-    to {
-        transform: translateY(-3%);
-    }
+  to {
+    transform: translateY(-3%);
+  }
 }
 
 @keyframes cardsWrapper {
-    from {
-        max-height: 200px;
-    }
+  from {
+    max-height: 200px;
+  }
 
-    to {
-        max-height: 140px;
-    }
+  to {
+    max-height: 140px;
+  }
+}
+
+@keyframes cardsWrapperFor992 {
+  from {
+    max-height: 250px;
+  }
+
+  to {
+    max-height: 140px;
+  }
 }
 
 @keyframes cardsWrapperFor768 {
-    from {
-        max-height: 150px;
-    }
+  from {
+    max-height: 150px;
+  }
 
-    to {
-        max-height: 100px;
-    }
+  to {
+    max-height: 100px;
+  }
 }
 
 @keyframes cardsWrapperFor575 {
-    from {
-        max-height: 200px;
-    }
+  from {
+    max-height: 200px;
+  }
 
-    to {
-        max-height: 130px;
-    }
+  to {
+    max-height: 130px;
+  }
 }
 
 @keyframes btnMoreInfo {
-    from {
-        opacity: 0;
-        transform: translate3d(0, 0, 0);
-    }
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
 
-    to {
-        opacity: 1;
-        transform: translate3d(0, -20px, 0);
-
-    }
+  to {
+    opacity: 1;
+    transform: translate3d(0, -20px, 0);
+  }
 }

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 // services
-import useAnimeResources from "../../services/AnimeResources";
+import useResources from "../../services/AnimeResources";
 // Components
 import AnimeItem from "../animeItem/AnimeItem";
 import DetailInformation from "../../reusabilityComponents/detailInformation/DetailInformation";
@@ -20,11 +20,11 @@ const AnimeList = () => {
   const [data, setData] = useState([]);
   const [loadingMore, setLoadingMore] = useState(true);
   const [numb, setNumb] = useState(1);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(0); // today max 18810
   const [endedOffset, setEndedOffset] = useState(false);
   const [newItemsLoading, setNewItemsLoading] = useState(true);
 
-  const { loading, error, getAllAnime } = useAnimeResources();
+  const { loading, error, getAllAnime } = useResources();
 
   const styleSpinner = {
     gridColumn: "1/4",
@@ -32,7 +32,7 @@ const AnimeList = () => {
 
   const onLoadedAnime = (newItems) => {
     let end = false;
-    if (newItems.length < 9) {
+    if (newItems == null || newItems.length < 9) {
       end = true;
     }
 

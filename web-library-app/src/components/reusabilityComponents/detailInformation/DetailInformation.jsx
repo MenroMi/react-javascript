@@ -75,7 +75,7 @@ const DetailInformation = ({ data }) => {
 
   let moreFromSeries = series === null ? null : checkLengthSeries(series);
   let shortDescr = checkLengthDescription(data);
-
+  console.log(data);
   // let skeleton = !(loading || error || visible) ? <Skeleton variant="circular"><ViewDetails data={data[0]} series={moreFromSeries} descr={shortDescr} /></Skeleton> : null;
   let load = loading ? <Spinner /> : null;
   let errorMessage = error ? <ErrorMessage /> : null;

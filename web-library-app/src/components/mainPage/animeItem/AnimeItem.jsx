@@ -22,6 +22,7 @@ const AnimeItem = (props) => {
 
   useEffect(() => {
     changeStateLoadingError();
+    // eslint-disable-next-line
   }, []);
 
   const validTitle = checkTitleLength(props.title);
@@ -42,6 +43,7 @@ const AnimeItem = (props) => {
 
 const ViewAnimeItem = ({ image, title, validTitle, homepage }) => {
   // rendering component without logic
+
   return (
     <>
       <img src={image} alt={title} className="card__image" />

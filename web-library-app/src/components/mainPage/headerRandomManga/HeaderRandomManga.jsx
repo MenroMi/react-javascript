@@ -6,7 +6,7 @@ import Spinner from "../../reusabilityComponents/spinnerLoading/Spinner";
 import ErrorMessage from "../../reusabilityComponents/errorValidate/ErrorValidate";
 
 // Services
-import useAnimeResources from "../../services/AnimeResources";
+import useResources from "../../services/AnimeResources";
 
 // images
 import girlRandom from "../../../assets/imgs/girlRandomManga.png";
@@ -17,7 +17,7 @@ import "./HeaderRandomManga.scss";
 const HeaderRandomManga = () => {
   // states
   const [manga, setManga] = useState({});
-  const { loading, error, getAnime } = useAnimeResources();
+  const { loading, error, getAnime } = useResources();
 
   const styleSpinner = {
     margin: "0 auto",
@@ -55,6 +55,7 @@ const HeaderRandomManga = () => {
   async function updateState() {
     // let maxCount = await this.anime.getCountAllAnime();
     const id = getRandomNumber(0, 18500);
+
     await getAnime(id)
       .then((data) => {
         if (parseInt(data)) {

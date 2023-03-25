@@ -3,14 +3,28 @@
 // hook - http
 import { useHttp } from "../hooks/http.hook";
 
-const useAnimeResources = () => {
-  const { loading, error, onRequest } = useHttp();
-
-  const apiBase = "https://kitsu.io/api/edge/anime";
+export default function useResources() {
+  const _apiBase = "https://kitsu.io/api/edge/";
   const baseOffset = 0;
+  const { loading, error, onRequest } = useHttp();
+  const { getAllAnime, getAnime, getAnimeCategory, getAnimeRelationship } =
+    useAnime(`${_apiBase}/anime`, onRequest, baseOffset);
+  const { getAllManga } = useManga(`${_apiBase}/manga`, onRequest, baseOffset);
 
-  const isEmptyDescription = (descr) => {
-    return descr.length <= 0
+  return {
+    loading,
+    error,
+    getAllAnime,
+    getAnime,
+    getAnimeCategory,
+    getAnimeRelationship,
+    getAllManga,
+  };
+}
+
+function useAnime(url, request, baseOffset) {
+  const _isEmptyDescription = (descr) => {
+    return descr.length <= 0 || !descr
       ? "Sorry, but this title dont have any description"
       : descr;
   };
@@ -19,7 +33,7 @@ const useAnimeResources = () => {
     let data = res.attributes;
     return {
       title: data.canonicalTitle,
-      description: isEmptyDescription(data.description),
+      description: data.description,
       posterImage: data.posterImage.small,
       homepage: res.links.self,
       wiki: res.relationships.animeCharacters.links.related,
@@ -29,14 +43,14 @@ const useAnimeResources = () => {
   };
 
   const getAllAnime = async (offset = baseOffset) => {
-    let animeList = await onRequest(
-      `${apiBase}?page[limit]=9&page[offset]=${offset}`
+    let animeList = await request(
+      `${url}?page[limit]=9&page[offset]=${offset}`
     ).then((data) => data.data);
     return animeList.map((item) => animeTitle(item));
   };
 
   const getAnime = async (id) => {
-    const oneTitle = await onRequest(`${apiBase}/${id}`);
+    const oneTitle = await request(`${url}/${id}`);
 
     if ("errors" in oneTitle) {
       return oneTitle.errors[0].status;
@@ -46,26 +60,75 @@ const useAnimeResources = () => {
   };
 
   const getAnimeCategory = (id) => {
-    return onRequest(`${apiBase}/${id}/categories`);
+    return request(`${url}/${id}/categories`);
   };
 
   const getAnimeRelationship = async (id) => {
-    return await onRequest(
-      `${apiBase}/${id}/?include=mediaRelationships.destination`
+    return await request(
+      `${url}/${id}/?include=mediaRelationships.destination`
     );
   };
 
   return {
-    loading,
-    error,
     getAllAnime,
     getAnime,
     getAnimeCategory,
     getAnimeRelationship,
   };
-};
+}
 
-export default useAnimeResources;
+function useManga(url, request, baseOffset) {
+  const _mangaTitle = async (res) => {
+    let categories = await getMangaCategory(
+      // array of objects
+      res.relationships.categories.links.self
+    );
+    const m = res.attributes;
+    return {
+      title: m.canonicalTitle,
+      image: m.posterImage.small,
+      rate: m.averageRating ? m.averageRating + "%" : "Don't exist",
+      category: categories,
+    };
+  };
+
+  const getMangaCategory = async (url) => {
+    const _apiManga = `https://kitsu.io/api/edge/categories/`;
+    const mangaCategory = await request(url).then((data) => data.data);
+    let categoryIDs = mangaCategory.reduce((prev, curr) => {
+      for (let key in curr) {
+        if (key === "id") {
+          prev.push(curr[key]);
+          continue;
+        }
+      }
+      return prev;
+    }, []);
+
+    if (categoryIDs.length > 3) {
+      categoryIDs.length = 3;
+    }
+
+    const categoriesPromises = categoryIDs.map(async (id) => {
+      return await request(`${_apiManga}/${id}`);
+    });
+
+    let categoriesNames = Promise.all(categoriesPromises).then((data) =>
+      data.map((objCategory) => objCategory.data.attributes.title)
+    );
+
+    return categoriesNames.then((data) => data);
+  };
+
+  const getAllManga = async (offset = baseOffset) => {
+    const mangaList = await request(
+      `${url}?page[limit]=8&page[offset]=${offset}`
+    ).then((data) => data.data);
+    return await mangaList.map((manga) => _mangaTitle(manga));
+  };
+
+  return { getAllManga };
+}
 
 /**
  * amount all anime titles
