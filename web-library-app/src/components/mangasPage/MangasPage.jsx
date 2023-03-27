@@ -1,7 +1,6 @@
 // basics
 import { useState, useEffect } from "react";
 import useResources from "../services/AnimeResources";
-import { Outlet } from "react-router-dom";
 
 // Components
 import NavManga from "./headerMangaPage/HeaderMangaPage";
@@ -70,6 +69,7 @@ const MangasPage = () => {
     onSearchByCategory(valueCategory, data)
   );
 
+  console.log(filterCategory);
   const visibleData =
     filterCategory.length <= 0 ? (
       <Spinner styles={{ marginTop: "80px" }} />

@@ -1,4 +1,4 @@
-// import plugIMG from "../../assets/icons/icons8-kuromi.svg";
+import pic from "../../assets/icons/animeBoom.png";
 
 // hook - http
 import { useHttp } from "../hooks/http.hook";
@@ -89,9 +89,13 @@ function useManga(url, request, baseOffset) {
     const categories = await getMangaCategory(url, res.id);
 
     const m = res.attributes;
+    // console.log(m.posterImage.small);
     return {
-      title: m.canonicalTitle,
-      image: m.posterImage.small,
+      title:
+        m.canonicalTitle.length >= 20
+          ? `${m.canonicalTitle.slice(0, 18)}...`
+          : m.canonicalTitle,
+      image: !!m.posterImage.small ? m.posterImage.small : pic,
       imageSingle: m.posterImage.original,
       descr: m.description,
       rate: m.averageRating ? m.averageRating + "%" : "Don't exist",
@@ -102,6 +106,11 @@ function useManga(url, request, baseOffset) {
 
   const getMangaCategory = async (url, id) => {
     const categories = await request(`${url}/${id}?include=categories`);
+
+    if (typeof categories.included === "undefined") {
+      return [];
+    }
+
     return categories.included.map((ctg) => ctg.attributes.title);
   };
 
@@ -114,7 +123,7 @@ function useManga(url, request, baseOffset) {
 
   const getSingleManga = async (id) => {
     const singleManga = await request(`${url}/${id}`).then((data) => data.data);
-    console.log(singleManga);
+    // console.log(singleManga);
     return _mangaTitle(singleManga);
   };
 

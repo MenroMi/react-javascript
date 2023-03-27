@@ -14,11 +14,22 @@ export default function ChosenManga() {
   const [series, setSeries] = useState(null);
   const { loading, error, getSingleManga, getMangaSeries } = useResources();
 
+  const onLoadedData = (data) => {
+    return setManga(data);
+  };
+
   useEffect(() => {
-    getSingleManga(mangaId).then((data) => setManga(data));
+    getSingleManga(mangaId).then(onLoadedData);
   }, [mangaId]);
 
-  let visibleManga = manga ? <ViewManga manga={manga} /> : <Spinner />;
+  let visibleManga =
+    !loading && manga ? (
+      <ViewManga manga={manga} />
+    ) : error ? (
+      <ErrorMessage />
+    ) : (
+      <Spinner />
+    );
 
   return visibleManga;
 }

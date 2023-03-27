@@ -41,6 +41,7 @@ const AnimeItem = (props) => {
   );
 };
 
+
 const ViewAnimeItem = ({ image, title, validTitle, homepage }) => {
   // rendering component without logic
 
