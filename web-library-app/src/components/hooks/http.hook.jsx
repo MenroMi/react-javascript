@@ -35,7 +35,9 @@ const useHttp = () => {
     []
   );
 
-  return { loading, error, onRequest };
+  const clearError = () => (error ? setError(false) : null);
+
+  return { loading, error, onRequest, clearError };
 };
 
 export { useHttp };

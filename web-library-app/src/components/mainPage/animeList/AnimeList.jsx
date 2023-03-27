@@ -26,10 +26,6 @@ const AnimeList = () => {
 
   const { loading, error, getAllAnime } = useResources();
 
-  const styleSpinner = {
-    gridColumn: "1/4",
-  };
-
   const onLoadedAnime = (newItems) => {
     let end = false;
     if (newItems == null || newItems.length < 9) {
@@ -108,7 +104,7 @@ const AnimeList = () => {
   const items = iterationItems(data, loading, error);
   const visibleDetails = data.filter((item) => item.id === numb);
 
-  const load = loading ? <Spinner styles={styleSpinner} /> : null;
+  const load = loading ? <Spinner styles={{ gridColumn: "1/4" }} /> : null;
   const errorMessage = error ? <ErrorMessage /> : null;
   const details = detailsInfo(loading, error, visibleDetails);
   return (
@@ -122,7 +118,7 @@ const AnimeList = () => {
             className="button button_load"
             disabled={loadingMore}
             style={{ display: endedOffset || error ? "none" : "block" }}
-            onClick={() => onRequestAnime(offset)}
+            onClick={() => onRequestAnime()}
           >
             {loadingMore ? (
               <img

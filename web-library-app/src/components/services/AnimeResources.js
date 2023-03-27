@@ -6,19 +6,26 @@ import { useHttp } from "../hooks/http.hook";
 export default function useResources() {
   const _apiBase = "https://kitsu.io/api/edge/";
   const baseOffset = 0;
-  const { loading, error, onRequest } = useHttp();
+  const { loading, error, onRequest, clearError } = useHttp();
   const { getAllAnime, getAnime, getAnimeCategory, getAnimeRelationship } =
     useAnime(`${_apiBase}/anime`, onRequest, baseOffset);
-  const { getAllManga } = useManga(`${_apiBase}/manga`, onRequest, baseOffset);
+  const { getAllManga, getSingleManga, getMangaSeries } = useManga(
+    `${_apiBase}/manga`,
+    onRequest,
+    baseOffset
+  );
 
   return {
     loading,
     error,
+    clearError,
     getAllAnime,
     getAnime,
     getAnimeCategory,
     getAnimeRelationship,
     getAllManga,
+    getSingleManga,
+    getMangaSeries,
   };
 }
 
@@ -79,45 +86,23 @@ function useAnime(url, request, baseOffset) {
 
 function useManga(url, request, baseOffset) {
   const _mangaTitle = async (res) => {
-    let categories = await getMangaCategory(
-      // array of objects
-      res.relationships.categories.links.self
-    );
+    const categories = await getMangaCategory(url, res.id);
+
     const m = res.attributes;
     return {
       title: m.canonicalTitle,
       image: m.posterImage.small,
+      imageSingle: m.posterImage.original,
+      descr: m.description,
       rate: m.averageRating ? m.averageRating + "%" : "Don't exist",
       category: categories,
+      id: res.id,
     };
   };
 
-  const getMangaCategory = async (url) => {
-    const _apiManga = `https://kitsu.io/api/edge/categories/`;
-    const mangaCategory = await request(url).then((data) => data.data);
-    let categoryIDs = mangaCategory.reduce((prev, curr) => {
-      for (let key in curr) {
-        if (key === "id") {
-          prev.push(curr[key]);
-          continue;
-        }
-      }
-      return prev;
-    }, []);
-
-    if (categoryIDs.length > 3) {
-      categoryIDs.length = 3;
-    }
-
-    const categoriesPromises = categoryIDs.map(async (id) => {
-      return await request(`${_apiManga}/${id}`);
-    });
-
-    let categoriesNames = Promise.all(categoriesPromises).then((data) =>
-      data.map((objCategory) => objCategory.data.attributes.title)
-    );
-
-    return categoriesNames.then((data) => data);
+  const getMangaCategory = async (url, id) => {
+    const categories = await request(`${url}/${id}?include=categories`);
+    return categories.included.map((ctg) => ctg.attributes.title);
   };
 
   const getAllManga = async (offset = baseOffset) => {
@@ -127,7 +112,18 @@ function useManga(url, request, baseOffset) {
     return await mangaList.map((manga) => _mangaTitle(manga));
   };
 
-  return { getAllManga };
+  const getSingleManga = async (id) => {
+    const singleManga = await request(`${url}/${id}`).then((data) => data.data);
+    console.log(singleManga);
+    return _mangaTitle(singleManga);
+  };
+
+  const getMangaSeries = async (id, link = url) => {
+    const res = await request(`${link}/${id}/?include=characters`);
+    return res;
+  };
+
+  return { getAllManga, getSingleManga, getMangaSeries };
 }
 
 /**

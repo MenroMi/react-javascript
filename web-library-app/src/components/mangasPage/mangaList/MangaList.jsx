@@ -3,14 +3,15 @@ import { v4 as uuidv4 } from "uuid";
 
 // Components
 import MangaItem from "../mangaItem/MangaItem";
+import loadingSVG from "../../../assets/icons/loadingMorePage.svg";
 
 // styles
 import "./MangaList.scss";
 
-const MangaList = ({ data }) => {
+const MangaList = ({ data, setManga, setLoading, loading }) => {
   const iterationItems = (data) => {
-    return data.map(({ ...info }) => {
-      return <MangaItem {...info} key={uuidv4()} />;
+    return data.map(({ id, ...info }) => {
+      return <MangaItem {...info} id={id} key={uuidv4()} />;
     });
   };
 
@@ -21,7 +22,29 @@ const MangaList = ({ data }) => {
       <ul className="list-manga">
         {items}
         <li>
-          <button className="button button_load">Load more</button>
+          <button
+            disabled={loading}
+            onClick={() => {
+              setLoading(true);
+              setManga();
+            }}
+            className="button button_load"
+          >
+            {loading ? (
+              <img
+                src={loadingSVG}
+                alt="loading"
+                style={{
+                  position: "relative",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: "50px",
+                }}
+              />
+            ) : (
+              "load more"
+            )}
+          </button>
         </li>
       </ul>
     </div>

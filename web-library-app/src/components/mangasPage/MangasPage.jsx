@@ -1,24 +1,31 @@
 // basics
 import { useState, useEffect } from "react";
 import useResources from "../services/AnimeResources";
+import { Outlet } from "react-router-dom";
 
 // Components
 import NavManga from "./headerMangaPage/HeaderMangaPage";
 import MangaList from "./mangaList/MangaList";
 import SearchPanelManga from "./searchManga/SearchManga";
+import Spinner from "../reusabilityComponents/spinnerLoading/Spinner";
+import ErrorMessage from "../reusabilityComponents/errorValidate/ErrorValidate";
 
 const MangasPage = () => {
   const [valueCategory, setValueCategory] = useState("");
+  const [loadingBtn, setLoadingBtn] = useState(false);
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
-  const { getAllManga } = useResources();
+  const [offset, setOffset] = useState(0);
+  const { getAllManga, error } = useResources();
+
+  const setManga = async () => {
+    let res = await getAllManga(offset).then((data) => Promise.all(data));
+    setData((arr) => [...arr, ...res]);
+    setOffset((offset) => offset + 8);
+    setLoadingBtn(false);
+  };
 
   useEffect(() => {
-    const setManga = async () => {
-      let res = await getAllManga().then((data) => Promise.all(data));
-      return setData((arr) => [...arr, ...res]);
-    };
-
     setManga();
   }, []);
 
@@ -62,6 +69,19 @@ const MangasPage = () => {
     search,
     onSearchByCategory(valueCategory, data)
   );
+
+  const visibleData =
+    filterCategory.length <= 0 ? (
+      <Spinner styles={{ marginTop: "80px" }} />
+    ) : (
+      <MangaList
+        setManga={setManga}
+        data={filterCategory}
+        loading={loadingBtn}
+        setLoading={setLoadingBtn}
+      />
+    );
+
   return (
     <div className="mangaPage">
       <NavManga />
@@ -72,7 +92,7 @@ const MangasPage = () => {
         chooseCategory={onSearchByCategory}
         onChangeSearchValue={onChangeSearchValue}
       />
-      <MangaList data={filterCategory} />
+      {error ? <ErrorMessage /> : visibleData}
     </div>
   );
 };
