@@ -1,0 +1,26 @@
+@import "../../styles/variables.scss";
+
+.box-photos {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  gap: 39px;
+}
+
+.btn-refresh {
+  margin-top: 80px;
+  width: 240px;
+  height: 40px;
+  border: none;
+  background-color: var(--clr-primary);
+  color: var(--clr-white);
+  font-weight: 400;
+  font-size: 21px;
+  cursor: pointer;
+  align-self: center;
+  transition: 0.3s all;
+  &:hover {
+    background-color: var(--clr-primary-hover);
+  }
+}

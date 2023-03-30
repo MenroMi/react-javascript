@@ -1,0 +1,10 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 1440px;
+  min-height: 700px;
+  margin: 0 auto;
+  padding: 80px 38px 65px 40px;
+  overflow-y: auto;
+}
