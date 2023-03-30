@@ -36,7 +36,7 @@ function useAnime(url, request, baseOffset) {
       : descr;
   };
 
-  const animeTitle = (res) => {
+  const _animeTitle = (res) => {
     let data = res.attributes;
     return {
       title: data.canonicalTitle,
@@ -53,7 +53,7 @@ function useAnime(url, request, baseOffset) {
     let animeList = await request(
       `${url}?page[limit]=9&page[offset]=${offset}`
     ).then((data) => data.data);
-    return animeList.map((item) => animeTitle(item));
+    return animeList.map((item) => _animeTitle(item));
   };
 
   const getAnime = async (id) => {
@@ -62,8 +62,7 @@ function useAnime(url, request, baseOffset) {
     if ("errors" in oneTitle) {
       return oneTitle.errors[0].status;
     }
-
-    return animeTitle(oneTitle.data);
+    return _animeTitle(oneTitle.data);
   };
 
   const getAnimeCategory = (id) => {

@@ -20,7 +20,7 @@ const useHttp = () => {
         const req = await fetch(url, { method, headers, body });
 
         if (!req.ok) {
-          setLoading(true);
+          setError(true);
           return await req.json();
         }
 
@@ -36,6 +36,8 @@ const useHttp = () => {
   );
 
   const clearError = () => (error ? setError(false) : null);
+
+  console.log("render custom hook");
 
   return { loading, error, onRequest, clearError };
 };

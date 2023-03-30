@@ -1,0 +1,15 @@
+@import "../../../../styles/elements/button.scss";
+
+.error-random-anime {
+  width: 550px;
+  & &__title {
+    text-align: center;
+    font-size: 2em;
+  }
+
+  & &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+}

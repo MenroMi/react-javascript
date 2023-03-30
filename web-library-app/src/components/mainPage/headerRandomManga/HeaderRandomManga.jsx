@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 //Components
 import Spinner from "../../reusabilityComponents/spinnerLoading/Spinner";
 import ErrorMessage from "../../reusabilityComponents/errorValidate/ErrorValidate";
+import ErrorHeaderComponent from "../../reusabilityComponents/errors/errorHeaderComponent/ErrorHeaderComponent";
 
 // Services
 import useResources from "../../services/AnimeResources";
@@ -17,15 +18,11 @@ import "./HeaderRandomManga.scss";
 const HeaderRandomManga = () => {
   // states
   const [manga, setManga] = useState({});
+  const [errorName, setErrorName] = useState("");
   const { loading, error, getAnime } = useResources();
 
-  const styleSpinner = {
-    margin: "0 auto",
-    display: "block",
-    shapeRendering: "auto",
-  };
-
   const onLoadedAnime = (manga) => {
+    setErrorName("");
     setManga(manga);
   };
 
@@ -34,25 +31,33 @@ const HeaderRandomManga = () => {
   };
 
   const onErrorLoad = (status) => {
+    console.log(status);
     switch (status) {
       case "404":
-        updateState();
+        setErrorName("Not Found title...");
         break;
-      case status >= "500":
-        alert("problems with server");
+      case "500":
+        setErrorName("problems with server");
         break;
       case "400":
-        alert("Bad Request - malformed request");
+        setErrorName("Bad Request - malformed request");
         break;
       case "401":
-        alert("Unauthorized - invalid or no authentication details provided");
+        setErrorName(
+          "Unauthorized - invalid or no authentication details provided"
+        );
         break;
       default:
+        setErrorName("Server not answer. Please try later.");
         break;
     }
   };
 
   async function updateState() {
+    if (errorName) {
+      setErrorName("");
+    }
+
     // let maxCount = await this.anime.getCountAllAnime();
     const id = getRandomNumber(0, 18500);
 
@@ -64,8 +69,16 @@ const HeaderRandomManga = () => {
           onLoadedAnime(data);
         }
       })
-      .catch(onErrorLoad); // == .then(data => onErrorLoad(data))
+      .catch((data) => {
+        onErrorLoad(data);
+      }); // == .then(data => onErrorLoad(data))
   }
+
+  useEffect(() => {
+    if (errorName === "Not Found title...") {
+      updateState();
+    }
+  }, [errorName]);
 
   useEffect(() => {
     updateState();
@@ -85,9 +98,17 @@ const HeaderRandomManga = () => {
     return title;
   };
 
-  const errorMessage = error ? <ErrorMessage /> : null;
-  const load = loading ? <Spinner styles={styleSpinner} /> : null;
-  const content = !(errorMessage || load) ? (
+  console.log(errorName);
+  const errorMessage = error ? (
+    <ErrorHeaderComponent onReroll={updateState} title={errorName} />
+  ) : null;
+  const load = loading ? (
+    <Spinner
+      styles={{ margin: "0 auto", display: "block", shapeRendering: "auto" }}
+    />
+  ) : null;
+
+  const content = !(loading || error) ? ( // !loading || !error
     <ViewRandomManga
       manga={manga}
       checkTitleLength={checkTitleLength}

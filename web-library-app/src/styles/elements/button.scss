@@ -1,46 +1,55 @@
+@import "../variables.scss";
+
 .button {
-    width: 101px;
-    height: 38px;
-    border: none;
-    color: white;
-    font-weight: 400;
-    font-size: 15px;
-    cursor: pointer;
-    transition: .3s ease;
+  width: 101px;
+  height: 38px;
+  border: none;
+  color: white;
+  font-weight: 400;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  &_main {
+    background-color: #0096c7;
 
     &:hover {
-        background-color: #0077B6;
+      background-color: #0077b6;
     }
+  }
 
-    &_main {
-        background-color: #0096C7;
+  &_submain {
+    background-color: #a7babe;
+
+    &:hover {
+      background-color: #889193;
     }
+  }
 
-    &_submain {
-        background-color: #a7babe;
+  &_load {
+    background-color: #0096c7;
+    width: 170px;
+    grid-column: 1/4;
+    margin: 0 auto;
 
-        &:hover {
-            background-color: #889193;
-        }
+    &:disabled {
+      filter: grayscale(80%);
     }
+  }
 
-    &_load {
-        background-color: #0096C7;
-        width: 170px;
-        grid-column: 1/4;
-        margin: 0 auto;
-
-        &:disabled {
-            filter: grayscale(80%)
-        }
+  &-reroll {
+    width: 185px;
+    background-color: $clr-bgc-restart;
+    &:hover {
+      background-color: $clr-bgc-restart-hover;
     }
+  }
 }
 
-
 @media (max-width: 576px) {
-    .button {
-        &_load {
-            width: 100%;
-        }
+  .button {
+    &_load {
+      width: 100%;
     }
+  }
 }

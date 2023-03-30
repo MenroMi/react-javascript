@@ -1,5 +1,4 @@
 // components
-
 import HeaderRandomManga from "../mainPage/headerRandomManga/HeaderRandomManga";
 import AnimeList from "../mainPage/animeList/AnimeList";
 
