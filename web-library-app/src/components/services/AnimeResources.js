@@ -70,9 +70,11 @@ function useAnime(url, request, baseOffset) {
   };
 
   const getAnimeRelationship = async (id) => {
-    return await request(
+    let res = await request(
       `${url}/${id}/?include=mediaRelationships.destination`
     );
+    // console.log(res);
+    return res;
   };
 
   return {

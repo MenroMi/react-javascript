@@ -2,7 +2,7 @@
 import { useState, useEffect, useMemo } from "react";
 
 // plugins
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 // services
 import useAnimeResources from "../../services/AnimeResources";
@@ -16,8 +16,9 @@ import "./DetailInformation.scss";
 
 const DetailInformation = ({ data }) => {
   const [series, setSeries] = useState(null);
-
   const { loading, error, getAnimeRelationship } = useAnimeResources();
+  const variable = data.length <= 0 ? null : data[0].id;
+  const information = useMemo(() => variable, [variable]);
 
   const checkLengthSeries = (arr) => {
     if (arr.length <= 0) {
@@ -46,16 +47,8 @@ const DetailInformation = ({ data }) => {
       ? `${arr[0].description.slice(0, 800)}...`
       : arr[0].description;
   };
-  const variable = data[0].id;
-  const information = useMemo(() => variable, [variable]);
 
-  useEffect(() => {
-    checkRelation();
-  }, [information]);
-
-  async function checkRelation() {
-    const [{ id }] = data;
-
+  async function checkRelation(id) {
     // onLoadingAnime();
     let series = await getAnimeRelationship(id).then((data) => data.included);
     if (series === undefined || series.length === 0 || !series) {
@@ -74,9 +67,13 @@ const DetailInformation = ({ data }) => {
     }
   }
 
+  useEffect(() => {
+    checkRelation(variable);
+  }, [information]);
+
   let moreFromSeries = series === null ? null : checkLengthSeries(series);
   let shortDescr = checkLengthDescription(data);
-  // let skeleton = !(loading || error || visible) ? <Skeleton variant="circular"><ViewDetails data={data[0]} series={moreFromSeries} descr={shortDescr} /></Skeleton> : null;
+
   let load = loading ? <Spinner /> : null;
   let errorMessage = error ? <ErrorMessage /> : null;
   let details = !(loading || error) ? (
@@ -123,9 +120,11 @@ const ViewDetails = ({ data, series, descr }) => {
   );
 };
 
-DetailInformation.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object.isRequired),
-  onChangeVisible: PropTypes.func.isRequired,
-};
+// DetailInformation.propTypes = {
+//   data: PropTypes.arrayOf(PropTypes.object.isRequired),
+//   onChangeVisible: PropTypes.func.isRequired,
+// };
 
 export default DetailInformation;
+
+// let skeleton = !(loading || error || visible) ? <Skeleton variant="circular"><ViewDetails data={data[0]} series={moreFromSeries} descr={shortDescr} /></Skeleton> : null;

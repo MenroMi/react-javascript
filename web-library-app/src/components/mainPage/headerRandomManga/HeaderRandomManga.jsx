@@ -31,7 +31,6 @@ const HeaderRandomManga = () => {
   };
 
   const onErrorLoad = (status) => {
-    console.log(status);
     switch (status) {
       case "404":
         setErrorName("Not Found title...");
@@ -81,6 +80,7 @@ const HeaderRandomManga = () => {
   }, [errorName]);
 
   useEffect(() => {
+    // console.log("useeffect - header");
     updateState();
   }, []);
 
@@ -98,7 +98,6 @@ const HeaderRandomManga = () => {
     return title;
   };
 
-  console.log(errorName);
   const errorMessage = error ? (
     <ErrorHeaderComponent onReroll={updateState} title={errorName} />
   ) : null;
@@ -116,6 +115,7 @@ const HeaderRandomManga = () => {
     />
   ) : null;
 
+  // console.log("render header");
   return (
     <section className="random">
       {errorMessage}

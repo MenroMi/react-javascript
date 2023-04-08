@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 
 const useHttp = () => {
   // states
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // check for bugs 31/03/23
   const [error, setError] = useState(false);
 
   // methods
@@ -37,7 +37,7 @@ const useHttp = () => {
 
   const clearError = () => (error ? setError(false) : null);
 
-  console.log("render custom hook");
+  // console.log("render custom hook");
 
   return { loading, error, onRequest, clearError };
 };

@@ -19,13 +19,13 @@ const AnimeList = () => {
   // states
   const [data, setData] = useState([]);
   const [loadingMore, setLoadingMore] = useState(true);
-  const [numb, setNumb] = useState(1);
+  const [numb, setNumb] = useState(1); // for detail information
   const [offset, setOffset] = useState(0); // today max 18810
   const [endedOffset, setEndedOffset] = useState(false);
   const [newItemsLoading, setNewItemsLoading] = useState(true);
 
   const { loading, error, getAllAnime } = useResources();
-
+  console.log(loading, error);
   const onLoadedAnime = (newItems) => {
     let end = false;
     if (newItems == null || newItems.length < 9) {
@@ -50,6 +50,7 @@ const AnimeList = () => {
   }
 
   const iterationItems = (data, loading, error) => {
+    console.log(data);
     return data.map(({ id, ...info }) => {
       return (
         <AnimeItem
@@ -72,10 +73,8 @@ const AnimeList = () => {
           onChangeVisible={onChangeVisibleDetails}
         />
       );
-    } else if (loading && !error) {
-      return <Spinner />;
     } else {
-      return <ErrorMessage />;
+      return <Spinner />;
     }
   };
 
@@ -91,11 +90,14 @@ const AnimeList = () => {
   };
 
   useEffect(() => {
+    // console.log("useeffect - listener");
     window.addEventListener("scroll", autoChangeOffset);
     return () => window.removeEventListener("scroll", autoChangeOffset);
   }, []);
 
   useEffect(() => {
+    // console.log("useeffect - request new animes");
+
     if (newItemsLoading && !endedOffset) {
       onRequestAnime();
     }
@@ -107,6 +109,8 @@ const AnimeList = () => {
   const load = loading ? <Spinner styles={{ gridColumn: "1/4" }} /> : null;
   const errorMessage = error ? <ErrorMessage /> : null;
   const details = detailsInfo(loading, error, visibleDetails);
+
+  // console.log("render list");
   return (
     <div className="cards-with-info">
       <ul className="list-anime">
