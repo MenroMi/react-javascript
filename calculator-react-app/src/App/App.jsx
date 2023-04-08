@@ -17,7 +17,7 @@ export default function App() {
     "\u00D7": (x, y) => x * y,
     "-": (x, y) => x - y,
     "+": (x, y) => x + y,
-    "%": (x, y) => x % y,
+    "%": (x, y = 100) => (y === 100 ? x / +y : (x * y) / 100),
   };
 
   const onChangeActualInput = (value) => {
@@ -109,11 +109,18 @@ export default function App() {
   };
 
   const onEqual = () => {
-    if (!(operator && left && right)) {
+    let res;
+
+    if (operator === "%" && right.length === 0) {
+      res = expressions[operator](+left);
+    } else {
+      res = expressions[operator](+left, +right);
+    }
+
+    if (operator !== "%" && left && !right) {
       return null;
     }
 
-    let res = expressions[operator](+left, +right);
     let countAfterDot = String(res).slice(String(res).indexOf("."));
 
     if (!Number.isInteger(res) && countAfterDot.length > 5) {
