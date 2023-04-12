@@ -1,6 +1,6 @@
 # TODOS LIST
 
-You can see this project - [Vercel] - (#)
+You can see this project - [Vercel] - (https://todos-list-menromi.vercel.app/)
 
 ## What was presented:
 
