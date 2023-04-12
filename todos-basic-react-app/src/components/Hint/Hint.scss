@@ -1,0 +1,31 @@
+@import "../../styles/variables";
+@import "../../styles/keyframes";
+
+.hint {
+  animation: on 300ms ease-in forwards;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  right: 50px;
+  bottom: 50px;
+  width: 400px;
+  height: 200px;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: $clr-todo-hint;
+  color: $clr-white;
+  text-align: center;
+  font-size: 30px;
+  line-height: 1.1;
+  box-shadow: 7px 3px 45px -3px rgba(66, 68, 90, 1);
+  svg {
+    position: absolute;
+    fill: $clr-white;
+    top: 5px;
+    right: 5px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+  }
+}

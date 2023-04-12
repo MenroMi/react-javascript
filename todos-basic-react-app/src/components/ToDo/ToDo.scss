@@ -1,0 +1,12 @@
+@import "../../styles/variables";
+
+.todo-app {
+  position: relative;
+  background-color: $clr-white;
+  max-width: 800px;
+  max-height: 1024px;
+  margin: 100px auto;
+  padding: 80px 0 50px 0;
+  border-radius: 10px;
+  box-shadow: 12px 11px 27px -24px rgba(66, 68, 90, 1);
+}

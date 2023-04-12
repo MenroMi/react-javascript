@@ -1,0 +1,15 @@
+@mixin posTransform {
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+@mixin inputs {
+  width: 554px;
+  height: 65px;
+  padding: 0 20px 0 88px;
+  font-size: 32px;
+  border: none;
+  background-color: $clr-todo-bgc;
+  color: $clr-todo-text;
+}

@@ -1,0 +1,43 @@
+@import "../../styles/variables";
+@import "../../styles/keyframes";
+@import "../../styles/mixins";
+
+.todo-item {
+  position: relative;
+}
+
+.todo-item-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    @include inputs;
+    &:disabled {
+      background-color: $clr-todo-bgc-disabled;
+    }
+  }
+
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.2s all;
+    &:active {
+      transform: scale(90%);
+    }
+    img {
+      width: 61px;
+      height: 61px;
+    }
+  }
+}
+
+.completed {
+  animation: completed 300ms ease-out forwards;
+}
+
+.loading {
+  transition: 0.3s all;
+  opacity: 0.3;
+}

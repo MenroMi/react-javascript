@@ -1,0 +1,31 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.todo-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  z-index: 9999;
+  width: 555px;
+  border-radius: 3px;
+  background-color: $clr-todo-text;
+  @include posTransform;
+  span {
+    position: absolute;
+    font-variant: small-caps;
+    font-size: 20px;
+    font-weight: 600;
+    color: $clr-todo-bgc-disabled;
+    @include posTransform;
+  }
+}
+
+.todo-progress-bar {
+  width: 1%;
+  height: 25px;
+  border-radius: 3px;
+  background-color: $clr-todo-btn-disabled;
+  opacity: 1;
+  transition: 0.3s all;
+  cursor: progress;
+}

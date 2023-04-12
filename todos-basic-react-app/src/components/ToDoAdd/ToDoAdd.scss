@@ -1,0 +1,30 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.todo-add-item {
+  display: flex;
+  justify-content: center;
+  input {
+    @include inputs;
+    &::placeholder {
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 52px;
+    }
+  }
+  button {
+    width: 122px;
+    border: none;
+    font-size: 32px;
+    color: $clr-white;
+    background-color: $clr-todo-btn;
+    cursor: pointer;
+    &:hover {
+      background-color: $clr-todo-btn-hover;
+    }
+    &:disabled {
+      cursor: default;
+      background-color: $clr-todo-btn-disabled;
+    }
+  }
+}
