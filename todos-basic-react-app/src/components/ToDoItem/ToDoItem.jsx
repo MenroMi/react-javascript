@@ -27,7 +27,10 @@ const ToDoItem = memo(({ text, id, edit }) => {
   const timeOutRef = useRef();
   const checkerRef = useRef(0);
   const classRef = useRef();
+  const focusRef = useRef(null);
   const dispatch = useDispatch();
+
+  const handleFocus = () => focusRef.current.focus();
 
   const completeTask = () => {
     setLoading(false);
@@ -42,7 +45,6 @@ const ToDoItem = memo(({ text, id, edit }) => {
       if (checkerRef.current === 0) {
         setLoading(true);
       }
-      console.log(checkerRef.current);
       checkerRef.current++;
       if (checkerRef.current < 2) {
         timeOutRef.current = setTimeout(ifer, 1000);
@@ -77,6 +79,7 @@ const ToDoItem = memo(({ text, id, edit }) => {
         <input
           type="text"
           name="message"
+          ref={focusRef}
           onKeyDown={(e) =>
             e.key === "Enter" ? dispatch(editTask(id, !edit)) : null
           }
@@ -85,7 +88,10 @@ const ToDoItem = memo(({ text, id, edit }) => {
           disabled={!edit}
         />
         <button
-          onClick={() => dispatch(editTask(id, !edit))}
+          onClick={() => {
+            dispatch(editTask(id, !edit));
+            setTimeout(handleFocus);
+          }}
           type="button"
           className="todo-item__edit"
         >
