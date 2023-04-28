@@ -1,0 +1,17 @@
+.foo {
+  padding: 50px 20px 8px 20px;
+  display: flex;
+  justify-content: space-between;
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__mail,
+  &__author {
+    font-weight: 300;
+    opacity: 0.5;
+  }
+}

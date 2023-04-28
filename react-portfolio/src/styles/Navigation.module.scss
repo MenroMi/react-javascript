@@ -1,0 +1,26 @@
+.nav {
+  &__cells {
+    background-color: var(--clr-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--width-container);
+    margin: 0 auto;
+  }
+
+  &__menu {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.Button {
+  width: 100px;
+  height: 40px;
+  color: var(--clr-txt-primary);
+  border: none;
+  border-radius: var(--border-btn);
+  &:hover {
+    border: 2px solid var(--clr-txt-primary);
+  }
+}

@@ -1,0 +1,16 @@
+.projects {
+  min-height: 800px;
+  padding-top: var(--pdg-top);
+  &__title {
+    font-size: 48px;
+    text-align: center;
+  }
+
+  &__list {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 60px;
+  }
+}

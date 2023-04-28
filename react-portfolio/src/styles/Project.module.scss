@@ -1,0 +1,48 @@
+.project {
+  position: relative;
+  width: 350px;
+  min-height: 300px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: var(--clr-project);
+  transition: 0.2s all;
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 70%;
+    &-title {
+      color: var(--clr-border-lvl);
+      font-size: 24px;
+      margin-left: 6px;
+    }
+
+    &-descr {
+      font-size: 18px;
+      margin-left: 6px;
+    }
+
+    &-stack {
+      display: flex;
+      margin: auto 0 0 6px;
+      gap: 20px;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+    .icon-link {
+      color: var(--clr-border-lvl);
+    }
+  }
+}
+
+.icon-folder {
+  color: var(--clr-border-lvl);
+}
+
+.icon-link {
+  transition: 0.2s all;
+
+  color: var(--clr-icon-link);
+}
