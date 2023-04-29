@@ -1,5 +1,7 @@
+// basic
 import Image from "next/image";
 
+// images
 import iconCSS from "../../assets/icons-technologies/css.svg";
 import iconJS from "../../assets/icons-technologies/js.svg";
 import iconReact from "../../assets/icons-technologies/react.svg";
@@ -9,31 +11,31 @@ import iconHTML from "../../assets/icons-technologies/html.svg";
 import iconSASS from "../../assets/icons-technologies/sass.svg";
 import iconGIT from "../../assets/icons-technologies/git.svg";
 
+// styles
 import styles from "../../styles/TechStack.module.scss";
-import { useState } from "react";
+
+const stack = [
+  {
+    tech: "JavaScript",
+    pic: iconJS,
+    id: 1,
+  },
+  {
+    tech: "TypeScript",
+    pic: iconTS,
+    id: 2,
+  },
+  { tech: "REACT", pic: iconReact, id: 3 },
+  { tech: "REDUX", pic: iconRedux, id: 4 },
+  { tech: "HTML5", pic: iconHTML, id: 5 },
+  { tech: "CSS3", pic: iconCSS, id: 6 },
+  { tech: "SASS", pic: iconSASS, id: 7 },
+  { tech: "GIT", pic: iconGIT, id: 8 },
+];
 
 export default function TechStack() {
-  const [stack, setStack] = useState([
-    {
-      tech: "JavaScript",
-      pic: iconJS,
-      id: 1,
-    },
-    {
-      tech: "TypeScript",
-      pic: iconTS,
-      id: 2,
-    },
-    { tech: "REACT", pic: iconReact, id: 3 },
-    { tech: "REDUX", pic: iconRedux, id: 4 },
-    { tech: "HTML5", pic: iconHTML, id: 5 },
-    { tech: "CSS3", pic: iconCSS, id: 6 },
-    { tech: "SASS", pic: iconSASS, id: 7 },
-    { tech: "GIT", pic: iconGIT, id: 8 },
-  ]);
-
   return (
-    <section className={styles["stack"]}>
+    <section id="stack" className={styles["stack"]}>
       <div className={styles["stack__info"]}>
         <h2>My Tech Stack</h2>
         <ul>

@@ -4,12 +4,13 @@ import Logo from "../Logo/Logo";
 import Button from "@mui/material/Button";
 import { Stack } from "@mui/material";
 import styles from "../../styles/Navigation.module.scss";
+import { useEffect, useRef, useState } from "react";
 
 const btnsArr = [
-  { label: "About", id: 1 },
-  { label: "projects", id: 2 },
-  { label: "my Stack", id: 3 },
-  { label: "contact", id: 4 },
+  { label: "About", link: "about", id: 1 },
+  { label: "projects", link: "projects", id: 2 },
+  { label: "my Stack", link: "stack", id: 3 },
+  { label: "contact", link: "contact", id: 4 },
 ];
 
 export default function Navigation() {
@@ -17,10 +18,10 @@ export default function Navigation() {
     <nav className={styles["nav__cells"]}>
       <Logo />
       <Stack direction="row" spacing={3}>
-        {btnsArr.map(({ label, id }) => {
+        {btnsArr.map(({ label, link, id }) => {
           return (
             <Button className={styles.Button} key={id} variant="text">
-              {label}
+              <a href={`#${link}`}>{label}</a>
             </Button>
           );
         })}

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Project_01",
+    "descr": "Short description",
+    "stack": ["React", "Next.js", "CSS"],
+    "id": 1
+  },
+  {
+    "name": "Project_02",
+    "descr": "Short description",
+    "stack": ["React", "Next.js", "CSS"],
+    "id": 2
+  },
+  {
+    "name": "Project_03",
+    "descr": "Short description",
+    "stack": ["React", "Redux", "SCSS"],
+    "id": 3
+  },
+  {
+    "name": "Project_04",
+    "descr": "Short description",
+    "stack": ["React", "Redux", "SCSS"],
+    "id": 4
+  },
+  {
+    "name": "Project_05",
+    "descr": "Short description",
+    "stack": ["React", "Redux", "SCSS"],
+    "id": 5
+  },
+  {
+    "name": "Project_06",
+    "descr": "Short description",
+    "stack": ["React", "Redux", "SCSS"],
+    "id": 6
+  }
+]

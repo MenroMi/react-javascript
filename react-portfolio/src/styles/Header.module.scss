@@ -1,5 +1,9 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  backdrop-filter: blur(10px) saturate(180%);
+  background-color: rgba(21, 38, 50, 0.8);
   width: 100%;
-  background-color: var(--clr-primary);
-  padding-top: 20px;
+  box-shadow: -1px 14px 24px -17px rgba(66, 68, 90, 0.3);
 }

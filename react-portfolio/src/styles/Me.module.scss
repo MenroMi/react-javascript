@@ -1,11 +1,12 @@
 .me {
   min-height: 400px;
-  padding-top: var(--pdg-top);
+  padding-top: 100px;
   display: flex;
   justify-content: space-between;
 }
 
 .info {
+  background-color: var(--clr-primary);
   max-width: 620px;
   padding-top: 7px;
   &__lvl {

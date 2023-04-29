@@ -6,7 +6,7 @@ import myImg from "../../../public/myImage.jpg";
 
 export default function About() {
   return (
-    <section className={styles.about}>
+    <section id="about" className={styles.about}>
       <Image src={myImg} alt="man" className={styles["main-photo"]} />
 
       <div className={styles.info}>

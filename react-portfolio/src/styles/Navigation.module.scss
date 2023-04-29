@@ -1,6 +1,7 @@
 .nav {
   &__cells {
-    background-color: var(--clr-primary);
+    height: 80px;
+    // background-color: var(--clr-primary);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,13 +15,19 @@
   }
 }
 
-.Button {
+nav > div .Button {
   width: 100px;
   height: 40px;
-  color: var(--clr-txt-primary);
   border: none;
+  color: #bdd0f5;
   border-radius: var(--border-btn);
   &:hover {
     border: 2px solid var(--clr-txt-primary);
+  }
+
+  a {
+    width: 100%;
+    color: #bdd0f5;
+    text-decoration: none;
   }
 }

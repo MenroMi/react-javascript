@@ -20,7 +20,7 @@ export default function Contact() {
   ]);
 
   return (
-    <section className={styles.contact}>
+    <section id="contact" className={styles.contact}>
       <h2 className={styles["contact__title"]}>Contact Me</h2>
       <div className={styles["contact__list"]}>
         {contact.map(({ name, link, id }) => (
